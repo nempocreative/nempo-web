@@ -88,4 +88,5 @@ export const wallNotes = [
   { dari: "Kirana", teks: "Aku simpan semua koran dinding kalian. Suatu hari bakal jadi buku." },
   { dari: "Fajar", teks: "Lapangan nanti kita main lagi, ya. Janji." },
   { dari: "Salma", teks: "Kalau rindu, mampir. Aku masak." },
+  { dari: "Nayla", teks: "Naskah drama kita belum kelar. Nanti kita lanjut di lain waktu." },
 ];
