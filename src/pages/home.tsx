@@ -1885,7 +1885,7 @@ export default function Home() {
             </div>
             <div className="flex-1 min-w-0">
               <h2 className="text-foreground font-black text-base leading-tight">{eventFinished ? "Riwayat Event" : "Event Mendatang"}</h2>
-              <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.10em] mt-0.5">{eventFinished ? "Sudah berlalu — sampai jumpa di acara berikutnya!" : "Catat tanggalnya, ayo datang bareng!"}</p>
+              <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.08em] mt-0.5 truncate sm:whitespace-normal">{eventFinished ? <><span className="sm:hidden">Sudah berlalu · sampai jumpa lagi!</span><span className="hidden sm:inline">Sudah berlalu — sampai jumpa di acara berikutnya!</span></> : "Catat tanggalnya, ayo datang bareng!"}</p>
             </div>
           </div>
           <Link
@@ -1893,7 +1893,7 @@ export default function Home() {
             className="group block w-full overflow-hidden rounded-3xl border border-border bg-card shadow-sm"
           >
             <div className="flex sm:h-[360px]">
-              <div className="relative aspect-[3/4] w-[210px] shrink-0 overflow-hidden sm:h-full sm:w-auto sm:aspect-auto">
+              <div className="relative aspect-[3/4] w-[42%] max-w-[180px] shrink-0 self-start overflow-hidden sm:h-full sm:w-auto sm:max-w-none sm:self-auto sm:aspect-auto">
                 <img
                   src={musicomedyPoster}
                   srcSet="/images/events/musicomedy-night-poster-540.webp 540w, /images/events/musicomedy-night-poster-810.webp 810w, /images/events/musicomedy-night-poster-1080.webp 1080w"
@@ -1906,9 +1906,9 @@ export default function Home() {
                   decoding="async"
                 />
               </div>
-              <div className="flex flex-1 flex-col justify-center gap-1.5 p-3.5 sm:gap-3 sm:p-8 lg:p-10">
+              <div className="flex min-w-0 flex-1 flex-col justify-center gap-2 p-3 sm:gap-3 sm:p-8 lg:p-10">
                 <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-primary sm:text-xs">Rabu, 4 November 2026</p>
+                  <p className="w-full text-[10px] font-bold uppercase tracking-wider text-primary sm:w-auto sm:text-xs"><span className="sm:hidden">Rabu, 4 Nov 2026</span><span className="hidden sm:inline">Rabu, 4 November 2026</span></p>
                   <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-primary sm:px-2.5 sm:text-[11px]">Gratis</span>
                   {eventFinished && (
                     <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-muted-foreground sm:px-2.5 sm:text-[11px]">
@@ -1916,21 +1916,21 @@ export default function Home() {
                     </span>
                   )}
                 </div>
-                <h3 className="text-lg font-black leading-tight text-foreground sm:text-3xl lg:text-4xl">MusiComedy Night</h3>
+                <h3 className="text-[17px] font-black leading-tight text-foreground sm:text-3xl lg:text-4xl">MusiComedy Night</h3>
                 <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/15 bg-primary/5 py-0.5 pl-1 pr-2.5 sm:gap-2 sm:py-1 sm:pl-1.5 sm:pr-3.5">
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground sm:h-6 sm:w-6">
                     <Mic className="h-3 w-3" strokeWidth={2} />
                   </span>
-                  <p className="text-[12px] font-bold leading-tight text-foreground sm:text-[13px]">
-                    bersama <span className="font-black">Saduli Ragap</span>
+                  <p className="text-[11px] font-bold leading-tight text-foreground sm:text-[13px]">
+                    <span className="hidden sm:inline">bersama </span><span className="font-black">Saduli Ragap</span>
                   </p>
                 </div>
 
-                <p className="max-w-lg text-[13px] leading-relaxed text-muted-foreground sm:text-sm sm:leading-relaxed lg:text-base">
+                <p className="hidden max-w-lg text-sm leading-relaxed text-muted-foreground sm:block lg:text-base">
                   Malam musik dan komedi bareng NEMPO.ID × Kala Muda di Good Story Cafe.
                 </p>
-                <span className="mt-0.5 inline-flex w-fit items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-[13px] font-bold text-primary-foreground sm:mt-1 sm:px-4 sm:py-2 sm:text-sm">
-                  Lihat detail event
+                <span className="mt-1 inline-flex w-fit items-center gap-1 whitespace-nowrap rounded-full bg-primary px-3 py-1.5 text-[12px] font-bold text-primary-foreground sm:gap-1.5 sm:px-4 sm:py-2 sm:text-sm">
+                  <span className="sm:hidden">Lihat detail</span><span className="hidden sm:inline">Lihat detail event</span>
                   <ChevronRight className="h-4 w-4" />
                 </span>
               </div>
