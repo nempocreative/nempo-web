@@ -42,6 +42,8 @@ type Filter = "Semua" | Kelas;
 export default function YearBookPage() {
   const [filter, setFilter] = useState<Filter>("Semua");
   const shown = filter === "Semua" ? graduates : graduates.filter((g) => g.kelas === filter);
+  const featured = moments.find((m) => m.featured) ?? null;
+  const others = moments.filter((m) => !m.featured);
 
   return (
     <Layout>
@@ -241,14 +243,35 @@ export default function YearBookPage() {
               </p>
             </div>
 
-            <div className="mt-9 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              {moments.map((m) => (
+            {featured && (
+              <figure
+                className="yb-card group mt-9 overflow-hidden rounded-2xl"
+                style={{ background: PAPER, border: `1px solid ${LINE}` }}
+              >
+                <div className="aspect-[16/10] sm:aspect-[21/9]">
+                  <img
+                    src={featured.src}
+                    alt={featured.caption}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <figcaption className="px-4 py-3">
+                  <p className="text-[11px] font-black uppercase tracking-[0.12em]" style={{ color: BRASS }}>
+                    {featured.tag}
+                  </p>
+                  <p className="yb-serif mt-0.5 text-lg font-bold leading-snug">{featured.caption}</p>
+                </figcaption>
+              </figure>
+            )}
+
+            <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+              {others.map((m) => (
                 <figure
                   key={m.caption}
-                  className={`yb-card group overflow-hidden rounded-2xl ${m.span ? "col-span-2 row-span-2" : ""}`}
+                  className="yb-card group overflow-hidden rounded-2xl"
                   style={{ background: PAPER, border: `1px solid ${LINE}` }}
                 >
-                  <div className={m.span ? "aspect-[2/1] sm:aspect-[16/10]" : "aspect-[4/3]"}>
+                  <div className="aspect-[4/3]">
                     <img
                       src={m.src}
                       alt={m.caption}
