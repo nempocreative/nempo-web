@@ -46,6 +46,24 @@ export async function login(email: string, password: string) {
   return token;
 }
 
+const cmsUrl = (query = '') => `${window.location.origin}/cms/${query}`;
+
+/** First visit after the migration: create the account; access is granted once the email is verified. */
+export async function activateAccount(email: string, password: string) {
+  const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: cmsUrl() } });
+  if (error) throw new ApiError(/already registered/i.test(error.message) ? 'Email ini sudah aktif. Silakan masuk atau gunakan Lupa password.' : error.message);
+}
+
+export async function sendPasswordReset(email: string) {
+  const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: cmsUrl('?setpw=1') });
+  if (error) throw new ApiError(error.message);
+}
+
+export async function setNewPassword(password: string) {
+  const { error } = await supabase.auth.updateUser({ password });
+  if (error) throw new ApiError(error.message);
+}
+
 /** CMS module slug -> database table. Modules not listed here have no table yet. */
 export const tableFor: Record<string, TableName> = {
   wisata: 'wisata', kuliner: 'kuliner', cafe: 'kuliner', penginapan: 'penginapan', events: 'events',
