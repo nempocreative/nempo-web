@@ -1,11 +1,11 @@
 {
-  "asset_id": "74ee28eb-92c5-48de-9596-e675ffe60ebe",
-  "content_type": "video/mp4",
-  "created_at": "2026-11-07T06:54:49Z",
+  "version": 1,
+  "asset_id": "77144548-1c7d-4a86-8a6b-6b0be80c7b9b",
+  "project_id": "4a75e7bf-8d24-401c-9942-df403f56d209",
+  "url": "/__l5e/assets-v1/77144548-1c7d-4a86-8a6b-6b0be80c7b9b/ggs-feed-12-we-are-open.mp4",
+  "r2_key": "a/v1/4a75e7bf-8d24-401c-9942-df403f56d209/77144548-1c7d-4a86-8a6b-6b0be80c7b9b/ggs-feed-12-we-are-open.mp4",
   "original_filename": "ggs-feed-12-we-are-open.mp4",
-  "project_id": "880044e6-52cc-4f08-a2e4-45ca185aafa1",
-  "r2_key": "a/v1/880044e6-52cc-4f08-a2e4-45ca185aafa1/74ee28eb-92c5-48de-9596-e675ffe60ebe/ggs-feed-12-we-are-open.mp4",
-  "size": 2804895,
-  "url": "/__l5e/assets-v1/74ee28eb-92c5-48de-9596-e675ffe60ebe/ggs-feed-12-we-are-open.mp4",
-  "version": 1
+  "size": 3448440,
+  "content_type": "video/mp4",
+  "created_at": "2026-11-10T11:11:32Z"
 }

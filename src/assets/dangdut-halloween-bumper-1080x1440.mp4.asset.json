@@ -1,11 +1,11 @@
 {
-  "asset_id": "690671ee-0021-415e-b87b-6ed2777f5d5a",
-  "content_type": "video/mp4",
-  "created_at": "2026-11-07T03:44:07Z",
+  "version": 1,
+  "asset_id": "8c6ce887-eebd-4507-a8f8-d8af437fd734",
+  "project_id": "4a75e7bf-8d24-401c-9942-df403f56d209",
+  "url": "/__l5e/assets-v1/8c6ce887-eebd-4507-a8f8-d8af437fd734/dangdut-halloween-bumper-1080x1440.mp4",
+  "r2_key": "a/v1/4a75e7bf-8d24-401c-9942-df403f56d209/8c6ce887-eebd-4507-a8f8-d8af437fd734/dangdut-halloween-bumper-1080x1440.mp4",
   "original_filename": "dangdut-halloween-bumper-1080x1440.mp4",
-  "project_id": "880044e6-52cc-4f08-a2e4-45ca185aafa1",
-  "r2_key": "a/v1/880044e6-52cc-4f08-a2e4-45ca185aafa1/690671ee-0021-415e-b87b-6ed2777f5d5a/dangdut-halloween-bumper-1080x1440.mp4",
   "size": 11841013,
-  "url": "/__l5e/assets-v1/690671ee-0021-415e-b87b-6ed2777f5d5a/dangdut-halloween-bumper-1080x1440.mp4",
-  "version": 1
+  "content_type": "video/mp4",
+  "created_at": "2026-11-10T11:11:00Z"
 }
