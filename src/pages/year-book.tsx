@@ -128,7 +128,7 @@ export default function YearBookPage() {
         </section>
 
         {/* ── JUMP NAV ── */}
-        <nav className="sticky top-0 z-20 border-b" style={{ borderColor: LINE, background: "rgba(255,253,248,.92)", backdropFilter: "blur(8px)" }}>
+        <nav className="border-b" style={{ borderColor: LINE, background: CARD }}>
           <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-3 sm:px-6 lg:px-8">
             {[
               { id: "lulusan", l: "Lulusan" },
@@ -276,7 +276,7 @@ export default function YearBookPage() {
                 Linimasa
               </p>
               <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
-                Dari hari pertama sampai sampai jumpa.
+                Dari hari pertama sampai jumpa.
               </h2>
             </div>
 

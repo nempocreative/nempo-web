@@ -55,11 +55,11 @@ export type Moment = {
   src: string;
   caption: string;
   tag: string;
-  span?: boolean;
+  featured?: boolean;
 };
 
 export const moments: Moment[] = [
-  { src: momentGroup, caption: "Panggung perpisahan angkatan", tag: "Perpisahan", span: true },
+  { src: momentGroup, caption: "Panggung perpisahan angkatan", tag: "Perpisahan", featured: true },
   { src: momentBasecamp, caption: "Kumpul angkatan di basecamp", tag: "Kumpul" },
   { src: momentHunting, caption: "Hunting foto tugas sekolah", tag: "Tugas" },
   { src: momentAkustik, caption: "Akustikan setelah bel pulang", tag: "Sore" },
@@ -67,7 +67,6 @@ export const moments: Moment[] = [
   { src: momentCafe, caption: "Rapat panitia di kafe", tag: "Panitia" },
   { src: momentMakan, caption: "Makan bareng tiap Jumat", tag: "Perut" },
   { src: momentPodcast, caption: "Rekam podcast angkatan", tag: "Suara" },
-  { src: momentOutdoor, caption: "Nongkrong di lapangan", tag: "Santai" },
   { src: momentTari, caption: "Latihan tari buat pentas", tag: "Pentas" },
 ];
 
