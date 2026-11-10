@@ -4,7 +4,6 @@
 import momentBasecamp from "@/assets/kalamuda-kegiatan-basecamp.jpg";
 import momentHunting from "@/assets/kalamuda-kegiatan-hunting-foto.jpg";
 import momentCafe from "@/assets/kalamuda-kegiatan-good-story-cafe.jpg";
-import momentOutdoor from "@/assets/kalamuda-kegiatan-nongkrong-outdoor.jpg";
 import momentAkustik from "@/assets/kalamuda-kegiatan-akustik.webp";
 import momentDapoer from "@/assets/kalamuda-kegiatan-dapoer-nyunda.webp";
 import momentMakan from "@/assets/kalamuda-kegiatan-makan-bersama.webp";
