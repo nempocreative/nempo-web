@@ -6,3 +6,6 @@
 
 ## Organizer-only cleanup
 - [x] Keep only organizer-site media in this project's own storage; remove Nempo Feed and leftover old-project media
+
+## New pages
+- [x] Year Book menu + page (/year-book) for a school graduating class; content lives in src/data/year-book.ts and is still example data
