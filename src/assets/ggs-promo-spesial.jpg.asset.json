@@ -1,11 +1,11 @@
 {
-  "asset_id": "b3e5e818-dea9-41e3-9daa-8bd01d82404c",
-  "content_type": "image/jpeg",
-  "created_at": "2026-11-07T06:54:14Z",
+  "version": 1,
+  "asset_id": "2e8c0ea9-ecff-433b-9123-6f7685e9eeeb",
+  "project_id": "4a75e7bf-8d24-401c-9942-df403f56d209",
+  "url": "/__l5e/assets-v1/2e8c0ea9-ecff-433b-9123-6f7685e9eeeb/ggs-promo-spesial.jpg",
+  "r2_key": "a/v1/4a75e7bf-8d24-401c-9942-df403f56d209/2e8c0ea9-ecff-433b-9123-6f7685e9eeeb/ggs-promo-spesial.jpg",
   "original_filename": "ggs-promo-spesial.jpg",
-  "project_id": "880044e6-52cc-4f08-a2e4-45ca185aafa1",
-  "r2_key": "a/v1/880044e6-52cc-4f08-a2e4-45ca185aafa1/b3e5e818-dea9-41e3-9daa-8bd01d82404c/ggs-promo-spesial.jpg",
   "size": 288448,
-  "url": "/__l5e/assets-v1/b3e5e818-dea9-41e3-9daa-8bd01d82404c/ggs-promo-spesial.jpg",
-  "version": 1
+  "content_type": "image/jpeg",
+  "created_at": "2026-11-10T11:12:04Z"
 }
