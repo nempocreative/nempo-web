@@ -35,10 +35,10 @@ import kegiatanMakan from "@/assets/kalamuda-kegiatan-makan-bersama.webp";
 import kegiatanPodcast from "@/assets/kalamuda-kegiatan-podcast-malam.webp";
 import kegiatanAkustik from "@/assets/kalamuda-kegiatan-akustik.webp";
 import kegiatanTari from "@/assets/kalamuda-kegiatan-tari-musicomedy.webp";
-import kegiatanNongkrongOutdoor from "@/assets/kalamuda-kegiatan-nongkrong-outdoor.jpg.asset.json";
-import kegiatanBasecamp from "@/assets/kalamuda-kegiatan-basecamp.jpg.asset.json";
-import kegiatanGoodStory from "@/assets/kalamuda-kegiatan-good-story-cafe.jpg.asset.json";
-import kegiatanHunting from "@/assets/kalamuda-kegiatan-hunting-foto.jpg.asset.json";
+import kegiatanNongkrongOutdoor from "@/assets/kalamuda-kegiatan-nongkrong-outdoor.jpg";
+import kegiatanBasecamp from "@/assets/kalamuda-kegiatan-basecamp.jpg";
+import kegiatanGoodStory from "@/assets/kalamuda-kegiatan-good-story-cafe.jpg";
+import kegiatanHunting from "@/assets/kalamuda-kegiatan-hunting-foto.jpg";
 
 const kegiatanPhotos = [
   { src: kegiatanDapoer, caption: "Dapoer Nyunda", tag: "Kuliner" },
