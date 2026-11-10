@@ -30,7 +30,8 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Architecture rules
-- This project is being migrated in phases from nempocreative/remix-of-nempo-62; phase 1 moved only the Nempo Feed app (`src/apps/feed`, mounted at `/nempo-feed`), and `/` redirects there until the main site is migrated; why: the owner asked for the feed first.
+- The whole NEMPO site (main pages, `/cms`, `/nempo-feed`) was migrated from nempocreative/remix-of-remix-of-remix-of-remix-of-nempo-feed-migration-4; its schema was rebuilt from the old generated types in `drizzle/migrations/0000_nempo_garut_schema.sql`; why: the source repo carried no migrations, so that file is the schema of record.
+- CMS admins are granted only by the `on_auth_user_confirmed_grant_admin` trigger when a verified email matches `admin_allowlist`, or by an existing admin; the CMS login offers activate (sign up + verify) and password reset; why: migrated admins get new auth IDs and must prove email ownership before receiving access.
 - Media pointers under `src/assets/` must belong to this project's own storage (re-upload with `lovable-assets create` when bringing files from another project); why: a foreign project's pointer breaks once published.
 - MusiComedy's opening bumper lives in its own feed tab with a 4:3 landscape animated stage (ending on a menu-ordering message) and a pre-rendered MP4 download; why: event playback and export must match without changing existing slides.
 - Bumper 2 lives in `NempoLogoOpening` with its own `nlo-` styles, separate transparent tagline images, a 12 s CSS timeline shared with a synthesized gamelan track in `public/audio/`, and a prerecorded MP4 with that audio; why: each phrase must animate independently, audio uses public URLs, and playback and download must stay in sync.
