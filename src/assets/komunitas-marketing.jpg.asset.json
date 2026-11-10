@@ -1,11 +1,11 @@
 {
-  "asset_id": "9caf392b-6598-4931-903f-218e54eff9e6",
-  "content_type": "image/jpeg",
-  "created_at": "2026-11-07T06:55:38Z",
+  "version": 1,
+  "asset_id": "4f0f7705-67c6-4bff-b20f-3ce78bacbec5",
+  "project_id": "4a75e7bf-8d24-401c-9942-df403f56d209",
+  "url": "/__l5e/assets-v1/4f0f7705-67c6-4bff-b20f-3ce78bacbec5/komunitas-marketing.jpg",
+  "r2_key": "a/v1/4a75e7bf-8d24-401c-9942-df403f56d209/4f0f7705-67c6-4bff-b20f-3ce78bacbec5/komunitas-marketing.jpg",
   "original_filename": "komunitas-marketing.jpg",
-  "project_id": "880044e6-52cc-4f08-a2e4-45ca185aafa1",
-  "r2_key": "a/v1/880044e6-52cc-4f08-a2e4-45ca185aafa1/9caf392b-6598-4931-903f-218e54eff9e6/komunitas-marketing.jpg",
   "size": 137285,
-  "url": "/__l5e/assets-v1/9caf392b-6598-4931-903f-218e54eff9e6/komunitas-marketing.jpg",
-  "version": 1
+  "content_type": "image/jpeg",
+  "created_at": "2026-11-10T11:14:50Z"
 }

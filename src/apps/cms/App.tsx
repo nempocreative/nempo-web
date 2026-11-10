@@ -39,10 +39,16 @@ function Workspace({onLogout}:{onLogout:()=>void}){
 function App(){
   const [token,setToken]=useState<string|null>(null);
   const [ready,setReady]=useState(false);
-  useEffect(()=>{restoreAdminSession().then(t=>{setToken(t);setReady(true);}).catch(()=>setReady(true));},[]);
+  const [settingPassword,setSettingPassword]=useState(false);
+  useEffect(()=>{
+    // A password-reset link lands here with ?setpw=1: ask for the new password before opening the workspace.
+    if(new URLSearchParams(window.location.search).has('setpw')){setSettingPassword(true);setReady(true);return;}
+    restoreAdminSession().then(t=>{setToken(t);setReady(true);}).catch(()=>setReady(true));
+  },[]);
   function logout(){clearSession();setToken(null);}
+  function loggedIn(t:string){setSettingPassword(false);setToken(t);}
   return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={"/cms/".replace(/\/$/,'')}>
-    {!ready?<div className="grid min-h-[100dvh] place-items-center text-sm text-[#8b7d6c]">Memuat…</div>:token?<Workspace onLogout={logout}/>:<LoginPage onLogin={setToken}/>}
+    {!ready?<div className="grid min-h-[100dvh] place-items-center text-sm text-[#8b7d6c]">Memuat…</div>:settingPassword?<LoginPage onLogin={loggedIn} initialMode="setpw"/>:token?<Workspace onLogout={logout}/>:<LoginPage onLogin={loggedIn}/>}
   </WouterRouter><Toaster/></TooltipProvider></QueryClientProvider>;
 }
 export default App;

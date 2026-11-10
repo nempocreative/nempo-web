@@ -1,11 +1,11 @@
 {
-  "asset_id": "2ca64aed-6dfe-4960-8ff2-bde68f9afab3",
-  "content_type": "image/webp",
-  "created_at": "2026-11-07T06:55:28Z",
+  "version": 1,
+  "asset_id": "3fe8d36b-385d-465d-af76-0e02fdf3717d",
+  "project_id": "4a75e7bf-8d24-401c-9942-df403f56d209",
+  "url": "/__l5e/assets-v1/3fe8d36b-385d-465d-af76-0e02fdf3717d/kalamuda-kegiatan-podcast-malam.webp",
+  "r2_key": "a/v1/4a75e7bf-8d24-401c-9942-df403f56d209/3fe8d36b-385d-465d-af76-0e02fdf3717d/kalamuda-kegiatan-podcast-malam.webp",
   "original_filename": "kalamuda-kegiatan-podcast-malam.webp",
-  "project_id": "880044e6-52cc-4f08-a2e4-45ca185aafa1",
-  "r2_key": "a/v1/880044e6-52cc-4f08-a2e4-45ca185aafa1/2ca64aed-6dfe-4960-8ff2-bde68f9afab3/kalamuda-kegiatan-podcast-malam.webp",
   "size": 182432,
-  "url": "/__l5e/assets-v1/2ca64aed-6dfe-4960-8ff2-bde68f9afab3/kalamuda-kegiatan-podcast-malam.webp",
-  "version": 1
+  "content_type": "image/webp",
+  "created_at": "2026-11-10T11:14:44Z"
 }
