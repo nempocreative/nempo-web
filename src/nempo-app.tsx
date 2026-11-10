@@ -95,6 +95,7 @@ const PriceListPage = lazyWithRetry(() => import("@/pages/price-list"));
 const DonasiBibitPage = lazyWithRetry(() => import("@/pages/donasi-bibit"));
 const TalentPage = lazyWithRetry(() => import("@/pages/talent-management"));
 const MerchandisePage = lazyWithRetry(() => import("@/pages/merchandise"));
+const YearBookPage = lazyWithRetry(() => import("@/pages/year-book"));
 const SettingsPage = lazyWithRetry(() => import("@/pages/settings"));
 const ItineraryPage = lazyWithRetry(() => import("@/pages/itinerary"));
 const ItineraryComingSoonPage = lazyWithRetry(() => import("@/pages/itinerary-coming-soon"));
@@ -199,6 +200,7 @@ function Router() {
       <Route path="/komunitas" component={KomunitasPage} />
       <Route path="/recruitment" component={RecruitmentPage} />
       <Route path="/portofolio" component={PortofolioPage} />
+      <Route path="/year-book" component={YearBookPage} />
       <Route path="/contact" component={ContactPage} />
       
       
