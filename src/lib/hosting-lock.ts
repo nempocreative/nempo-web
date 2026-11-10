@@ -1,5 +1,5 @@
 // Paths that exist only for the editor preview; published domains answer 404.
-export const LOCKED_PREFIXES = ["/cms", "/nempo-feed", "/backup", "/api/backup"];
+export const LOCKED_PREFIXES = ["/cms", "/backup", "/api/backup"];
 
 export function isPreviewHost(host: string): boolean {
   const h = host.split(":")[0]!.toLowerCase();
