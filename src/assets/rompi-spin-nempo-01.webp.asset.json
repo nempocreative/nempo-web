@@ -1,11 +1,11 @@
 {
-  "asset_id": "ea46cb21-fafe-4a1e-89cf-1091f094af38",
-  "content_type": "image/webp",
-  "created_at": "2026-11-07T06:59:04Z",
+  "version": 1,
+  "asset_id": "d3aa1de4-af64-41ef-9a69-fb8caf0fbdc9",
+  "project_id": "4a75e7bf-8d24-401c-9942-df403f56d209",
+  "url": "/__l5e/assets-v1/d3aa1de4-af64-41ef-9a69-fb8caf0fbdc9/rompi-spin-nempo-01.webp",
+  "r2_key": "a/v1/4a75e7bf-8d24-401c-9942-df403f56d209/d3aa1de4-af64-41ef-9a69-fb8caf0fbdc9/rompi-spin-nempo-01.webp",
   "original_filename": "rompi-spin-nempo-01.webp",
-  "project_id": "880044e6-52cc-4f08-a2e4-45ca185aafa1",
-  "r2_key": "a/v1/880044e6-52cc-4f08-a2e4-45ca185aafa1/ea46cb21-fafe-4a1e-89cf-1091f094af38/rompi-spin-nempo-01.webp",
   "size": 53774,
-  "url": "/__l5e/assets-v1/ea46cb21-fafe-4a1e-89cf-1091f094af38/rompi-spin-nempo-01.webp",
-  "version": 1
+  "content_type": "image/webp",
+  "created_at": "2026-11-10T11:18:01Z"
 }
