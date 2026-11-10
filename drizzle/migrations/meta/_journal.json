@@ -1,20 +1,5 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "7",
-      "when": 1794309229867,
-      "tag": "0000_nempo_garut_schema",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1794310145282,
-      "tag": "0001_tighten_visitor_privileges",
-      "breakpoints": true
-    }
-  ]
+  "entries": []
 }
