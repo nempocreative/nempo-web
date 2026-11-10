@@ -69,7 +69,7 @@ describe("repository completeness for git sync", () => {
 
   it("keeps every required file out of .gitignore", () => {
     const probe = [
-      "src/assets/musicomedy-night-poster.webp.asset.json",
+      "src/assets/kalamuda-kegiatan-basecamp.jpg.asset.json",
       "src/data/media-archive.json",
       "src/data/event-seed.ts",
       "drizzle/migrations/meta/_journal.json",

@@ -7,8 +7,8 @@ import {
 } from "./media-archive";
 
 describe("media archive manifest", () => {
-  it("keeps all 37 recovered files", () => {
-    expect(MEDIA_ARCHIVE_ENTRIES).toHaveLength(37);
+  it("keeps the 4 community page photos the organizer site still uses", () => {
+    expect(MEDIA_ARCHIVE_ENTRIES).toHaveLength(4);
   });
 
   it("records a checksum, a size and a pointer for every file", () => {
@@ -25,9 +25,9 @@ describe("media archive manifest", () => {
     expect(new Set(names).size).toBe(names.length);
   });
 
-  it("finds the MusiComedy group photo by filename", () => {
-    const entry = mediaArchiveByFilename("musicomedy-group.webp");
-    expect(entry?.content_type).toBe("image/webp");
+  it("finds the basecamp community photo by filename", () => {
+    const entry = mediaArchiveByFilename("kalamuda-kegiatan-basecamp.jpg");
+    expect(entry?.content_type).toBe("image/jpeg");
   });
 
   it("writes one re-runnable database record", () => {
@@ -35,6 +35,6 @@ describe("media archive manifest", () => {
     expect(sql).toContain("public.media_archive");
     expect(sql).toContain(MEDIA_ARCHIVE_ID);
     expect(sql).toContain("on conflict (id) do update");
-    expect(sql).toContain("4b1016ff394324068fa67e0c914a5ad5bf893c5ded7b2ac6fdb4564e57757e54");
+    expect(sql).toContain("1b54c5d86e8901b607727e94efcc57ef6654124fbb4851fa09cba9fc4360675b");
   });
 });
