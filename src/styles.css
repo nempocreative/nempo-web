@@ -1917,3 +1917,114 @@ html, body, #root {
   .yb-line { transform: none; transition: none; }
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
+
+/* ── Year book luxe motion (intro gate, gold frame, masks, wipes, tilt) ── */
+.yb-intro { perspective: 2200px; animation: yb-intro-out 0s linear 2.2s forwards; }
+@keyframes yb-intro-out { to { visibility: hidden; } }
+.yb-door { backface-visibility: hidden; will-change: transform, opacity; }
+.yb-door-l { transform-origin: left center; animation: yb-door-l 1.3s cubic-bezier(0.7, 0, 0.25, 1) 0.85s forwards; }
+.yb-door-r { transform-origin: right center; animation: yb-door-r 1.3s cubic-bezier(0.7, 0, 0.25, 1) 0.85s forwards; }
+@keyframes yb-door-l { 70% { opacity: 1; } to { transform: rotateY(-100deg); opacity: 0; } }
+@keyframes yb-door-r { 70% { opacity: 1; } to { transform: rotateY(100deg); opacity: 0; } }
+.yb-seal { animation: yb-seal 1.2s ease forwards; }
+@keyframes yb-seal {
+  0% { opacity: 0; transform: scale(0.82); }
+  35%, 68% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.25); }
+}
+
+.yb-enter { animation: yb-rise-blur 1.1s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) backwards; }
+@keyframes yb-rise-blur { from { opacity: 0; transform: translate3d(0, 30px, 0); filter: blur(8px); } }
+.yb-foil.yb-track-in { animation: yb-track 1.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 1.5s) backwards, yb-shine 7s ease-in-out infinite; }
+@keyframes yb-track { from { letter-spacing: 0.35em; filter: blur(14px); opacity: 0; } }
+
+.yb-frame > i { position: absolute; background: rgba(242, 190, 80, 0.62); }
+.yb-frame > i:nth-child(1) { top: 0; left: 0; right: 0; height: 2px; transform-origin: left; animation: yb-draw-x 1.5s cubic-bezier(0.65, 0, 0.35, 1) 1.3s backwards; }
+.yb-frame > i:nth-child(2) { top: 0; bottom: 0; right: 0; width: 2px; transform-origin: top; animation: yb-draw-y 1.5s cubic-bezier(0.65, 0, 0.35, 1) 1.3s backwards; }
+.yb-frame > i:nth-child(3) { bottom: 0; left: 0; right: 0; height: 2px; transform-origin: right; animation: yb-draw-x 1.5s cubic-bezier(0.65, 0, 0.35, 1) 1.3s backwards; }
+.yb-frame > i:nth-child(4) { top: 0; bottom: 0; left: 0; width: 2px; transform-origin: bottom; animation: yb-draw-y 1.5s cubic-bezier(0.65, 0, 0.35, 1) 1.3s backwards; }
+.yb-frame > b { position: absolute; width: 10px; height: 10px; background: #f5c55a; transform: rotate(45deg); animation: yb-pop 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) 2.6s backwards; }
+@keyframes yb-draw-x { from { transform: scaleX(0); } }
+@keyframes yb-draw-y { from { transform: scaleY(0); } }
+@keyframes yb-pop { from { opacity: 0; transform: rotate(45deg) scale(0); } }
+
+.yb-aurora { animation: yb-drift 18s ease-in-out infinite alternate; }
+.yb-aurora.b { animation-duration: 23s; animation-direction: alternate-reverse; }
+@keyframes yb-drift { to { transform: translate3d(14%, 10%, 0) scale(1.18); } }
+
+.yb-dust {
+  position: absolute; border-radius: 9999px; opacity: 0;
+  background: radial-gradient(circle, #fff1c2 0%, #f5c55a 45%, rgba(242, 160, 7, 0) 72%);
+  animation: yb-float var(--d) linear var(--dl) infinite;
+}
+.yb-dust.dia { border-radius: 1px; background: #f5c55a; box-shadow: 0 0 8px rgba(245, 197, 90, 0.8); }
+@keyframes yb-float {
+  0% { transform: translate3d(0, 0, 0) rotate(45deg); opacity: 0; }
+  15%, 80% { opacity: var(--o); }
+  100% { transform: translate3d(var(--dx), -42vh, 0) rotate(225deg); opacity: 0; }
+}
+
+.yb-mask { overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.yb-mask > span { display: block; transform: translate3d(0, 110%, 0) skewY(5deg); transform-origin: left top; transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0.1s; }
+.yb-mask.on > span { transform: none; }
+
+.yb-wipe { clip-path: inset(0 0 100% 0); transition: clip-path 1.4s cubic-bezier(0.77, 0, 0.18, 1); }
+.yb-wipe.on { clip-path: inset(0 0 0 0); }
+.yb-wipe > img:not(.yb-kb) { transform: scale(1.22); transition: transform 2.1s cubic-bezier(0.22, 1, 0.36, 1); }
+.yb-wipe.on > img:not(.yb-kb) { transform: scale(1); }
+
+.yb-write-once { clip-path: inset(0 100% 0 0); transition: clip-path 1.8s cubic-bezier(0.65, 0, 0.35, 1) 0.3s; }
+.yb-write-once.on { clip-path: inset(-20% -10% -20% 0); }
+
+.yb-stagger.on > .yb-rise { animation: yb-rise 1.1s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+@keyframes yb-rise { from { opacity: 0; transform: perspective(1000px) translate3d(0, 60px, 0) rotateX(28deg) scale(0.94); } }
+.yb-stagger.on > .yb-drop { animation: yb-drop 1s cubic-bezier(0.2, 0.9, 0.25, 1.15) backwards; }
+@keyframes yb-drop { from { opacity: 0; transform: translate3d(0, -60px, 0) rotate(-10deg) scale(1.12); } }
+.yb-stagger.on > .yb-swing { transform-origin: 50% 0; animation: yb-swing 1.15s cubic-bezier(0.2, 0.9, 0.3, 1.25) backwards; }
+@keyframes yb-swing { from { opacity: 0; transform: translate3d(0, -24px, 0) rotate(-16deg); } }
+.yb-stagger.on > .yb-write { animation: yb-write 1.1s cubic-bezier(0.65, 0, 0.35, 1) backwards; }
+@keyframes yb-write { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(-20% -10% -20% 0); } }
+
+.yb-tilt { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotate(var(--r, 0deg)); transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.yb-tilt.is-tilting { transition: transform 0.1s linear; }
+.yb-glare { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.4s ease; background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(255, 240, 200, 0.5), rgba(255, 240, 200, 0) 55%); }
+.yb-tilt:hover .yb-glare { opacity: 1; }
+.yb-sheen::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; transform: translateX(-130%);
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 236, 180, 0.55) 48%, rgba(255, 255, 255, 0.2) 52%, transparent 68%);
+}
+.yb-stagger.on .yb-sheen::after { animation: yb-sweep 1.5s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--i, 0) * 70ms + 0.8s) backwards; }
+@keyframes yb-sweep { from { transform: translateX(-130%); } to { transform: translateX(130%); } }
+
+.yb-ring-gold { position: relative; isolation: isolate; overflow: hidden; border-radius: 9999px; padding: 4px; }
+.yb-ring-gold::before { content: ""; position: absolute; inset: -40%; z-index: -1; background: conic-gradient(#f2a007, #fff3c8, #c98a1c, #ffe08a, #f2a007); animation: yb-spin 5s linear infinite; }
+@keyframes yb-spin { to { transform: rotate(360deg); } }
+.yb-glow { transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.35s ease; }
+.yb-glow:hover { border-color: rgba(242, 190, 80, 0.85); box-shadow: 0 0 0 1px rgba(242, 190, 80, 0.35), 0 30px 60px -28px rgba(242, 160, 7, 0.55); }
+
+.yb-pulse::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid #f2a007; animation: yb-pulse 2.6s ease-out infinite; }
+@keyframes yb-pulse { from { transform: scale(1); opacity: 0.7; } to { transform: scale(1.9); opacity: 0; } }
+
+.yb-cap { position: absolute; opacity: 0; }
+.on > .yb-cap { animation: yb-toss 1.7s cubic-bezier(0.15, 0.85, 0.3, 1) var(--d) forwards, yb-hover 6s ease-in-out calc(var(--d) + 1.7s) infinite; }
+@keyframes yb-toss {
+  0% { opacity: 0; transform: translate3d(0, 60vh, 0) rotate(0deg) scale(0.5); }
+  25% { opacity: var(--o, 0.6); }
+  100% { opacity: var(--o, 0.6); transform: translate3d(0, 0, 0) rotate(var(--rot)) scale(1); }
+}
+@keyframes yb-hover {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--rot)); }
+  50% { transform: translate3d(0, -14px, 0) rotate(calc(var(--rot) + 7deg)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yb-intro { display: none; }
+  .yb-enter, .yb-frame > i, .yb-frame > b, .yb-aurora, .yb-dust, .yb-pulse::after, .yb-ring-gold::before { animation: none !important; }
+  .yb-dust { opacity: 0.5; }
+  .yb-foil.yb-track-in { animation: none; }
+  .yb-mask > span, .yb-wipe, .yb-wipe > img, .yb-write-once { transform: none !important; clip-path: none !important; transition: none !important; }
+  .yb-stagger.on > .yb-rise, .yb-stagger.on > .yb-drop, .yb-stagger.on > .yb-swing, .yb-stagger.on > .yb-write, .yb-stagger.on .yb-sheen::after { animation: none; }
+  .yb-cap { opacity: 0.5; }
+  .on > .yb-cap { animation: none; }
+  .yb-tilt { transition: none; }
+}

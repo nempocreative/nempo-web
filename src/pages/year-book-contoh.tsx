@@ -4,7 +4,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { Link } from "@/lib/wouter";
-import { ArrowLeft, ArrowUp, Award, ChevronDown, GraduationCap, Star } from "lucide-react";
+import { ArrowLeft, ArrowUp, Award, ChevronDown, GraduationCap } from "lucide-react";
 import {
   chapters,
   graduates,
@@ -17,7 +17,18 @@ import {
   yearBookMeta,
   type Kelas,
 } from "@/data/year-book";
-import { Reveal, useCountUp, useInView, useScrollProgress, useStagger } from "@/lib/yearbook-motion";
+import {
+  GoldDust,
+  Reveal,
+  spotlightHandler,
+  tiltHandlers,
+  useActiveSection,
+  useCountUp,
+  useInView,
+  useScrollFade,
+  useScrollProgress,
+  useStagger,
+} from "@/lib/yearbook-motion";
 
 const SERIF = '"Playfair Display", Georgia, serif';
 const HAND = '"Caveat", "Segoe Script", cursive';
@@ -47,10 +58,11 @@ function Eyebrow({ children, color = ACCENT }: { children: ReactNode; color?: st
   );
 }
 
-function Heading({ children, className = "", color = INK }: { children: ReactNode; className?: string; color?: string }) {
+function Heading({ children, className = "", color = INK, foil = false }: { children: ReactNode; className?: string; color?: string; foil?: boolean }) {
+  const { ref, inView } = useInView<HTMLHeadingElement>();
   return (
-    <h2 className={`text-4xl font-black leading-[0.98] tracking-[-0.03em] sm:text-6xl ${className}`} style={{ ...serif, color }}>
-      {children}
+    <h2 ref={ref} className={`yb-mask text-4xl font-black leading-[0.98] tracking-[-0.03em] sm:text-6xl${inView ? " on" : ""} ${className}`} style={{ ...serif, color }}>
+      <span className={foil ? "yb-foil" : ""}>{children}</span>
     </h2>
   );
 }
@@ -82,61 +94,104 @@ function Polaroid({ src, caption, rotate, imgClass = "aspect-[4/3]", className =
   );
 }
 
+/* ───────────── Pembuka (gerbang emas) ───────────── */
+
+const DOOR_BG = "linear-gradient(160deg, #22306e 0%, #141c3f 55%, #0a1030 100%)";
+
+function Intro() {
+  return (
+    <div aria-hidden className="yb-intro pointer-events-none fixed inset-0 z-[70]">
+      <div className="yb-door yb-door-l absolute inset-y-0 left-0 w-1/2" style={{ background: DOOR_BG, boxShadow: "inset -1px 0 0 rgba(242,190,80,.7)" }}>
+        <span className="absolute inset-y-5 left-5 right-0 border-y-2 border-l-2 sm:inset-y-8 sm:left-8" style={{ borderColor: "rgba(242,190,80,.55)" }} />
+        <span className="absolute inset-y-8 left-8 right-0 border-y border-l sm:inset-y-12 sm:left-12" style={{ borderColor: "rgba(242,190,80,.25)" }} />
+      </div>
+      <div className="yb-door yb-door-r absolute inset-y-0 right-0 w-1/2" style={{ background: DOOR_BG, boxShadow: "inset 1px 0 0 rgba(242,190,80,.7)" }}>
+        <span className="absolute inset-y-5 left-0 right-5 border-y-2 border-r-2 sm:inset-y-8 sm:right-8" style={{ borderColor: "rgba(242,190,80,.55)" }} />
+        <span className="absolute inset-y-8 left-0 right-8 border-y border-r sm:inset-y-12 sm:right-12" style={{ borderColor: "rgba(242,190,80,.25)" }} />
+      </div>
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="yb-seal grid h-40 w-40 place-items-center rounded-full text-center sm:h-48 sm:w-48" style={{ background: "radial-gradient(circle at 35% 30%, #2a3878, #0f1638)", boxShadow: "0 0 0 2px #f2be50, 0 0 0 8px rgba(20,28,63,.9), 0 0 0 9px rgba(242,190,80,.45), 0 30px 80px -20px rgba(0,0,0,.8)" }}>
+          <div className="flex flex-col items-center">
+            <GraduationCap className="h-9 w-9 sm:h-11 sm:w-11" style={{ color: "#f5c55a" }} strokeWidth={1.5} />
+            <span className="yb-foil mt-1 text-3xl font-black sm:text-4xl" style={serif}>
+              {yearBookMeta.angkatan}
+            </span>
+            <span className="mt-1 text-[9px] font-black uppercase tracking-[0.3em] sm:text-[10px]" style={{ color: "rgba(245,197,90,.85)" }}>
+              Year Book
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ───────────── Sampul ───────────── */
 
 function Cover() {
+  const fadeRef = useScrollFade<HTMLDivElement>();
+  const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
   return (
-    <section id="sampul" className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center" style={{ background: NAV_BG, color: CREAM }}>
-      <div aria-hidden className="pointer-events-none absolute inset-4 rounded-2xl border-2 sm:inset-8" style={{ borderColor: "rgba(242,190,80,.6)" }} />
-      <div aria-hidden className="pointer-events-none absolute inset-6 rounded-xl border sm:inset-11" style={{ borderColor: "rgba(242,190,80,.28)" }} />
-      <span className="yb-fade absolute right-8 top-8 rotate-[8deg] rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] sm:right-14 sm:top-14 sm:text-xs" style={{ background: BRASS, color: INK, animationDelay: "0.25s" }}>
+    <section
+      id="sampul"
+      onPointerMove={spotlightHandler}
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center"
+      style={{ background: NAV_BG, color: CREAM }}
+    >
+      <div aria-hidden className="yb-aurora pointer-events-none absolute -left-[30%] -top-[25%] h-[75vmax] w-[75vmax] rounded-full" style={{ background: "radial-gradient(circle, rgba(43,63,216,.55), rgba(43,63,216,0) 62%)" }} />
+      <div aria-hidden className="yb-aurora b pointer-events-none absolute -bottom-[30%] -right-[25%] h-[70vmax] w-[70vmax] rounded-full" style={{ background: "radial-gradient(circle, rgba(242,160,7,.22), rgba(242,160,7,0) 60%)" }} />
+      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(520px circle at var(--sx,50%) var(--sy,42%), rgba(245,197,90,.16), rgba(245,197,90,0) 62%)" }} />
+      <GoldDust count={30} seed={11} />
+
+      <div aria-hidden className="yb-frame pointer-events-none absolute inset-4 sm:inset-8">
+        <i />
+        <i />
+        <i />
+        <i />
+        <b className="-left-[4px] -top-[4px]" />
+        <b className="-right-[4px] -top-[4px]" />
+        <b className="-bottom-[4px] -right-[4px]" />
+        <b className="-bottom-[4px] -left-[4px]" />
+      </div>
+      <div aria-hidden className="yb-enter pointer-events-none absolute inset-6 rounded-xl border sm:inset-11" style={{ ...d(2.2), borderColor: "rgba(242,190,80,.24)" }} />
+      <span className="yb-enter absolute right-8 top-8 z-10 rotate-[8deg] rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] sm:right-14 sm:top-14 sm:text-xs" style={{ ...d(2.5), background: BRASS, color: INK }}>
         Isi contoh
       </span>
 
-      <Reveal delay={80} y={18}>
-        <span className="grid h-20 w-20 place-items-center rounded-full border-2 sm:h-24 sm:w-24 [@media(max-height:720px)]:hidden" style={{ borderColor: "rgba(242,190,80,.85)" }}>
+      <div ref={fadeRef} className="relative z-10 flex flex-col items-center will-change-transform">
+        <span className="yb-enter grid h-20 w-20 place-items-center rounded-full border-2 sm:h-24 sm:w-24 [@media(max-height:720px)]:hidden" style={{ ...d(1.35), borderColor: "rgba(242,190,80,.85)", boxShadow: "0 0 40px -6px rgba(242,160,7,.55)" }}>
           <GraduationCap className="h-10 w-10 sm:h-12 sm:w-12" style={{ color: "#f5c55a" }} strokeWidth={1.6} />
         </span>
-      </Reveal>
-      <Reveal delay={220} y={18}>
-        <p className="mt-6 text-xs font-black uppercase tracking-[0.42em] sm:text-sm" style={{ color: "rgba(245,197,90,.9)" }}>
+        <p className="yb-enter mt-6 text-xs font-black uppercase tracking-[0.42em] sm:text-sm" style={{ ...d(1.5), color: "rgba(245,197,90,.9)" }}>
           {yearBookMeta.sekolah}
         </p>
-      </Reveal>
-      <Reveal delay={340} y={36}>
-        <h1 className="yb-foil mt-4 text-[clamp(4.2rem,min(15vw,21svh),12rem)] font-black leading-[0.84] tracking-[-0.045em]" style={serif}>
+        <h1 className="yb-foil yb-track-in mt-4 whitespace-nowrap text-[clamp(4.2rem,min(15vw,21svh),12rem)] font-black leading-[0.84] tracking-[-0.045em]" style={{ ...serif, ...d(1.55) }}>
           Year Book
         </h1>
-      </Reveal>
-      <Reveal delay={540} y={20}>
-        <div className="mt-5 flex items-center gap-4">
-          <span className="h-px w-12 sm:w-20" style={{ background: "rgba(245,197,90,.6)" }} />
+        <div className="yb-enter mt-5 flex items-center gap-4" style={d(1.95)}>
+          <span className="h-px w-12 sm:w-20" style={{ background: "linear-gradient(90deg, rgba(245,197,90,0), rgba(245,197,90,.8))" }} />
           <span className="yb-foil text-4xl font-black sm:text-5xl" style={serif}>
             {yearBookMeta.angkatan}
           </span>
-          <span className="h-px w-12 sm:w-20" style={{ background: "rgba(245,197,90,.6)" }} />
+          <span className="h-px w-12 sm:w-20" style={{ background: "linear-gradient(90deg, rgba(245,197,90,.8), rgba(245,197,90,0))" }} />
         </div>
-      </Reveal>
-      <Reveal delay={680} y={20}>
-        <p className="mt-4 text-4xl leading-none sm:text-5xl" style={hand}>
+        <p className="yb-enter mt-4 text-4xl leading-none sm:text-5xl" style={{ ...hand, ...d(2.1) }}>
           “{yearBookMeta.julukanAngkatan}”
         </p>
-      </Reveal>
-      <Reveal delay={800} y={20}>
-        <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed sm:text-base [@media(max-height:720px)]:hidden" style={{ color: "rgba(255,246,220,.72)" }}>
+        <p className="yb-enter mx-auto mt-6 max-w-md text-sm leading-relaxed sm:text-base [@media(max-height:720px)]:hidden" style={{ ...d(2.25), color: "rgba(255,246,220,.72)" }}>
           {yearBookMeta.tagline}
         </p>
-      </Reveal>
-      <Reveal delay={900} y={16}>
-        <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.3em] sm:text-xs" style={{ color: "rgba(255,246,220,.5)" }}>
+        <p className="yb-enter mt-3 text-[11px] font-bold uppercase tracking-[0.3em] sm:text-xs" style={{ ...d(2.35), color: "rgba(255,246,220,.5)" }}>
           Angkatan {yearBookMeta.tahunMasuk} — {yearBookMeta.tahunLulus}
         </p>
-      </Reveal>
+      </div>
 
-      <a href="#sambutan" className="yb-bob absolute bottom-10 flex [@media(max-height:720px)]:bottom-7 flex-col items-center gap-1 text-[11px] font-black uppercase tracking-[0.24em] sm:bottom-14" style={{ color: "rgba(245,197,90,.9)" }}>
-        Buka buku
-        <ChevronDown className="h-5 w-5" />
-      </a>
+      <div className="yb-enter absolute bottom-10 z-10 sm:bottom-14 [@media(max-height:720px)]:bottom-7" style={d(2.7)}>
+        <a href="#sambutan" className="yb-bob flex flex-col items-center gap-1 text-[11px] font-black uppercase tracking-[0.24em]" style={{ color: "rgba(245,197,90,.9)" }}>
+          Buka buku
+          <ChevronDown className="h-5 w-5" />
+        </a>
+      </div>
     </section>
   );
 }
@@ -144,31 +199,41 @@ function Cover() {
 /* ───────────── Sambutan ───────────── */
 
 function Sambutan() {
+  const { ref: photoRef, inView: photoOn } = useInView<HTMLDivElement>(0.1);
+  const { ref: signRef, inView: signOn } = useInView<HTMLParagraphElement>(0.3);
+  const { ref: textRef, className: textClass } = useStagger<HTMLDivElement>(0.05);
   return (
     <section id="sambutan" className="px-5 py-20 sm:px-10 sm:py-28" style={{ background: PAPER }}>
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16">
-        <div className="relative mx-auto w-full max-w-sm">
+        <Reveal className="relative mx-auto w-full max-w-sm" x={-30} y={20}>
+          <div aria-hidden className="absolute -inset-3 rounded-sm border sm:-inset-4" style={{ borderColor: "rgba(242,160,7,.45)", transform: "rotate(2deg)" }} />
           <div className="relative bg-white p-3 pb-4 sm:p-4" style={{ transform: "rotate(-2.5deg)", boxShadow: "0 30px 60px -30px rgba(20,28,63,.55)" }}>
             <Tape className="-top-3 left-10" rotate={-6} />
-            <img src={kepalaSekolah.foto} alt={kepalaSekolah.nama} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            <div ref={photoRef} className={`yb-wipe overflow-hidden${photoOn ? " on" : ""}`}>
+              <img src={kepalaSekolah.foto} alt={kepalaSekolah.nama} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            </div>
             <p className="mt-3 text-center text-2xl leading-none" style={{ ...hand, color: INK }}>
               {kepalaSekolah.nama}
             </p>
           </div>
-        </div>
+        </Reveal>
         <div>
-          <Eyebrow>Sambutan kepala sekolah</Eyebrow>
+          <Reveal y={16}>
+            <Eyebrow>Sambutan kepala sekolah</Eyebrow>
+          </Reveal>
           <Heading className="mt-3">Untuk angkatan {yearBookMeta.angkatan}</Heading>
-          <div className="relative mt-8 space-y-5 text-base leading-[1.8] sm:text-lg" style={{ color: INK }}>
-            {kepalaSekolah.sambutan.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
+          <div ref={textRef} className={`relative mt-8 space-y-5 text-base leading-[1.8] sm:text-lg ${textClass}`} style={{ color: INK }}>
+            {kepalaSekolah.sambutan.map((p, i) => (
+              <p key={p.slice(0, 24)} style={{ animationDelay: `${150 + i * 140}ms` }}>
+                {p}
+              </p>
             ))}
           </div>
           <div className="mt-8">
-            <p className="text-5xl leading-none" style={{ ...hand, color: ACCENT }}>
+            <p ref={signRef} className={`yb-write-once inline-block text-5xl leading-none${signOn ? " on" : ""}`} style={{ ...hand, color: ACCENT }}>
               Siti Marlina
             </p>
-            <span className="mt-2 block h-px w-48" style={{ background: LINE }} />
+            <span className="mt-2 block h-px w-48" style={{ background: `linear-gradient(90deg, ${BRASS}, ${LINE})` }} />
             <p className="mt-2 text-xs font-black uppercase tracking-[0.18em]" style={{ color: INK_SOFT }}>
               {kepalaSekolah.jabatan} · {yearBookMeta.sekolah}
             </p>
