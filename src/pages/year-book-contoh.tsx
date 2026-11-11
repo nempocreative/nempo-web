@@ -4,6 +4,7 @@ import { SEO } from "@/components/seo";
 import { Link } from "@/lib/wouter";
 import { NEMPO_CONSULT_URL } from "@/lib/contact";
 import {
+  ArrowLeft,
   ArrowRight,
   BookOpen,
   Camera,
