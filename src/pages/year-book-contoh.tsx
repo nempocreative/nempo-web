@@ -175,33 +175,46 @@ function Angkatan() {
     { n: moments.length, l: "Momen" },
   ];
   return (
-    <section id="angkatan" className="relative">
-      <div className="relative h-[78svh] min-h-[460px] overflow-hidden">
-        <img src={group.src} alt={group.caption} loading="lazy" className="h-full w-full object-cover" />
-        <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,28,63,.15) 0%, rgba(20,28,63,.2) 40%, rgba(20,28,63,.92) 100%)" }} />
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-5 pb-28 sm:px-10 sm:pb-32">
+    <section id="angkatan" className="relative overflow-hidden px-4 pb-20 pt-16 sm:px-10 sm:pb-28 sm:pt-24" style={{ background: NAV_BG }}>
+      <div className="mx-auto max-w-6xl">
+        <div className="text-center">
           <p className="text-3xl leading-none sm:text-4xl" style={{ ...hand, color: "#ffd166" }}>
             foto bareng satu angkatan ♡
           </p>
-          <p className="mt-2 text-[clamp(4.5rem,14vw,10rem)] font-black leading-[0.82] tracking-[-0.05em]" style={{ ...serif, color: CREAM }}>
-            {yearBookMeta.angkatan}
-          </p>
-          <p className="mt-2 text-2xl italic sm:text-3xl" style={{ ...serif, color: "rgba(255,246,220,.85)" }}>
-            {yearBookMeta.julukanAngkatan}
+          <h2 className="mt-3 text-[clamp(2.6rem,8vw,5.5rem)] font-black leading-[0.95] tracking-[-0.03em]" style={{ ...serif, color: CREAM }}>
+            Angkatan {yearBookMeta.angkatan}
+          </h2>
+          <p className="mt-2 text-xl italic sm:text-2xl" style={{ ...serif, color: "rgba(255,246,220,.8)" }}>
+            “{yearBookMeta.julukanAngkatan}” · {yearBookMeta.sekolah}
           </p>
         </div>
-      </div>
-      <div className="relative z-10 mx-auto -mt-20 grid max-w-5xl grid-cols-2 gap-3 px-5 sm:grid-cols-4 sm:gap-4 sm:px-10">
-        {stats.map((s) => (
-          <div key={s.l} className="rounded-2xl border px-5 py-5 text-center" style={{ background: CARD, borderColor: LINE, boxShadow: "0 24px 50px -30px rgba(20,28,63,.5)" }}>
-            <p className="text-4xl font-black leading-none sm:text-5xl" style={{ ...serif, color: ACCENT }}>
-              {s.n}
-            </p>
-            <p className="mt-2 text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: INK_SOFT }}>
-              {s.l}
-            </p>
+
+        <figure className="relative mx-auto mt-10 max-w-5xl sm:mt-14">
+          <div className="rounded-[6px] p-2 sm:p-3.5" style={{ background: CARD, boxShadow: "0 40px 80px -30px rgba(0,0,0,.65)" }}>
+            <img src={group.src} alt={group.caption} loading="lazy" width={1600} height={907} className="block h-auto w-full rounded-[3px]" />
+            <figcaption className="flex items-center justify-between gap-3 px-1 pb-0.5 pt-2.5 sm:px-2 sm:pt-3.5">
+              <span className="text-xl leading-none sm:text-3xl" style={{ ...hand, color: INK }}>
+                {yearBookMeta.sekolah}, {yearBookMeta.tahunLulus}
+              </span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] sm:text-xs" style={{ color: INK_SOFT }}>
+                {yearBookMeta.tahunMasuk}–{yearBookMeta.tahunLulus}
+              </span>
+            </figcaption>
           </div>
-        ))}
+        </figure>
+
+        <div className="mx-auto mt-10 grid max-w-5xl grid-cols-2 gap-3 sm:mt-14 sm:grid-cols-4 sm:gap-4">
+          {stats.map((s) => (
+            <div key={s.l} className="rounded-2xl border px-5 py-5 text-center" style={{ background: "rgba(255,255,255,.06)", borderColor: "rgba(255,246,220,.16)" }}>
+              <p className="text-4xl font-black leading-none sm:text-5xl" style={{ ...serif, color: "#ffd166" }}>
+                {s.n}
+              </p>
+              <p className="mt-2 text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: "rgba(255,246,220,.75)" }}>
+                {s.l}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
