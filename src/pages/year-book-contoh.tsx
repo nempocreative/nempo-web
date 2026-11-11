@@ -82,7 +82,7 @@ export default function YearBookPage() {
             <Link
               href="/year-book"
               className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] transition-colors"
-              style={{ border: "1px solid rgba(244,246,255,.3)", color: "rgba(246,241,230,.75)" }}
+              style={{ border: "1px solid rgba(244,246,255,.3)", color: "rgba(244,246,255,.78)" }}
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               Penjelasan Year Book
