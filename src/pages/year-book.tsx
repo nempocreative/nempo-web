@@ -21,6 +21,7 @@ import {
   yearBookLangkah,
   yearBookMeta,
 } from "@/data/year-book";
+import { Reveal, useInView, useStagger } from "@/lib/yearbook-motion";
 
 const SERIF = '"Playfair Display", Georgia, serif';
 const HAND = '"Caveat", "Segoe Script", cursive';
@@ -41,6 +42,10 @@ const stats = [
 ];
 
 export default function YearBookPage() {
+  const { ref: isiRef, className: isiClass } = useStagger<HTMLDivElement>(0.06);
+  const { ref: langkahRef, className: langkahClass } = useStagger<HTMLOListElement>(0.12);
+  const { ref: bentukRef, className: bentukClass } = useStagger<HTMLDivElement>(0.1);
+  const { ref: ctaRef, inView: ctaOn } = useInView<HTMLDivElement>(0.08);
   return (
     <Layout>
       <SEO
@@ -68,27 +73,32 @@ export default function YearBookPage() {
             }}
           />
           <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:px-8">
-            <p className="text-[11px] font-black uppercase tracking-[0.3em]" style={{ color: ACCENT }}>
-              Layanan Nempo
-            </p>
-            <h1 className="yb-serif mt-3 text-[52px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[84px] lg:text-[104px]">
-              Year Book
-            </h1>
-            <p className="yb-serif mt-2 text-2xl font-semibold italic sm:text-3xl" style={{ color: INK_SOFT }}>
-              buku tahunan untuk satu angkatan
-            </p>
+            <Reveal y={18}>
+              <p className="text-[11px] font-black uppercase tracking-[0.3em]" style={{ color: ACCENT }}>
+                Layanan Nempo
+              </p>
+              <h1 className="yb-serif mt-3 text-[52px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[84px] lg:text-[104px]">
+                Year Book
+              </h1>
+              <p className="yb-serif mt-2 text-2xl font-semibold italic sm:text-3xl" style={{ color: INK_SOFT }}>
+                buku tahunan untuk satu angkatan
+              </p>
+            </Reveal>
 
-            <p className="mt-6 max-w-2xl text-sm leading-7 sm:text-base" style={{ color: INK_SOFT }}>
-              Year book adalah buku yang merangkum satu angkatan sekolah: wajah
-              setiap lulusan, foto-foto satu tahun, pesan guru, dan catatan
-              antarteman. Nempo yang kumpulkan isinya, desain, lalu cetak atau
-              bagikan sebagai buku digital.
-            </p>
-            <p className="yb-hand mt-4 text-2xl sm:text-3xl" style={{ color: ACCENT }}>
-              mau lihat bentuknya seperti apa?
-            </p>
+            <Reveal delay={160} y={22}>
+              <p className="mt-6 max-w-2xl text-sm leading-7 sm:text-base" style={{ color: INK_SOFT }}>
+                Year book adalah buku yang merangkum satu angkatan sekolah: wajah
+                setiap lulusan, foto-foto satu tahun, pesan guru, dan catatan
+                antarteman. Nempo yang kumpulkan isinya, desain, lalu cetak atau
+                bagikan sebagai buku digital.
+              </p>
+              <p className="yb-hand mt-4 text-2xl sm:text-3xl" style={{ color: ACCENT }}>
+                mau lihat bentuknya seperti apa?
+              </p>
+            </Reveal>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <Reveal delay={300} y={20}>
+              <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href={yearBookMeta.halamanContoh}
                 className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black"
@@ -109,11 +119,13 @@ export default function YearBookPage() {
                 Konsultasi bareng Nempo
               </a>
             </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── KARTU CONTOH (klik → halaman contoh) ── */}
         <section className="px-4 pb-4 sm:px-6 lg:px-8">
+          <Reveal y={34} className="mx-auto max-w-7xl">
           <Link
             href={yearBookMeta.halamanContoh}
             className="yb-card group mx-auto block max-w-7xl overflow-hidden rounded-3xl"
@@ -166,11 +178,12 @@ export default function YearBookPage() {
               </div>
             </div>
           </Link>
+          </Reveal>
         </section>
 
         {/* ── ISI YEAR BOOK ── */}
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <div className="max-w-xl">
+          <Reveal className="max-w-xl" y={20}>
             <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
               Isinya
             </p>
@@ -181,14 +194,14 @@ export default function YearBookPage() {
               Bagian-bagian di bawah ini bisa dikurangi atau ditambah sesuai
               kebutuhan angkatan.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div ref={isiRef} className={`mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 ${isiClass}`}>
             {yearBookIsi.map((item, i) => (
               <article
                 key={item.judul}
                 className="yb-card rounded-2xl p-5"
-                style={{ background: CARD, border: `1px solid ${LINE}` }}
+                style={{ background: CARD, border: `1px solid ${LINE}`, animationDelay: `${i * 70}ms` }}
               >
                 <p className="yb-serif text-2xl font-black" style={{ color: "rgba(43,63,216,.2)" }}>
                   {String(i + 1).padStart(2, "0")}
@@ -205,18 +218,18 @@ export default function YearBookPage() {
         {/* ── CARA PESAN ── */}
         <section className="border-y" style={{ borderColor: LINE, background: CARD }}>
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-            <div className="max-w-xl">
+            <Reveal className="max-w-xl" y={20}>
               <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
                 Alurnya
               </p>
               <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
                 Empat langkah sampai buku sampai.
               </h2>
-            </div>
+            </Reveal>
 
-            <ol className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {yearBookLangkah.map((s) => (
-                <li key={s.nomor} className="yb-card rounded-2xl p-5" style={{ background: PAPER, border: `1px solid ${LINE}` }}>
+            <ol ref={langkahRef} className={`mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 ${langkahClass}`}>
+              {yearBookLangkah.map((s, i) => (
+                <li key={s.nomor} className="yb-card rounded-2xl p-5" style={{ background: PAPER, border: `1px solid ${LINE}`, animationDelay: `${i * 110}ms` }}>
                   <p className="yb-serif text-4xl font-black" style={{ color: "rgba(242,160,7,.32)" }}>
                     {s.nomor}
                   </p>
@@ -232,18 +245,18 @@ export default function YearBookPage() {
 
         {/* ── CETAK ATAU DIGITAL ── */}
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <div className="max-w-xl">
+          <Reveal className="max-w-xl" y={20}>
             <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
               Bentuknya
             </p>
             <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
               Cetak, digital, atau dua-duanya.
             </h2>
-          </div>
+          </Reveal>
 
-          <div className="mt-9 grid gap-4 sm:grid-cols-2">
-            {yearBookBentuk.map((b) => (
-              <article key={b.nama} className="yb-card rounded-2xl p-6" style={{ background: CARD, border: `1px solid ${LINE}` }}>
+          <div ref={bentukRef} className={`mt-9 grid gap-4 sm:grid-cols-2 ${bentukClass}`}>
+            {yearBookBentuk.map((b, i) => (
+              <article key={b.nama} className="yb-card rounded-2xl p-6" style={{ background: CARD, border: `1px solid ${LINE}`, animationDelay: `${i * 120}ms` }}>
                 <h3 className="yb-serif text-2xl font-black" style={{ color: ACCENT }}>
                   {b.nama}
                 </h3>
@@ -266,7 +279,16 @@ export default function YearBookPage() {
         {/* ── CTA ── */}
         <section className="border-t" style={{ borderColor: LINE, background: INK, color: PAPER }}>
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div
+              ref={ctaRef}
+              data-reveal
+              className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between"
+              style={{
+                opacity: ctaOn ? 1 : 0,
+                transform: ctaOn ? "translate3d(0,0,0)" : "translate3d(0,26px,0)",
+                transition: "opacity .7s ease, transform .8s cubic-bezier(.22,1,.36,1)",
+              }}
+            >
               <div className="max-w-xl">
                 <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: BRASS }}>
                   Buat Year Book Sekolahmu

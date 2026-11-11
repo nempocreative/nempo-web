@@ -1886,3 +1886,34 @@ html, body, #root {
 .kg-shine { background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.28) 50%, transparent 65%); background-size: 250% 100%; animation: kg-shine 1.4s ease-out .3s both; }
 @keyframes kg-shine { from { background-position: 150% 0; } to { background-position: -100% 0; } }
 @media (prefers-reduced-motion: reduce) { .kg-card-active, .kg-shine { animation: none; } }
+
+/* ── Year book motion (src/lib/yearbook-motion.tsx) ── */
+@keyframes yb-fade-up {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes yb-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.yb-fade { animation: yb-fade 0.9s ease both; }
+.yb-stagger:not(.on) > * { opacity: 0; }
+.yb-stagger.on > * { animation: yb-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+/* children that must stay put inside a staggered container (e.g. the timeline rail) */
+.yb-stagger > .yb-keep { opacity: 1; animation: none; }
+.yb-kb { transform-origin: 50% 55%; animation: yb-kb 22s ease-in-out infinite alternate; }
+@keyframes yb-kb {
+  from { transform: scale(1); }
+  to { transform: scale(1.07); }
+}
+.yb-line { transform: scaleY(0); transform-origin: top center; transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s; }
+@media (min-width: 1024px) { .yb-line { transform: scaleX(0); transform-origin: left center; } }
+.yb-line.on { transform: scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  .yb-stagger:not(.on) > * { opacity: 1; }
+  .yb-stagger.on > * { animation: none; }
+  .yb-fade { animation: none; }
+  .yb-kb { animation: none; }
+  .yb-line { transform: none; transition: none; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
