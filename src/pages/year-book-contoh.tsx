@@ -48,10 +48,10 @@ export default function YearBookPage() {
   return (
     <Layout>
       <SEO
-        title={`Year Book Angkatan ${yearBookMeta.angkatan}`}
-        description={`Buku tahunan angkatan ${yearBookMeta.angkatan} ${yearBookMeta.sekolah}: profil lulusan, momen satu tahun, pesan guru, dan dinding pesan.`}
-        keywords="year book, buku tahunan sekolah, yearbook angkatan, lulusan sekolah, buku tahunan digital"
-        path="/year-book"
+        title={`Contoh Year Book Angkatan ${yearBookMeta.angkatan}`}
+        description={`Contoh isi buku tahunan angkatan ${yearBookMeta.angkatan} ${yearBookMeta.sekolah}: profil lulusan, momen satu tahun, pesan guru, dan dinding pesan.`}
+        keywords="contoh year book, contoh buku tahunan, yearbook angkatan, buku tahunan sekolah"
+        path="/year-book/contoh"
       />
 
       <style>{`
