@@ -7,6 +7,9 @@ import {
   moments,
   teacherMessages,
   wallNotes,
+  yearBookBentuk,
+  yearBookIsi,
+  yearBookLangkah,
   yearBookMeta,
 } from "./year-book";
 
@@ -55,7 +58,7 @@ describe("isi year book", () => {
     expect(yearBookMeta.catatanContoh).toContain("src/data/year-book.ts");
   });
 
-  it("halaman contohyearbook menunjuk ke /year-book/contoh", () => {
+  it("halaman contoh yearbook menunjuk ke /year-book/contoh", () => {
     expect(yearBookMeta.halamanContoh).toBe("/year-book/contoh");
   });
 
