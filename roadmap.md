@@ -8,4 +8,5 @@
 - [x] Keep only organizer-site media in this project's own storage; remove Nempo Feed and leftover old-project media
 
 ## New pages
-- [x] Year Book menu + page (/year-book) for a school graduating class; content lives in src/data/year-book.ts and is still example data
+- [x] Year Book menu + halaman utama /year-book berisi penjelasan layanan
+- [x] Halaman contoh buku tahunan di /year-book/contoh (klik dari kartu di halaman utama); isi masih data contoh di src/data/year-book.ts
