@@ -129,6 +129,18 @@ function ServiceArt({ id }: ServiceArtProps) {
           <path d="m50 8 1.2 3 3 1.2-3 1.3-1.2 3-1.3-3-3-1.3 3-1.2 1.3-3Z" fill={gold} stroke={outline} strokeWidth="1" />
         </>
       );
+    case "year-book":
+      return (
+        <>
+          <ellipse cx="32" cy="57" rx="17" ry="3" fill="#633F7C" opacity=".18" />
+          <path d="M32 22 12 30l20 8 20-8-20-8Z" fill="#7C2F3F" stroke={outline} strokeWidth="2" strokeLinejoin="round" />
+          <path d="M20 33v7c0 3 5.4 6 12 6s12-3 12-6v-7" fill="#A44A5A" stroke={outline} strokeWidth="2" strokeLinejoin="round" />
+          <path d="M52 30v9" stroke={outline} strokeWidth="2" strokeLinecap="round" />
+          <circle cx="52" cy="42" r="2.2" fill={gold} stroke={outline} strokeWidth="1.2" />
+          <path d="M18 48c4-2 9-2 14 1 5-3 10-3 14-1v5c-4-2-9-2-14 1-5-3-10-3-14-1v-5Z" fill={cream} stroke={outline} strokeWidth="1.8" strokeLinejoin="round" />
+          <path d="m14 12 1.2 3 3 1.2-3 1.3-1.2 3-1.3-3-3-1.3 3-1.2 1.3-3Z" fill={gold} stroke={outline} strokeWidth="1" />
+        </>
+      );
     default:
       return null;
   }
