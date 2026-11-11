@@ -131,7 +131,7 @@ export const yearBookBentuk: YearBookBentuk[] = [
   {
     nama: "Cetak",
     ringkas: "Buku fisik untuk dipegang, disimpan, dan dibagikan ke angkatan.",
-    poin: ["Pilihan ukuran dan jenis kertas", "Sampul硬 dengan nama angkatan", "Dibagikan pas hari perpisahan"],
+    poin: ["Pilihan ukuran dan jenis kertas", "Sampul tebal dengan nama angkatan", "Dibagikan pas hari perpisahan"],
   },
   {
     nama: "Digital",
