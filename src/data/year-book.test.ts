@@ -54,4 +54,22 @@ describe("isi year book", () => {
     expect(yearBookMeta.catatanContoh).toContain("CONTOH");
     expect(yearBookMeta.catatanContoh).toContain("src/data/year-book.ts");
   });
+
+  it("halaman contohyearbook menunjuk ke /year-book/contoh", () => {
+    expect(yearBookMeta.halamanContoh).toBe("/year-book/contoh");
+  });
+
+  it("penjelasan punya isi, langkah, dan bentuk yang terisi penuh", () => {
+    expect(yearBookIsi.length).toBe(6);
+    for (const item of yearBookIsi) {
+      expect(item.judul.trim().length).toBeGreaterThan(0);
+      expect(item.teks.trim().length).toBeGreaterThan(0);
+    }
+    expect(yearBookLangkah.length).toBe(4);
+    expect(yearBookLangkah.map((s) => s.nomor)).toEqual(["01", "02", "03", "04"]);
+    expect(yearBookBentuk.length).toBe(2);
+    for (const b of yearBookBentuk) {
+      expect(b.poin.length).toBeGreaterThan(0);
+    }
+  });
 });
