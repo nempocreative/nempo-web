@@ -1,6 +1,6 @@
 // Year Book — isi buku tahunan angkatan.
-// Semua nama, julukan, kutipan, dan pesan di bawah ini CONTOH (bukan data asli),
-// ditulis di kode supaya mudah diganti satu per satu.
+// Semua nama, julukan, kutipan, foto, dan pesan di bawah ini CONTOH (bukan data asli),
+// ditulis di kode supaya mudah diganti satu per satu. Foto wajah dibuat dengan AI.
 import momentBasecamp from "@/assets/kalamuda-kegiatan-basecamp.jpg";
 import momentHunting from "@/assets/kalamuda-kegiatan-hunting-foto.jpg";
 import momentCafe from "@/assets/kalamuda-kegiatan-good-story-cafe.jpg";
@@ -10,6 +10,22 @@ import momentMakan from "@/assets/kalamuda-kegiatan-makan-bersama.webp";
 import momentPodcast from "@/assets/kalamuda-kegiatan-podcast-malam.webp";
 import momentTari from "@/assets/kalamuda-kegiatan-tari-musicomedy.webp";
 import momentGroup from "@/assets/musicomedy-group.webp";
+import fotoNadia from "@/assets/yearbook/siswa-nadia.webp";
+import fotoRayhan from "@/assets/yearbook/siswa-rayhan.webp";
+import fotoSalsa from "@/assets/yearbook/siswa-salsa.webp";
+import fotoDimas from "@/assets/yearbook/siswa-dimas.webp";
+import fotoAulia from "@/assets/yearbook/siswa-aulia.webp";
+import fotoMaya from "@/assets/yearbook/siswa-maya.webp";
+import fotoFajar from "@/assets/yearbook/siswa-fajar.webp";
+import fotoSalma from "@/assets/yearbook/siswa-salma.webp";
+import fotoGilang from "@/assets/yearbook/siswa-gilang.webp";
+import fotoKirana from "@/assets/yearbook/siswa-kirana.webp";
+import fotoRizky from "@/assets/yearbook/siswa-rizky.webp";
+import fotoNayla from "@/assets/yearbook/siswa-nayla.webp";
+import fotoHendra from "@/assets/yearbook/guru-hendra.webp";
+import fotoRatna from "@/assets/yearbook/guru-ratna.webp";
+import fotoYusuf from "@/assets/yearbook/guru-yusuf.webp";
+import fotoKepsek from "@/assets/yearbook/kepala-sekolah.webp";
 
 export const yearBookMeta = {
   angkatan: "2026",
@@ -17,10 +33,10 @@ export const yearBookMeta = {
   julukanAngkatan: "Sejuta Cerita",
   tahunMasuk: 2023,
   tahunLulus: 2026,
-  tagline: "Empat tahun, satu angkatan, sejuta cerita yang kita simpan di sini.",
+  tagline: "Tiga tahun, satu angkatan, sejuta cerita yang kita simpan di sini.",
   halamanContoh: "/year-book/contoh",
   catatanContoh:
-    "Semua nama, foto, dan pesan di halaman ini masih CONTOH. Ganti isinya di file src/data/year-book.ts.",
+    "Semua nama, foto, dan pesan di halaman ini masih CONTOH (foto wajah dibuat dengan AI). Ganti isinya di file src/data/year-book.ts.",
 };
 
 export const kelasList = ["XII IPA 1", "XII IPA 2", "XII IPS 1"] as const;
@@ -33,22 +49,24 @@ export type Graduate = {
   kelas: Kelas;
   hobi: string;
   quote: string;
+  citaCita: string;
+  foto: string;
   warna: string;
 };
 
 export const graduates: Graduate[] = [
-  { id: "nadia", nama: "Nadia Putri", julukan: "Ketua Angkatan", kelas: "XII IPA 1", hobi: "Paduan suara", quote: "Kita mungkin ambil arah berbeda, tapi pernah tumbuh di halaman yang sama.", warna: "#e0447c" },
-  { id: "rayhan", nama: "Rayhan Aditya", julukan: "Si Paling Strategis", kelas: "XII IPA 1", hobi: "Catur & futsal", quote: "Bagian paling seru dari sekolah adalah tidak pernah tahu cerita apa yang menunggu besok.", warna: "#2b6fd8" },
-  { id: "salsa", nama: "Salsa Nuraini", julukan: "Creative Soul", kelas: "XII IPA 2", hobi: "Menggambar & film analog", quote: "Terima kasih untuk semua tawa yang membuat hari biasa terasa istimewa.", warna: "#7c4ddb" },
-  { id: "dimas", nama: "Dimas Pratama", julukan: "Si Penghubung", kelas: "XII IPS 1", hobi: "Podcast & nongkrong", quote: "Kelas ini mengajarkan bahwa teman baik selalu punya cara untuk tetap dekat.", warna: "#0d9488" },
-  { id: "aulia", nama: "Aulia Rahman", julukan: "Quiet Achiever", kelas: "XII IPA 2", hobi: "Olimpiade fisika", quote: "Kita selesai di sini, tapi cerita kita tidak pernah benar-benar selesai.", warna: "#e07b00" },
-  { id: "maya", nama: "Maya Kirana", julukan: "Si Paling Optimis", kelas: "XII IPS 1", hobi: "Menari & fotografi", quote: "Simpan yang baik-baik. Nanti kita akan rindu semuanya.", warna: "#e05244" },
-  { id: "fajar", nama: "Fajar Nugraha", julukan: "Kapten Lapangan", kelas: "XII IPA 1", hobi: "Basket & lari pagi", quote: "Habis lapangan ini, masih ada lapangan-lapangan lain yang menunggu.", warna: "#2b3fd8" },
-  { id: "salma", nama: "Salma Azzahra", julukan: "Ibu Kandung Kelas", kelas: "XII IPA 2", hobi: "Memasak & baca novel", quote: "Resep paling enak di sekolah bukan kantin, tapi makan bareng pas jam istirahat.", warna: "#c026d3" },
-  { id: "gilang", nama: "Gilang Saputra", julukan: "DJ Kelas", kelas: "XII IPS 1", hobi: "Musik & editing video", quote: "Setiap acara jadi lebih hidup kalau musiknya tepat. Itu pelajaran paling pentingku.", warna: "#16a34a" },
-  { id: "kirana", nama: "Kirana Ayudia", julukan: "Pencatat Sejarah", kelas: "XII IPA 1", hobi: "Menulis & jurnalistik", quote: "Aku catat semuanya supaya suatu hari nanti kita bisa baca lagi dan tertawa.", warna: "#d97706" },
-  { id: "rizky", nama: "Rizky Ramadhan", julukan: "Si Rajin Telat", kelas: "XII IPS 1", hobi: "Skateboard & gaming", quote: "Maaf untuk semua telatku. Terima kasih sudah tetap nyimpenin tempat duduk.", warna: "#4f46e5" },
-  { id: "nayla", nama: "Nayla Zahira", julukan: "Gudang Cerita", kelas: "XII IPA 2", hobi: "Teater & nulis lirik", quote: "Kalau nanti kita ketemu lagi, aku mau cerita ini belum kelar.", warna: "#db2777" },
+  { id: "nadia", nama: "Nadia Putri", julukan: "Ketua Angkatan", kelas: "XII IPA 1", hobi: "Paduan suara", quote: "Kita mungkin ambil arah berbeda, tapi pernah tumbuh di halaman yang sama.", citaCita: "Diplomat", foto: fotoNadia, warna: "#e0447c" },
+  { id: "rayhan", nama: "Rayhan Aditya", julukan: "Si Paling Strategis", kelas: "XII IPA 1", hobi: "Catur & futsal", quote: "Seru-serunya sekolah: nggak pernah tahu cerita apa yang nunggu besok.", citaCita: "Insinyur sipil", foto: fotoRayhan, warna: "#2b6fd8" },
+  { id: "fajar", nama: "Fajar Nugraha", julukan: "Kapten Lapangan", kelas: "XII IPA 1", hobi: "Basket & lari pagi", quote: "Habis lapangan ini, masih banyak lapangan lain yang menunggu.", citaCita: "Pelatih timnas", foto: fotoFajar, warna: "#2b3fd8" },
+  { id: "kirana", nama: "Kirana Ayudia", julukan: "Pencatat Sejarah", kelas: "XII IPA 1", hobi: "Menulis & jurnalistik", quote: "Aku catat semuanya, biar nanti kita bisa baca lagi sambil ketawa.", citaCita: "Jurnalis", foto: fotoKirana, warna: "#d97706" },
+  { id: "salsa", nama: "Salsa Nuraini", julukan: "Creative Soul", kelas: "XII IPA 2", hobi: "Menggambar & film analog", quote: "Makasih untuk semua tawa yang bikin hari biasa jadi istimewa.", citaCita: "Ilustrator", foto: fotoSalsa, warna: "#7c4ddb" },
+  { id: "aulia", nama: "Aulia Rahma", julukan: "Quiet Achiever", kelas: "XII IPA 2", hobi: "Olimpiade fisika", quote: "Kita selesai di sini, tapi cerita kita belum benar-benar selesai.", citaCita: "Peneliti antariksa", foto: fotoAulia, warna: "#e07b00" },
+  { id: "salma", nama: "Salma Azzahra", julukan: "Ibu Kandung Kelas", kelas: "XII IPA 2", hobi: "Memasak & baca novel", quote: "Menu terenak di sekolah: makan bareng pas jam istirahat.", citaCita: "Dokter anak", foto: fotoSalma, warna: "#c026d3" },
+  { id: "nayla", nama: "Nayla Zahira", julukan: "Gudang Cerita", kelas: "XII IPA 2", hobi: "Teater & nulis lirik", quote: "Kalau nanti kita ketemu lagi, ceritanya kita lanjutin, ya.", citaCita: "Penulis skenario", foto: fotoNayla, warna: "#db2777" },
+  { id: "dimas", nama: "Dimas Pratama", julukan: "Si Penghubung", kelas: "XII IPS 1", hobi: "Podcast & nongkrong", quote: "Teman baik selalu punya cara untuk tetap dekat.", citaCita: "Penyiar radio", foto: fotoDimas, warna: "#0d9488" },
+  { id: "maya", nama: "Maya Kirana", julukan: "Si Paling Optimis", kelas: "XII IPS 1", hobi: "Menari & fotografi", quote: "Simpan yang baik-baik. Nanti kita akan rindu semuanya.", citaCita: "Fotografer", foto: fotoMaya, warna: "#e05244" },
+  { id: "gilang", nama: "Gilang Saputra", julukan: "DJ Kelas", kelas: "XII IPS 1", hobi: "Musik & editing video", quote: "Acara apa pun jadi hidup kalau lagunya pas.", citaCita: "Produser musik", foto: fotoGilang, warna: "#16a34a" },
+  { id: "rizky", nama: "Rizky Ramadhan", julukan: "Si Rajin Telat", kelas: "XII IPS 1", hobi: "Skateboard & gaming", quote: "Maaf untuk semua telatku. Makasih udah nyimpenin tempat duduk.", citaCita: "Pengusaha", foto: fotoRizky, warna: "#4f46e5" },
 ];
 
 export type Moment = {
@@ -74,22 +92,67 @@ export const chapters = [
   { number: "01", title: "Hari pertama", date: "Juli 2023", text: "Seragam masih kaku, nama teman belum hafal, dan bangku yang akhirnya jadi tempat pulang." },
   { number: "02", title: "Tumbuh bareng", date: "2024 — 2025", text: "Dari tugas kelompok sampai obrolan setelah bel pulang, pelan-pelan kita jadi satu angkatan." },
   { number: "03", title: "Tahun terakhir", date: "2026", text: "Ujian, pentas, dan panitia perpisahan — semua kita kerjakan sambil pura-pura tidak sedih." },
-  { number: "04", title: "Sampai jumpa", date: "April 2026", text: "Kita tutup satu bab dengan bangga, bawa cerita lebih banyak daripada yang muat ditulis di sini." },
+  { number: "04", title: "Sampai jumpa", date: "April 2026", text: "Kita tutup satu bab dengan bangga, bawa cerita lebih banyak dari yang muat ditulis di sini." },
 ];
 
-export const teacherMessages = [
-  { nama: "Bapak Hendra", mapel: "Wali Kelas XII IPA 1", pesan: "Kalian bukan kelas paling tenang, tapi kalian kelas paling hidup. Itu yang bikin saya ingat terus." },
-  { nama: "Ibu Ratna", mapel: "Wali Kelas XII IPA 2", pesan: "Nilai bisa lupa, tapi cara kalian saling jaga waktu acara sekolah tidak akan saya lupa." },
-  { nama: "Bapak Yusuf", mapel: "Wali Kelas XII IPS 1", pesan: "Pergi jauh, pulang kalau sempat. Kelas ini selalu punya tempat buat kalian." },
+export type TeacherMessage = {
+  nama: string;
+  mapel: string;
+  kelas: Kelas;
+  foto: string;
+  pesan: string;
+};
+
+export const teacherMessages: TeacherMessage[] = [
+  { nama: "Bapak Hendra", mapel: "Wali Kelas XII IPA 1", kelas: "XII IPA 1", foto: fotoHendra, pesan: "Kalian bukan kelas paling tenang, tapi kalian kelas paling hidup. Itu yang bikin saya ingat terus." },
+  { nama: "Ibu Ratna", mapel: "Wali Kelas XII IPA 2", kelas: "XII IPA 2", foto: fotoRatna, pesan: "Nilai bisa lupa, tapi cara kalian saling jaga waktu acara sekolah tidak akan saya lupa." },
+  { nama: "Bapak Yusuf", mapel: "Wali Kelas XII IPS 1", kelas: "XII IPS 1", foto: fotoYusuf, pesan: "Pergi jauh, pulang kalau sempat. Kelas ini selalu punya tempat buat kalian." },
+];
+
+export type KelasInfo = {
+  kelas: Kelas;
+  julukan: string;
+  motto: string;
+  warna: string;
+};
+
+export const kelasInfo: KelasInfo[] = [
+  { kelas: "XII IPA 1", julukan: "Kelas Paling Hidup", motto: "Ribut boleh, kompak wajib.", warna: "#2b3fd8" },
+  { kelas: "XII IPA 2", julukan: "Keluarga Lab Kimia", motto: "Kalau gagal, ulang lagi bareng-bareng.", warna: "#c026d3" },
+  { kelas: "XII IPS 1", julukan: "Pasukan Bel Pulang", motto: "Belajar serius, pulangnya lebih serius.", warna: "#0d9488" },
+];
+
+export const kepalaSekolah = {
+  nama: "Ibu Dra. Siti Marlina",
+  jabatan: "Kepala Sekolah",
+  foto: fotoKepsek,
+  sambutan: [
+    "Anak-anakku angkatan 2026, tiga tahun terasa singkat, tapi kalian mengisinya dengan sangat penuh: prestasi, pentas, kepanitiaan, dan tentu saja tawa di setiap sudut sekolah.",
+    "Bawalah kejujuran, rasa ingin tahu, dan semangat saling menjaga yang kalian pelajari di sini. Ke mana pun langkah kalian, sekolah ini selalu menjadi rumah untuk pulang.",
+  ],
+};
+
+export type Superlative = {
+  gelar: string;
+  graduateId: string;
+};
+
+export const superlatives: Superlative[] = [
+  { gelar: "Paling mungkin jadi menteri", graduateId: "nadia" },
+  { gelar: "Paling sering telat", graduateId: "rizky" },
+  { gelar: "Senyum termanis", graduateId: "maya" },
+  { gelar: "Paling mungkin terkenal", graduateId: "gilang" },
+  { gelar: "Otak paling encer", graduateId: "aulia" },
+  { gelar: "Teman curhat terbaik", graduateId: "salma" },
 ];
 
 export const wallNotes = [
-  { dari: "Dimas", teks: "Nanti kalau udah kerja, jangan cuma muncullah di grup ya." },
-  { dari: "Maya", teks: "Sisa foto hasil hunting masih ada di flashdiskku. Ambil sebelum kehapus." },
-  { dari: "Kirana", teks: "Aku simpan semua koran dinding kalian. Suatu hari bakal jadi buku." },
+  { dari: "Dimas", teks: "Nanti kalau udah kerja, jangan cuma muncul di grup ya." },
+  { dari: "Maya", teks: "Sisa foto hunting masih di flashdiskku. Ambil sebelum kehapus!" },
+  { dari: "Kirana", teks: "Aku simpan semua koran dinding kalian. Suatu hari jadi buku." },
   { dari: "Fajar", teks: "Lapangan nanti kita main lagi, ya. Janji." },
   { dari: "Salma", teks: "Kalau rindu, mampir. Aku masak." },
-  { dari: "Nayla", teks: "Naskah drama kita belum kelar. Nanti kita lanjut di lain waktu." },
+  { dari: "Nayla", teks: "Naskah drama kita belum kelar. Lanjut lain waktu!" },
 ];
 
 // ── Penjelasan layanan Year Book (dipakai halaman /year-book) ──

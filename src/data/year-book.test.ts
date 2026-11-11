@@ -3,7 +3,9 @@ import { mainNavItems } from "./main-nav-items";
 import {
   chapters,
   graduates,
+  kelasInfo,
   kelasList,
+  superlatives,
   moments,
   teacherMessages,
   wallNotes,
@@ -74,5 +76,31 @@ describe("isi year book", () => {
     for (const b of yearBookBentuk) {
       expect(b.poin.length).toBeGreaterThan(0);
     }
+  });
+
+  it("setiap kelas punya tepat 4 lulusan supaya halaman lulusan terisi penuh", () => {
+    for (const k of kelasList) {
+      expect(graduates.filter((g) => g.kelas === k).length).toBe(4);
+    }
+  });
+
+  it("setiap kelas punya wali kelas dan info kelas", () => {
+    for (const k of kelasList) {
+      expect(teacherMessages.filter((t) => t.kelas === k).length).toBe(1);
+      expect(kelasInfo.filter((i) => i.kelas === k).length).toBe(1);
+    }
+  });
+
+  it("setiap lulusan punya foto dan cita-cita", () => {
+    for (const g of graduates) {
+      expect(g.foto.length).toBeGreaterThan(0);
+      expect(g.citaCita.trim().length).toBeGreaterThan(0);
+    }
+  });
+
+  it("6 gelar paling-paling, masing-masing untuk lulusan yang ada", () => {
+    expect(superlatives.length).toBe(6);
+    const ids = new Set(graduates.map((g) => g.id));
+    for (const s of superlatives) expect(ids.has(s.graduateId)).toBe(true);
   });
 });
