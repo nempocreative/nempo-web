@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { Link } from "@/lib/wouter";
@@ -9,18 +8,18 @@ import {
   Camera,
   GraduationCap,
   MessageCircle,
-  Quote,
   Users,
 } from "lucide-react";
 import {
-  chapters,
   graduates,
   kelasList,
   moments,
   teacherMessages,
   wallNotes,
+  yearBookBentuk,
+  yearBookIsi,
+  yearBookLangkah,
   yearBookMeta,
-  type Kelas,
 } from "@/data/year-book";
 
 const SERIF = '"Playfair Display", Georgia, serif';
@@ -34,291 +33,196 @@ const LINE = "#e3d9c6";
 const ACCENT = "#7c2f3f";
 const BRASS = "#b98a3c";
 
-const initialsOf = (name: string) =>
-  name.split(" ").filter(Boolean).slice(0, 2).map((w) => w[0]).join("").toUpperCase();
-
-type Filter = "Semua" | Kelas;
+const stats = [
+  { n: graduates.length, l: "Lulusan" },
+  { n: kelasList.length, l: "Kelas" },
+  { n: moments.length, l: "Momen" },
+  { n: teacherMessages.length + wallNotes.length, l: "Pesan" },
+];
 
 export default function YearBookPage() {
-  const [filter, setFilter] = useState<Filter>("Semua");
-  const shown = filter === "Semua" ? graduates : graduates.filter((g) => g.kelas === filter);
-  const featured = moments.find((m) => m.featured) ?? null;
-  const others = moments.filter((m) => !m.featured);
-
   return (
     <Layout>
       <SEO
-        title={`Year Book Angkatan ${yearBookMeta.angkatan}`}
-        description={`Buku tahunan angkatan ${yearBookMeta.angkatan} ${yearBookMeta.sekolah}: profil lulusan, momen satu tahun, pesan guru, dan dinding pesan.`}
-        keywords="year book, buku tahunan sekolah, yearbook angkatan, lulusan sekolah, buku tahunan digital"
+        title="Year Book untuk Sekolah"
+        description="Year book sekolah dari Nempo: profil lulusan, galeri momen satu tahun, pesan guru, dan dinding pesan — versi cetak maupun digital. Lihat contohnya dulu."
+        keywords="year book sekolah, buku tahunan sekolah, jasa yearbook, buku tahunan angkatan, yearbook digital"
         path="/year-book"
       />
 
       <style>{`
         .yb-serif { font-family: ${SERIF}; }
         .yb-hand { font-family: ${HAND}; }
-        .yb-tape::before, .yb-tape::after {
-          content: ""; position: absolute; top: -9px; width: 54px; height: 19px;
-          background: rgba(185,138,60,.28); border: 1px solid rgba(185,138,60,.32);
-        }
-        .yb-tape::before { left: 14px; transform: rotate(-4deg); }
-        .yb-tape::after { right: 14px; transform: rotate(3deg); }
         .yb-card { transition: transform 220ms ease, box-shadow 220ms ease; }
-        .yb-card:hover { transform: translateY(-4px) rotate(-.5deg); box-shadow: 0 16px 34px -18px rgba(30,26,21,.45); }
+        .yb-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px -18px rgba(30,26,21,.45); }
       `}</style>
 
       <main className="min-h-screen overflow-x-clip" style={{ background: PAPER, color: INK }}>
-        {/* ── COVER ── */}
-        <section className="relative overflow-hidden" style={{ background: INK, color: PAPER }}>
+        {/* ── HERO: PENJELASAN ── */}
+        <section className="relative overflow-hidden">
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.14]"
+            className="pointer-events-none absolute inset-0 opacity-[0.16]"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 18% 22%, #b98a3c 0%, transparent 42%), radial-gradient(circle at 82% 70%, #7c2f3f 0%, transparent 46%)",
+                "radial-gradient(circle at 14% 18%, #b98a3c 0%, transparent 44%), radial-gradient(circle at 86% 62%, #7c2f3f 0%, transparent 46%)",
             }}
           />
-          <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-5" style={{ borderColor: "rgba(246,241,230,.18)" }}>
-              <p className="text-[10px] font-black uppercase tracking-[0.28em]" style={{ color: "rgba(246,241,230,.6)" }}>
-                {yearBookMeta.sekolah}
-              </p>
-              <span
-                className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em]"
-                style={{ background: "rgba(185,138,60,.2)", color: "#e6c489", border: "1px solid rgba(185,138,60,.42)" }}
-              >
-                Isi contoh
-              </span>
-            </div>
-
-            <p className="mt-9 text-[11px] font-black uppercase tracking-[0.3em]" style={{ color: BRASS }}>
-              Buku Tahunan
+          <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:px-8">
+            <p className="text-[11px] font-black uppercase tracking-[0.3em]" style={{ color: ACCENT }}>
+              Layanan Nempo
             </p>
-            <h1 className="yb-serif mt-3 text-[54px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[86px] lg:text-[112px]">
+            <h1 className="yb-serif mt-3 text-[52px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[84px] lg:text-[104px]">
               Year Book
             </h1>
-            <p className="yb-serif mt-2 text-2xl font-semibold italic sm:text-4xl" style={{ color: "rgba(246,241,230,.72)" }}>
-              Angkatan {yearBookMeta.angkatan}
+            <p className="yb-serif mt-2 text-2xl font-semibold italic sm:text-3xl" style={{ color: INK_SOFT }}>
+              buku tahunan untuk satu angkatan
             </p>
 
-            <p className="mt-6 max-w-xl text-sm leading-7 sm:text-base" style={{ color: "rgba(246,241,230,.66)" }}>
-              {yearBookMeta.tagline}
+            <p className="mt-6 max-w-2xl text-sm leading-7 sm:text-base" style={{ color: INK_SOFT }}>
+              Year book adalah buku yang merangkum satu angkatan sekolah: wajah
+              setiap lulusan, foto-foto satu tahun, pesan guru, dan catatan
+              antarteman. Nempo yang kumpulkan isinya, desain, lalu cetak atau
+              bagikan sebagai buku digital.
             </p>
-            <p className="yb-hand mt-4 text-2xl sm:text-3xl" style={{ color: "#e6c489" }}>
-              sampai jumpa lagi, ya!
+            <p className="yb-hand mt-4 text-2xl sm:text-3xl" style={{ color: ACCENT }}>
+              mau lihat bentuknya seperti apa?
             </p>
 
-            <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {[
-                { n: graduates.length, l: "Lulusan" },
-                { n: kelasList.length, l: "Kelas" },
-                { n: moments.length, l: "Momen" },
-                { n: teacherMessages.length + wallNotes.length, l: "Pesan" },
-              ].map((s) => (
-                <div
-                  key={s.l}
-                  className="rounded-2xl px-4 py-4"
-                  style={{ background: "rgba(246,241,230,.07)", border: "1px solid rgba(246,241,230,.16)" }}
-                >
-                  <p className="yb-serif text-3xl font-black sm:text-4xl">{s.n}</p>
-                  <p className="mt-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: "rgba(246,241,230,.55)" }}>
-                    {s.l}
-                  </p>
-                </div>
-              ))}
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href={yearBookMeta.halamanContoh}
+                className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black"
+                style={{ background: ACCENT, color: PAPER }}
+              >
+                <BookOpen className="h-4 w-4" />
+                Lihat contoh yearbook
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <a
+                href={NEMPO_CONSULT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black"
+                style={{ border: `1px solid ${LINE}`, background: CARD, color: INK }}
+              >
+                <MessageCircle className="h-4 w-4" />
+                Konsultasi bareng Nempo
+              </a>
             </div>
           </div>
         </section>
 
-        {/* ── JUMP NAV ── */}
-        <nav className="border-b" style={{ borderColor: LINE, background: CARD }}>
-          <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-3 sm:px-6 lg:px-8">
-            {[
-              { id: "lulusan", l: "Lulusan" },
-              { id: "momen", l: "Momen" },
-              { id: "perjalanan", l: "Perjalanan" },
-              { id: "guru", l: "Pesan Guru" },
-              { id: "dinding", l: "Dinding Pesan" },
-            ].map((t) => (
-              <a
-                key={t.id}
-                href={`#${t.id}`}
-                className="shrink-0 rounded-full px-4 py-1.5 text-xs font-bold transition-colors"
-                style={{ border: `1px solid ${LINE}`, background: CARD, color: INK_SOFT }}
+        {/* ── KARTU CONTOH (klik → halaman contoh) ── */}
+        <section className="px-4 pb-4 sm:px-6 lg:px-8">
+          <Link
+            href={yearBookMeta.halamanContoh}
+            className="yb-card group mx-auto block max-w-7xl overflow-hidden rounded-3xl"
+            style={{ background: INK, color: PAPER }}
+          >
+            <div className="grid gap-6 p-6 sm:p-10 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
+              <div>
+                <span
+                  className="inline-block rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em]"
+                  style={{ background: "rgba(185,138,60,.2)", color: "#e6c489", border: "1px solid rgba(185,138,60,.42)" }}
+                >
+                  Isi contoh
+                </span>
+                <p className="mt-5 text-[11px] font-black uppercase tracking-[0.3em]" style={{ color: BRASS }}>
+                  Contoh Buku Tahunan
+                </p>
+                <h2 className="yb-serif mt-2 text-4xl font-black leading-[0.9] tracking-[-0.03em] sm:text-6xl">
+                  Year Book
+                </h2>
+                <p className="yb-serif mt-1 text-xl font-semibold italic sm:text-2xl" style={{ color: "rgba(246,241,230,.72)" }}>
+                  Angkatan {yearBookMeta.angkatan} · {yearBookMeta.sekolah}
+                </p>
+                <p className="mt-4 max-w-md text-sm leading-7" style={{ color: "rgba(246,241,230,.66)" }}>
+                  Isinya masih contoh — nama siswa, kutipan, dan fotonya saya
+                  karang. Buka halaman ini untuk melihat bentuk aslinya: profil
+                  lulusan, galeri momen, linimasa, pesan guru, dan dinding pesan.
+                </p>
+                <p
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-black"
+                  style={{ color: "#e6c489" }}
+                >
+                  Buka contoh yearbook
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                {stats.map((s) => (
+                  <div
+                    key={s.l}
+                    className="rounded-2xl px-4 py-5"
+                    style={{ background: "rgba(246,241,230,.07)", border: "1px solid rgba(246,241,230,.16)" }}
+                  >
+                    <p className="yb-serif text-3xl font-black sm:text-4xl">{s.n}</p>
+                    <p className="mt-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: "rgba(246,241,230,.55)" }}>
+                      {s.l}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Link>
+        </section>
+
+        {/* ── ISI YEAR BOOK ── */}
+        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div className="max-w-xl">
+            <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
+              Isinya
+            </p>
+            <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
+              Apa saja yang masuk buku?
+            </h2>
+            <p className="mt-3 text-sm leading-6" style={{ color: INK_SOFT }}>
+              Bagian-bagian di bawah ini bisa dikurangi atau ditambah sesuai
+              kebutuhan angkatan.
+            </p>
+          </div>
+
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {yearBookIsi.map((item, i) => (
+              <article
+                key={item.judul}
+                className="yb-card rounded-2xl p-5"
+                style={{ background: CARD, border: `1px solid ${LINE}` }}
               >
-                {t.l}
-              </a>
+                <p className="yb-serif text-2xl font-black" style={{ color: "rgba(124,47,63,.22)" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="yb-serif mt-1 text-xl font-bold">{item.judul}</h3>
+                <p className="mt-2 text-sm leading-6" style={{ color: INK_SOFT }}>
+                  {item.teks}
+                </p>
+              </article>
             ))}
           </div>
-        </nav>
-
-        {/* ── LULUSAN ── */}
-        <section id="lulusan" className="scroll-mt-16">
-          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-            <div className="flex flex-wrap items-end justify-between gap-5">
-              <div className="max-w-xl">
-                <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
-                  Profil Lulusan
-                </p>
-                <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
-                  Satu angkatan, {graduates.length} wajah.
-                </h2>
-                <p className="mt-3 text-sm leading-6" style={{ color: INK_SOFT }}>
-                  Pilih kelas untuk melihat siapa saja yang lulus di angkatan {yearBookMeta.angkatan}.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {(["Semua", ...kelasList] as Filter[]).map((k) => {
-                  const active = filter === k;
-                  return (
-                    <button
-                      key={k}
-                      type="button"
-                      onClick={() => setFilter(k)}
-                      className="rounded-full px-4 py-2 text-xs font-bold transition-colors"
-                      style={
-                        active
-                          ? { background: INK, color: PAPER, border: `1px solid ${INK}` }
-                          : { background: CARD, color: INK_SOFT, border: `1px solid ${LINE}` }
-                      }
-                    >
-                      {k}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {shown.map((g) => (
-                <article
-                  key={g.id}
-                  className="yb-card yb-tape relative rounded-2xl p-5"
-                  style={{ background: CARD, border: `1px solid ${LINE}`, boxShadow: "0 8px 22px -20px rgba(30,26,21,.6)" }}
-                >
-                  <div className="flex items-center gap-3">
-                    <span
-                      className="yb-serif grid h-14 w-14 shrink-0 place-items-center rounded-full text-lg font-black"
-                      style={{ background: g.warna, color: "#fffdf8" }}
-                    >
-                      {initialsOf(g.nama)}
-                    </span>
-                    <div className="min-w-0">
-                      <h3 className="yb-serif truncate text-xl font-bold leading-tight">{g.nama}</h3>
-                      <p className="mt-0.5 text-[11px] font-black uppercase tracking-[0.12em]" style={{ color: g.warna }}>
-                        {g.julukan}
-                      </p>
-                    </div>
-                  </div>
-
-                  <p className="yb-hand mt-4 text-xl leading-snug" style={{ color: INK_SOFT }}>
-                    “{g.quote}”
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap items-center gap-2 border-t pt-3 text-[11px] font-bold" style={{ borderColor: LINE, color: INK_SOFT }}>
-                    <span className="rounded-full px-2.5 py-1" style={{ background: "rgba(124,47,63,.08)", color: ACCENT }}>
-                      {g.kelas}
-                    </span>
-                    <span className="rounded-full px-2.5 py-1" style={{ background: "rgba(185,138,60,.12)", color: "#7d5c1e" }}>
-                      {g.hobi}
-                    </span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
         </section>
 
-        {/* ── MOMEN ── */}
-        <section id="momen" className="scroll-mt-16 border-y" style={{ borderColor: LINE, background: CARD }}>
+        {/* ── CARA PESAN ── */}
+        <section className="border-y" style={{ borderColor: LINE, background: CARD }}>
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
             <div className="max-w-xl">
               <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
-                Galeri
+                Alurnya
               </p>
               <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
-                Momen satu tahun.
-              </h2>
-              <p className="mt-3 text-sm leading-6" style={{ color: INK_SOFT }}>
-                Foto-foto yang paling sering dibuka lagi kalau kangen.
-              </p>
-            </div>
-
-            {featured && (
-              <figure
-                className="yb-card group mt-9 overflow-hidden rounded-2xl"
-                style={{ background: PAPER, border: `1px solid ${LINE}` }}
-              >
-                <div className="aspect-[16/10] sm:aspect-[21/9]">
-                  <img
-                    src={featured.src}
-                    alt={featured.caption}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <figcaption className="px-4 py-3">
-                  <p className="text-[11px] font-black uppercase tracking-[0.12em]" style={{ color: BRASS }}>
-                    {featured.tag}
-                  </p>
-                  <p className="yb-serif mt-0.5 text-lg font-bold leading-snug">{featured.caption}</p>
-                </figcaption>
-              </figure>
-            )}
-
-            <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              {others.map((m) => (
-                <figure
-                  key={m.caption}
-                  className="yb-card group overflow-hidden rounded-2xl"
-                  style={{ background: PAPER, border: `1px solid ${LINE}` }}
-                >
-                  <div className="aspect-[4/3]">
-                    <img
-                      src={m.src}
-                      alt={m.caption}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                    />
-                  </div>
-                  <figcaption className="px-3 py-2.5">
-                    <p className="text-[11px] font-black uppercase tracking-[0.12em]" style={{ color: BRASS }}>
-                      {m.tag}
-                    </p>
-                    <p className="mt-0.5 text-sm font-semibold leading-snug">{m.caption}</p>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── PERJALANAN ── */}
-        <section id="perjalanan" className="scroll-mt-16">
-          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-            <div className="max-w-xl">
-              <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
-                Linimasa
-              </p>
-              <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
-                Dari hari pertama sampai jumpa.
+                Empat langkah sampai buku sampai.
               </h2>
             </div>
 
             <ol className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {chapters.map((c) => (
-                <li
-                  key={c.number}
-                  className="yb-card rounded-2xl p-5"
-                  style={{ background: CARD, border: `1px solid ${LINE}` }}
-                >
-                  <p className="yb-serif text-4xl font-black" style={{ color: "rgba(124,47,63,.22)" }}>
-                    {c.number}
+              {yearBookLangkah.map((s) => (
+                <li key={s.nomor} className="yb-card rounded-2xl p-5" style={{ background: PAPER, border: `1px solid ${LINE}` }}>
+                  <p className="yb-serif text-4xl font-black" style={{ color: "rgba(185,138,60,.3)" }}>
+                    {s.nomor}
                   </p>
-                  <p className="mt-2 text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: BRASS }}>
-                    {c.date}
-                  </p>
-                  <h3 className="yb-serif mt-1 text-xl font-bold">{c.title}</h3>
+                  <h3 className="yb-serif mt-2 text-xl font-bold">{s.judul}</h3>
                   <p className="mt-2 text-sm leading-6" style={{ color: INK_SOFT }}>
-                    {c.text}
+                    {s.teks}
                   </p>
                 </li>
               ))}
@@ -326,65 +230,36 @@ export default function YearBookPage() {
           </div>
         </section>
 
-        {/* ── PESAN GURU ── */}
-        <section id="guru" className="scroll-mt-16 border-y" style={{ borderColor: LINE, background: CARD }}>
-          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-            <div className="max-w-xl">
-              <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
-                Pesan Guru
-              </p>
-              <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
-                Kata mereka sebelum kita pergi.
-              </h2>
-            </div>
-
-            <div className="mt-9 grid gap-4 sm:grid-cols-3">
-              {teacherMessages.map((t) => (
-                <article key={t.nama} className="yb-card rounded-2xl p-5" style={{ background: PAPER, border: `1px solid ${LINE}` }}>
-                  <Quote className="h-5 w-5" style={{ color: BRASS }} />
-                  <p className="yb-hand mt-3 text-2xl leading-snug">{t.pesan}</p>
-                  <div className="mt-4 border-t pt-3" style={{ borderColor: LINE }}>
-                    <p className="text-sm font-black">{t.nama}</p>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.1em]" style={{ color: INK_SOFT }}>
-                      {t.mapel}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
+        {/* ── CETAK ATAU DIGITAL ── */}
+        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div className="max-w-xl">
+            <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
+              Bentuknya
+            </p>
+            <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
+              Cetak, digital, atau dua-duanya.
+            </h2>
           </div>
-        </section>
 
-        {/* ── DINDING PESAN ── */}
-        <section id="dinding" className="scroll-mt-16">
-          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-            <div className="max-w-xl">
-              <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
-                Dinding Pesan
-              </p>
-              <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
-                Catatan yang ditempel di mading.
-              </h2>
-            </div>
-
-            <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {wallNotes.map((n, i) => (
-                <article
-                  key={n.dari}
-                  className="yb-card rounded-xl p-5"
-                  style={{
-                    background: i % 2 === 0 ? "#fdf6e3" : "#f7ece6",
-                    border: `1px solid ${LINE}`,
-                    transform: `rotate(${i % 2 === 0 ? -0.8 : 0.7}deg)`,
-                  }}
-                >
-                  <p className="yb-hand text-2xl leading-snug">{n.teks}</p>
-                  <p className="mt-3 text-right text-[11px] font-black uppercase tracking-[0.12em]" style={{ color: ACCENT }}>
-                    — {n.dari}
-                  </p>
-                </article>
-              ))}
-            </div>
+          <div className="mt-9 grid gap-4 sm:grid-cols-2">
+            {yearBookBentuk.map((b) => (
+              <article key={b.nama} className="yb-card rounded-2xl p-6" style={{ background: CARD, border: `1px solid ${LINE}` }}>
+                <h3 className="yb-serif text-2xl font-black" style={{ color: ACCENT }}>
+                  {b.nama}
+                </h3>
+                <p className="mt-2 text-sm leading-6" style={{ color: INK_SOFT }}>
+                  {b.ringkas}
+                </p>
+                <ul className="mt-4 space-y-2">
+                  {b.poin.map((p) => (
+                    <li key={p} className="flex items-start gap-2 text-sm leading-6">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: BRASS }} />
+                      <span style={{ color: INK }}>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -400,8 +275,8 @@ export default function YearBookPage() {
                   Punya angkatan yang mau dibukukan?
                 </h2>
                 <p className="mt-3 text-sm leading-7" style={{ color: "rgba(246,241,230,.66)" }}>
-                  Nempo bantu kumpulin profil lulusan, foto satu tahun, pesan guru,
-                  dan dinding pesan jadi satu buku tahunan — versi cetak maupun digital.
+                  Ceritakan jumlah siswa dan kelasnya, sisanya Nempo yang urus —
+                  dari kumpul data sampai buku siap dibagikan.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a
@@ -415,12 +290,12 @@ export default function YearBookPage() {
                     Konsultasi bareng Nempo
                   </a>
                   <Link
-                    href="/digital-services/yearbook"
+                    href={yearBookMeta.halamanContoh}
                     className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black"
                     style={{ border: "1px solid rgba(246,241,230,.3)", color: PAPER }}
                   >
                     <BookOpen className="h-4 w-4" />
-                    Lihat yearbook digital
+                    Lihat contoh yearbook
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>

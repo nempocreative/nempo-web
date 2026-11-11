@@ -18,6 +18,7 @@ export const yearBookMeta = {
   tahunMasuk: 2023,
   tahunLulus: 2026,
   tagline: "Empat tahun, satu angkatan, sejuta cerita yang kita simpan di sini.",
+  halamanContoh: "/year-book/contoh",
   catatanContoh:
     "Semua nama, foto, dan pesan di halaman ini masih CONTOH. Ganti isinya di file src/data/year-book.ts.",
 };
@@ -89,4 +90,52 @@ export const wallNotes = [
   { dari: "Fajar", teks: "Lapangan nanti kita main lagi, ya. Janji." },
   { dari: "Salma", teks: "Kalau rindu, mampir. Aku masak." },
   { dari: "Nayla", teks: "Naskah drama kita belum kelar. Nanti kita lanjut di lain waktu." },
+];
+
+// ── Penjelasan layanan Year Book (dipakai halaman /year-book) ──
+
+export type YearBookIsi = {
+  judul: string;
+  teks: string;
+};
+
+export const yearBookIsi: YearBookIsi[] = [
+  { judul: "Profil lulusan", teks: "Satu halaman per siswa: nama, kelas, hobi, dan kutipan pilihan sendiri." },
+  { judul: "Galeri momen", teks: "Foto satu tahun penuh — kumpul angkatan, tugas, pentas, sampai makan bareng." },
+  { judul: "Linimasa angkatan", teks: "Cerita berurutan dari hari pertama masuk sampai hari perpisahan." },
+  { judul: "Pesan guru", teks: "Kata wali kelas dan guru untuk angkatan, dicetak persis seperti ditulis." },
+  { judul: "Dinding pesan", teks: "Catatan singkat antarteman, ditempel seperti di mading sekolah." },
+  { judul: "Sampul & identitas", teks: "Nama sekolah, angkatan, dan julukan angkatan di sampul depan." },
+];
+
+export type YearBookLangkah = {
+  nomor: string;
+  judul: string;
+  teks: string;
+};
+
+export const yearBookLangkah: YearBookLangkah[] = [
+  { nomor: "01", judul: "Konsultasi", teks: "Ceritakan angkatanmu: jumlah siswa, jumlah kelas, dan buku yang diinginkan." },
+  { nomor: "02", judul: "Kumpulkan isi", teks: "Kami kirim formulir isian untuk siswa, guru, dan panitia biar datanya rapi." },
+  { nomor: "03", judul: "Desain & tinjau", teks: "Tata letak dan foto disusun, lalu kamu tinjau sampai benar-benar pas." },
+  { nomor: "04", judul: "Cetak & bagikan", teks: "Buku dicetak atau dibagikan sebagai tautan digital ke seluruh angkatan." },
+];
+
+export type YearBookBentuk = {
+  nama: string;
+  ringkas: string;
+  poin: string[];
+};
+
+export const yearBookBentuk: YearBookBentuk[] = [
+  {
+    nama: "Cetak",
+    ringkas: "Buku fisik untuk dipegang, disimpan, dan dibagikan ke angkatan.",
+    poin: ["Pilihan ukuran dan jenis kertas", "Sampul tebal dengan nama angkatan", "Dibagikan pas hari perpisahan"],
+  },
+  {
+    nama: "Digital",
+    ringkas: "Buku tahunan yang dibuka lewat tautan, bisa dibagikan ke mana saja.",
+    poin: ["Tautan khusus untuk angkatan", "Foto bisa dibuka ukuran penuh", "Isinya bisa ditambah setelah cetak"],
+  },
 ];
