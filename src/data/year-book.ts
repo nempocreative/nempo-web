@@ -1,15 +1,15 @@
 // Year Book — isi buku tahunan angkatan.
 // Semua nama, julukan, kutipan, foto, dan pesan di bawah ini CONTOH (bukan data asli),
-// ditulis di kode supaya mudah diganti satu per satu. Foto wajah dibuat dengan AI.
-import momentBasecamp from "@/assets/kalamuda-kegiatan-basecamp.jpg";
-import momentHunting from "@/assets/kalamuda-kegiatan-hunting-foto.jpg";
-import momentCafe from "@/assets/kalamuda-kegiatan-good-story-cafe.jpg";
-import momentAkustik from "@/assets/kalamuda-kegiatan-akustik.webp";
-import momentDapoer from "@/assets/kalamuda-kegiatan-dapoer-nyunda.webp";
-import momentMakan from "@/assets/kalamuda-kegiatan-makan-bersama.webp";
-import momentPodcast from "@/assets/kalamuda-kegiatan-podcast-malam.webp";
-import momentTari from "@/assets/kalamuda-kegiatan-tari-musicomedy.webp";
-import momentGroup from "@/assets/musicomedy-group.webp";
+// ditulis di kode supaya mudah diganti satu per satu. Semua foto dibuat dengan AI.
+import momentAngkatan from "@/assets/yearbook/momen-angkatan.webp";
+import momentKumpul from "@/assets/yearbook/momen-kumpul-kelas.webp";
+import momentHunting from "@/assets/yearbook/momen-hunting-foto.webp";
+import momentAkustik from "@/assets/yearbook/momen-akustik.webp";
+import momentMasak from "@/assets/yearbook/momen-masak.webp";
+import momentRapat from "@/assets/yearbook/momen-rapat-panitia.webp";
+import momentMakan from "@/assets/yearbook/momen-makan-kantin.webp";
+import momentPodcast from "@/assets/yearbook/momen-podcast.webp";
+import momentTari from "@/assets/yearbook/momen-latihan-tari.webp";
 import fotoNadia from "@/assets/yearbook/siswa-nadia.webp";
 import fotoRayhan from "@/assets/yearbook/siswa-rayhan.webp";
 import fotoSalsa from "@/assets/yearbook/siswa-salsa.webp";
@@ -36,7 +36,7 @@ export const yearBookMeta = {
   tagline: "Tiga tahun, satu angkatan, sejuta cerita yang kita simpan di sini.",
   halamanContoh: "/year-book/contoh",
   catatanContoh:
-    "Semua nama, foto, dan pesan di halaman ini masih CONTOH (foto wajah dibuat dengan AI). Ganti isinya di file src/data/year-book.ts.",
+    "Semua nama, foto, dan pesan di halaman ini masih CONTOH (semua foto dibuat dengan AI). Ganti isinya di file src/data/year-book.ts.",
 };
 
 export const kelasList = ["XII IPA 1", "XII IPA 2", "XII IPS 1"] as const;
@@ -77,15 +77,15 @@ export type Moment = {
 };
 
 export const moments: Moment[] = [
-  { src: momentGroup, caption: "Panggung perpisahan angkatan", tag: "Perpisahan", featured: true },
-  { src: momentBasecamp, caption: "Kumpul angkatan di basecamp", tag: "Kumpul" },
+  { src: momentAngkatan, caption: "Foto bareng satu angkatan", tag: "Angkatan", featured: true },
+  { src: momentKumpul, caption: "Ngobrol habis bel pulang", tag: "Kelas" },
   { src: momentHunting, caption: "Hunting foto tugas sekolah", tag: "Tugas" },
-  { src: momentAkustik, caption: "Akustikan setelah bel pulang", tag: "Sore" },
-  { src: momentDapoer, caption: "Masak bareng di kelas", tag: "Masak" },
-  { src: momentCafe, caption: "Rapat panitia di kafe", tag: "Panitia" },
-  { src: momentMakan, caption: "Makan bareng tiap Jumat", tag: "Perut" },
+  { src: momentAkustik, caption: "Akustikan di tangga sekolah", tag: "Sore" },
+  { src: momentMasak, caption: "Praktik masak masakan Sunda", tag: "Masak" },
+  { src: momentRapat, caption: "Rapat panitia perpisahan", tag: "Panitia" },
+  { src: momentMakan, caption: "Makan bareng di kantin", tag: "Perut" },
   { src: momentPodcast, caption: "Rekam podcast angkatan", tag: "Suara" },
-  { src: momentTari, caption: "Latihan tari buat pentas", tag: "Pentas" },
+  { src: momentTari, caption: "Latihan jaipong buat pentas", tag: "Pentas" },
 ];
 
 export const chapters = [

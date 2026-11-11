@@ -459,7 +459,7 @@ function Penutup() {
         Baca dari awal
       </a>
       <p className="mt-12 max-w-md text-xs leading-relaxed" style={{ color: "rgba(255,246,220,.5)" }}>
-        Contoh year book dari Nempo · Garut. Nama, kutipan, dan foto wajah di halaman ini contoh (foto dibuat dengan AI).
+        Contoh year book dari Nempo · Garut. Nama, kutipan, dan semua foto di halaman ini contoh (foto dibuat dengan AI).
       </p>
     </section>
   );
