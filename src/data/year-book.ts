@@ -18,6 +18,7 @@ export const yearBookMeta = {
   tahunMasuk: 2023,
   tahunLulus: 2026,
   tagline: "Empat tahun, satu angkatan, sejuta cerita yang kita simpan di sini.",
+  halamanContoh: "/year-book/contoh",
   catatanContoh:
     "Semua nama, foto, dan pesan di halaman ini masih CONTOH. Ganti isinya di file src/data/year-book.ts.",
 };
