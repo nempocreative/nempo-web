@@ -10,4 +10,4 @@
 ## New pages
 - [x] Year Book menu + halaman utama /year-book berisi penjelasan layanan
 - [x] Halaman contoh buku tahunan di /year-book/contoh (klik dari kartu di halaman utama); isi masih data contoh di src/data/year-book.ts
-- [x] Contoh year book dibuat seperti buku sungguhan (bisa dibalik per halaman, foto tiap lulusan, sambutan, paling-paling, galeri, dinding pesan)
+- [x] Contoh year book jadi satu web buku tahunan layar penuh (tanpa menu situs, hanya tombol Kembali)
