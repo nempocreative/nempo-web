@@ -27,13 +27,13 @@ import {
 const SERIF = '"Playfair Display", Georgia, serif';
 const HAND = '"Caveat", "Segoe Script", cursive';
 
-const PAPER = "#f6f1e6";
-const CARD = "#fffdf8";
-const INK = "#1e1a15";
-const INK_SOFT = "#6b6157";
-const LINE = "#e3d9c6";
-const ACCENT = "#7c2f3f";
-const BRASS = "#b98a3c";
+const PAPER = "#f4f6ff";
+const CARD = "#ffffff";
+const INK = "#141c3f";
+const INK_SOFT = "#565f88";
+const LINE = "#dbe1f6";
+const ACCENT = "#2b3fd8";
+const BRASS = "#f2a007";
 
 const initialsOf = (name: string) =>
   name.split(" ").filter(Boolean).slice(0, 2).map((w) => w[0]).join("").toUpperCase();
@@ -60,12 +60,12 @@ export default function YearBookPage() {
         .yb-hand { font-family: ${HAND}; }
         .yb-tape::before, .yb-tape::after {
           content: ""; position: absolute; top: -9px; width: 54px; height: 19px;
-          background: rgba(185,138,60,.28); border: 1px solid rgba(185,138,60,.32);
+          background: rgba(242,160,7,.3); border: 1px solid rgba(242,160,7,.36);
         }
         .yb-tape::before { left: 14px; transform: rotate(-4deg); }
         .yb-tape::after { right: 14px; transform: rotate(3deg); }
         .yb-card { transition: transform 220ms ease, box-shadow 220ms ease; }
-        .yb-card:hover { transform: translateY(-4px) rotate(-.5deg); box-shadow: 0 16px 34px -18px rgba(30,26,21,.45); }
+        .yb-card:hover { transform: translateY(-4px) rotate(-.5deg); box-shadow: 0 16px 34px -18px rgba(20,28,63,.45); }
       `}</style>
 
       <main className="min-h-screen overflow-x-clip" style={{ background: PAPER, color: INK }}>
@@ -75,25 +75,25 @@ export default function YearBookPage() {
             className="pointer-events-none absolute inset-0 opacity-[0.14]"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 18% 22%, #b98a3c 0%, transparent 42%), radial-gradient(circle at 82% 70%, #7c2f3f 0%, transparent 46%)",
+                "radial-gradient(circle at 18% 22%, #f2a007 0%, transparent 42%), radial-gradient(circle at 82% 70%, #2b3fd8 0%, transparent 46%)",
             }}
           />
           <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:px-8">
             <Link
               href="/year-book"
               className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] transition-colors"
-              style={{ border: "1px solid rgba(246,241,230,.28)", color: "rgba(246,241,230,.75)" }}
+              style={{ border: "1px solid rgba(244,246,255,.3)", color: "rgba(246,241,230,.75)" }}
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               Penjelasan Year Book
             </Link>
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-b pb-5" style={{ borderColor: "rgba(246,241,230,.18)" }}>
-              <p className="text-[10px] font-black uppercase tracking-[0.28em]" style={{ color: "rgba(246,241,230,.6)" }}>
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-b pb-5" style={{ borderColor: "rgba(244,246,255,.2)" }}>
+              <p className="text-[10px] font-black uppercase tracking-[0.28em]" style={{ color: "rgba(244,246,255,.62)" }}>
                 {yearBookMeta.sekolah}
               </p>
               <span
                 className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em]"
-                style={{ background: "rgba(185,138,60,.2)", color: "#e6c489", border: "1px solid rgba(185,138,60,.42)" }}
+                style={{ background: "rgba(242,160,7,.22)", color: "#ffd166", border: "1px solid rgba(242,160,7,.45)" }}
               >
                 Isi contoh
               </span>
@@ -105,14 +105,14 @@ export default function YearBookPage() {
             <h1 className="yb-serif mt-3 text-[54px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[86px] lg:text-[112px]">
               Year Book
             </h1>
-            <p className="yb-serif mt-2 text-2xl font-semibold italic sm:text-4xl" style={{ color: "rgba(246,241,230,.72)" }}>
+            <p className="yb-serif mt-2 text-2xl font-semibold italic sm:text-4xl" style={{ color: "rgba(244,246,255,.75)" }}>
               Angkatan {yearBookMeta.angkatan}
             </p>
 
-            <p className="mt-6 max-w-xl text-sm leading-7 sm:text-base" style={{ color: "rgba(246,241,230,.66)" }}>
+            <p className="mt-6 max-w-xl text-sm leading-7 sm:text-base" style={{ color: "rgba(244,246,255,.68)" }}>
               {yearBookMeta.tagline}
             </p>
-            <p className="yb-hand mt-4 text-2xl sm:text-3xl" style={{ color: "#e6c489" }}>
+            <p className="yb-hand mt-4 text-2xl sm:text-3xl" style={{ color: "#ffd166" }}>
               sampai jumpa lagi, ya!
             </p>
 
@@ -126,10 +126,10 @@ export default function YearBookPage() {
                 <div
                   key={s.l}
                   className="rounded-2xl px-4 py-4"
-                  style={{ background: "rgba(246,241,230,.07)", border: "1px solid rgba(246,241,230,.16)" }}
+                  style={{ background: "rgba(244,246,255,.08)", border: "1px solid rgba(244,246,255,.18)" }}
                 >
                   <p className="yb-serif text-3xl font-black sm:text-4xl">{s.n}</p>
-                  <p className="mt-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: "rgba(246,241,230,.55)" }}>
+                  <p className="mt-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: "rgba(244,246,255,.58)" }}>
                     {s.l}
                   </p>
                 </div>
@@ -202,12 +202,12 @@ export default function YearBookPage() {
                 <article
                   key={g.id}
                   className="yb-card yb-tape relative rounded-2xl p-5"
-                  style={{ background: CARD, border: `1px solid ${LINE}`, boxShadow: "0 8px 22px -20px rgba(30,26,21,.6)" }}
+                  style={{ background: CARD, border: `1px solid ${LINE}`, boxShadow: "0 8px 22px -20px rgba(20,28,63,.6)" }}
                 >
                   <div className="flex items-center gap-3">
                     <span
                       className="yb-serif grid h-14 w-14 shrink-0 place-items-center rounded-full text-lg font-black"
-                      style={{ background: g.warna, color: "#fffdf8" }}
+                      style={{ background: g.warna, color: "#ffffff" }}
                     >
                       {initialsOf(g.nama)}
                     </span>
@@ -224,10 +224,10 @@ export default function YearBookPage() {
                   </p>
 
                   <div className="mt-4 flex flex-wrap items-center gap-2 border-t pt-3 text-[11px] font-bold" style={{ borderColor: LINE, color: INK_SOFT }}>
-                    <span className="rounded-full px-2.5 py-1" style={{ background: "rgba(124,47,63,.08)", color: ACCENT }}>
+                    <span className="rounded-full px-2.5 py-1" style={{ background: "rgba(43,63,216,.1)", color: ACCENT }}>
                       {g.kelas}
                     </span>
-                    <span className="rounded-full px-2.5 py-1" style={{ background: "rgba(185,138,60,.12)", color: "#7d5c1e" }}>
+                    <span className="rounded-full px-2.5 py-1" style={{ background: "rgba(242,160,7,.14)", color: "#8a5a00" }}>
                       {g.hobi}
                     </span>
                   </div>
@@ -319,7 +319,7 @@ export default function YearBookPage() {
                   className="yb-card rounded-2xl p-5"
                   style={{ background: CARD, border: `1px solid ${LINE}` }}
                 >
-                  <p className="yb-serif text-4xl font-black" style={{ color: "rgba(124,47,63,.22)" }}>
+                  <p className="yb-serif text-4xl font-black" style={{ color: "rgba(43,63,216,.2)" }}>
                     {c.number}
                   </p>
                   <p className="mt-2 text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: BRASS }}>
@@ -382,7 +382,7 @@ export default function YearBookPage() {
                   key={n.dari}
                   className="yb-card rounded-xl p-5"
                   style={{
-                    background: i % 2 === 0 ? "#fdf6e3" : "#f7ece6",
+                    background: i % 2 === 0 ? "#fff3d6" : "#e8edff",
                     border: `1px solid ${LINE}`,
                     transform: `rotate(${i % 2 === 0 ? -0.8 : 0.7}deg)`,
                   }}
@@ -408,7 +408,7 @@ export default function YearBookPage() {
                 <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
                   Punya angkatan yang mau dibukukan?
                 </h2>
-                <p className="mt-3 text-sm leading-7" style={{ color: "rgba(246,241,230,.66)" }}>
+                <p className="mt-3 text-sm leading-7" style={{ color: "rgba(244,246,255,.68)" }}>
                   Nempo bantu kumpulin profil lulusan, foto satu tahun, pesan guru,
                   dan dinding pesan jadi satu buku tahunan — versi cetak maupun digital.
                 </p>
@@ -426,7 +426,7 @@ export default function YearBookPage() {
                   <Link
                     href="/digital-services/yearbook"
                     className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black"
-                    style={{ border: "1px solid rgba(246,241,230,.3)", color: PAPER }}
+                    style={{ border: "1px solid rgba(244,246,255,.32)", color: PAPER }}
                   >
                     <BookOpen className="h-4 w-4" />
                     Lihat yearbook digital
@@ -444,7 +444,7 @@ export default function YearBookPage() {
                   <div
                     key={s.l}
                     className="flex items-center gap-3 rounded-2xl px-4 py-3"
-                    style={{ background: "rgba(246,241,230,.07)", border: "1px solid rgba(246,241,230,.16)" }}
+                    style={{ background: "rgba(244,246,255,.08)", border: "1px solid rgba(244,246,255,.18)" }}
                   >
                     <s.icon className="h-4 w-4" style={{ color: BRASS }} />
                     <span className="text-sm font-bold">{s.l}</span>
@@ -453,7 +453,7 @@ export default function YearBookPage() {
               </div>
             </div>
 
-            <p className="mt-10 text-[11px] font-bold leading-5" style={{ color: "rgba(246,241,230,.45)" }}>
+            <p className="mt-10 text-[11px] font-bold leading-5" style={{ color: "rgba(244,246,255,.48)" }}>
               {yearBookMeta.catatanContoh}
             </p>
           </div>

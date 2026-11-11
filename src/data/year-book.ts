@@ -37,18 +37,18 @@ export type Graduate = {
 };
 
 export const graduates: Graduate[] = [
-  { id: "nadia", nama: "Nadia Putri", julukan: "Ketua Angkatan", kelas: "XII IPA 1", hobi: "Paduan suara", quote: "Kita mungkin ambil arah berbeda, tapi pernah tumbuh di halaman yang sama.", warna: "#8d3b4f" },
-  { id: "rayhan", nama: "Rayhan Aditya", julukan: "Si Paling Strategis", kelas: "XII IPA 1", hobi: "Catur & futsal", quote: "Bagian paling seru dari sekolah adalah tidak pernah tahu cerita apa yang menunggu besok.", warna: "#2f5d7c" },
-  { id: "salsa", nama: "Salsa Nuraini", julukan: "Creative Soul", kelas: "XII IPA 2", hobi: "Menggambar & film analog", quote: "Terima kasih untuk semua tawa yang membuat hari biasa terasa istimewa.", warna: "#6a4a86" },
-  { id: "dimas", nama: "Dimas Pratama", julukan: "Si Penghubung", kelas: "XII IPS 1", hobi: "Podcast & nongkrong", quote: "Kelas ini mengajarkan bahwa teman baik selalu punya cara untuk tetap dekat.", warna: "#1f6f5c" },
-  { id: "aulia", nama: "Aulia Rahman", julukan: "Quiet Achiever", kelas: "XII IPA 2", hobi: "Olimpiade fisika", quote: "Kita selesai di sini, tapi cerita kita tidak pernah benar-benar selesai.", warna: "#9a6a1f" },
-  { id: "maya", nama: "Maya Kirana", julukan: "Si Paling Optimis", kelas: "XII IPS 1", hobi: "Menari & fotografi", quote: "Simpan yang baik-baik. Nanti kita akan rindu semuanya.", warna: "#a8462f" },
-  { id: "fajar", nama: "Fajar Nugraha", julukan: "Kapten Lapangan", kelas: "XII IPA 1", hobi: "Basket & lari pagi", quote: "Habis lapangan ini, masih ada lapangan-lapangan lain yang menunggu.", warna: "#31548f" },
-  { id: "salma", nama: "Salma Azzahra", julukan: "Ibu Kandung Kelas", kelas: "XII IPA 2", hobi: "Memasak & baca novel", quote: "Resep paling enak di sekolah bukan kantin, tapi makan bareng pas jam istirahat.", warna: "#7a3b63" },
-  { id: "gilang", nama: "Gilang Saputra", julukan: "DJ Kelas", kelas: "XII IPS 1", hobi: "Musik & editing video", quote: "Setiap acara jadi lebih hidup kalau musiknya tepat. Itu pelajaran paling pentingku.", warna: "#2c6d55" },
-  { id: "kirana", nama: "Kirana Ayudia", julukan: "Pencatat Sejarah", kelas: "XII IPA 1", hobi: "Menulis & jurnalistik", quote: "Aku catat semuanya supaya suatu hari nanti kita bisa baca lagi dan tertawa.", warna: "#8a5a2b" },
-  { id: "rizky", nama: "Rizky Ramadhan", julukan: "Si Rajin Telat", kelas: "XII IPS 1", hobi: "Skateboard & gaming", quote: "Maaf untuk semua telatku. Terima kasih sudah tetap nyimpenin tempat duduk.", warna: "#4a4f8f" },
-  { id: "nayla", nama: "Nayla Zahira", julukan: "Gudang Cerita", kelas: "XII IPA 2", hobi: "Teater & nulis lirik", quote: "Kalau nanti kita ketemu lagi, aku mau cerita ini belum kelar.", warna: "#953c55" },
+  { id: "nadia", nama: "Nadia Putri", julukan: "Ketua Angkatan", kelas: "XII IPA 1", hobi: "Paduan suara", quote: "Kita mungkin ambil arah berbeda, tapi pernah tumbuh di halaman yang sama.", warna: "#e0447c" },
+  { id: "rayhan", nama: "Rayhan Aditya", julukan: "Si Paling Strategis", kelas: "XII IPA 1", hobi: "Catur & futsal", quote: "Bagian paling seru dari sekolah adalah tidak pernah tahu cerita apa yang menunggu besok.", warna: "#2b6fd8" },
+  { id: "salsa", nama: "Salsa Nuraini", julukan: "Creative Soul", kelas: "XII IPA 2", hobi: "Menggambar & film analog", quote: "Terima kasih untuk semua tawa yang membuat hari biasa terasa istimewa.", warna: "#7c4ddb" },
+  { id: "dimas", nama: "Dimas Pratama", julukan: "Si Penghubung", kelas: "XII IPS 1", hobi: "Podcast & nongkrong", quote: "Kelas ini mengajarkan bahwa teman baik selalu punya cara untuk tetap dekat.", warna: "#0d9488" },
+  { id: "aulia", nama: "Aulia Rahman", julukan: "Quiet Achiever", kelas: "XII IPA 2", hobi: "Olimpiade fisika", quote: "Kita selesai di sini, tapi cerita kita tidak pernah benar-benar selesai.", warna: "#e07b00" },
+  { id: "maya", nama: "Maya Kirana", julukan: "Si Paling Optimis", kelas: "XII IPS 1", hobi: "Menari & fotografi", quote: "Simpan yang baik-baik. Nanti kita akan rindu semuanya.", warna: "#e05244" },
+  { id: "fajar", nama: "Fajar Nugraha", julukan: "Kapten Lapangan", kelas: "XII IPA 1", hobi: "Basket & lari pagi", quote: "Habis lapangan ini, masih ada lapangan-lapangan lain yang menunggu.", warna: "#2b3fd8" },
+  { id: "salma", nama: "Salma Azzahra", julukan: "Ibu Kandung Kelas", kelas: "XII IPA 2", hobi: "Memasak & baca novel", quote: "Resep paling enak di sekolah bukan kantin, tapi makan bareng pas jam istirahat.", warna: "#c026d3" },
+  { id: "gilang", nama: "Gilang Saputra", julukan: "DJ Kelas", kelas: "XII IPS 1", hobi: "Musik & editing video", quote: "Setiap acara jadi lebih hidup kalau musiknya tepat. Itu pelajaran paling pentingku.", warna: "#16a34a" },
+  { id: "kirana", nama: "Kirana Ayudia", julukan: "Pencatat Sejarah", kelas: "XII IPA 1", hobi: "Menulis & jurnalistik", quote: "Aku catat semuanya supaya suatu hari nanti kita bisa baca lagi dan tertawa.", warna: "#d97706" },
+  { id: "rizky", nama: "Rizky Ramadhan", julukan: "Si Rajin Telat", kelas: "XII IPS 1", hobi: "Skateboard & gaming", quote: "Maaf untuk semua telatku. Terima kasih sudah tetap nyimpenin tempat duduk.", warna: "#4f46e5" },
+  { id: "nayla", nama: "Nayla Zahira", julukan: "Gudang Cerita", kelas: "XII IPA 2", hobi: "Teater & nulis lirik", quote: "Kalau nanti kita ketemu lagi, aku mau cerita ini belum kelar.", warna: "#db2777" },
 ];
 
 export type Moment = {
