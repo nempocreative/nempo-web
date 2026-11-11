@@ -79,7 +79,15 @@ export default function YearBookPage() {
             }}
           />
           <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-5" style={{ borderColor: "rgba(246,241,230,.18)" }}>
+            <Link
+              href="/year-book"
+              className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] transition-colors"
+              style={{ border: "1px solid rgba(246,241,230,.28)", color: "rgba(246,241,230,.75)" }}
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
+              Penjelasan Year Book
+            </Link>
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-b pb-5" style={{ borderColor: "rgba(246,241,230,.18)" }}>
               <p className="text-[10px] font-black uppercase tracking-[0.28em]" style={{ color: "rgba(246,241,230,.6)" }}>
                 {yearBookMeta.sekolah}
               </p>
@@ -92,7 +100,7 @@ export default function YearBookPage() {
             </div>
 
             <p className="mt-9 text-[11px] font-black uppercase tracking-[0.3em]" style={{ color: BRASS }}>
-              Buku Tahunan
+              Contoh Buku Tahunan
             </p>
             <h1 className="yb-serif mt-3 text-[54px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[86px] lg:text-[112px]">
               Year Book
