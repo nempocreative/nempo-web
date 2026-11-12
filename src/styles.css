@@ -5,6 +5,30 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.yb-memories {
+  --background: #f4f6ff;
+  --foreground: #141c3f;
+  --primary: #2b3fd8;
+  --primary-foreground: #ffffff;
+  --primary-border: #2b3fd8;
+  --muted-foreground: #565f88;
+  --border: #dbe1f6;
+  --input: #dbe1f6;
+  --ring: #2b3fd8;
+  --button-outline: #dbe1f6;
+  background: var(--background);
+  color: var(--foreground);
+}
+.yb-memories-dark {
+  --background: #141c3f;
+  --foreground: #fff6dc;
+  --primary: #f2a007;
+  --primary-foreground: #141c3f;
+  --primary-border: #f2a007;
+  --muted-foreground: #dbe1f6;
+  --border: #565f88;
+}
+
 /* GGS open slide: shared brand palette, separate from other feeds. */
 .ggl-root {
   --ggl-ink: #4a0e33;

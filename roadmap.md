@@ -17,3 +17,9 @@
 - [x] Kirim foto momen yearbook: unggah JPG/PNG/WebP maks 8 MB dengan nama dan cerita; tersimpan pribadi untuk dipilah admin nanti, tanpa halaman admin
 
 - [x] Nama Instagram di semua profil siswa contoh, dapat diklik untuk membuka profil di tab baru
+
+## Kenangan interaktif yearbook
+- [x] Playlist angkatan pilihan contoh dengan tautan Spotify
+- [x] Video perpisahan contoh dari foto sekolah AI yang tersedia
+- [x] Pencarian siswa dan filter kelas di profil lulusan
+- [x] Kapsul waktu lima tahun: simpan di perangkat dan unduh salinan

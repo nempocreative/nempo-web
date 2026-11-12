@@ -4,12 +4,17 @@ import { useState, type CSSProperties, type FormEvent, type ReactNode } from "re
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { YearbookPhotoUpload } from "@/components/yearbook-photo-upload";
+import { YearbookSoundtrack, YearbookFarewellVideo, YearbookTimeCapsule } from "@/components/yearbook-memories";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { filterGraduates } from "@/lib/yearbook-interactive";
 import { Link } from "@/lib/wouter";
 import { ArrowLeft, ArrowUp, Award, ChevronDown, GraduationCap, Instagram, Send, Shuffle } from "lucide-react";
 import {
   chapters,
   graduates,
   graduateInstagramUrl,
+  kelasList,
   kelasInfo,
   kepalaSekolah,
   moments,
@@ -380,14 +385,15 @@ function Perjalanan() {
 
 /* ───────────── Per kelas ───────────── */
 
-function KelasSection({ kelas, index }: { kelas: Kelas; index: number }) {
+function KelasSection({ kelas, index, query = "" }: { kelas: Kelas; index: number; query?: string }) {
   const info = kelasInfo.find((k) => k.kelas === kelas)!;
   const wali = teacherMessages.find((t) => t.kelas === kelas)!;
-  const members = graduates.filter((g) => g.kelas === kelas);
+  const members = filterGraduates(graduates, query, kelas);
   const candid = moments[kelasCandid[kelas]];
   const { ref: headRef, inView: headOn } = useInView<HTMLDivElement>(0.08);
   const { ref: gridRef, className: gridClass } = useStagger<HTMLDivElement>(0.06);
   const { ref: candidRef, inView: candidOn } = useInView<HTMLDivElement>(0.1);
+  if (members.length === 0) return null;
   return (
     <section id={`kelas-${index + 1}`} className="relative overflow-hidden px-5 py-20 sm:px-10 sm:py-28" style={{ background: index % 2 === 0 ? CARD : PAPER }}>
       <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-[0.08]" style={{ background: info.warna }} />
@@ -790,10 +796,14 @@ const CHAPTERS = [
   { id: "sambutan", label: "Sambutan" },
   { id: "angkatan", label: "Angkatan" },
   { id: "perjalanan", label: "Perjalanan" },
+  { id: "cari-teman", label: "Cari teman" },
   ...kelasInfo.map((k, i) => ({ id: `kelas-${i + 1}`, label: k.kelas })),
   { id: "paling-paling", label: "Paling-paling" },
   { id: "galeri", label: "Galeri" },
   { id: "dinding", label: "Pesan" },
+  { id: "playlist", label: "Playlist" },
+  { id: "video-perpisahan", label: "Video" },
+  { id: "kapsul-waktu", label: "Kapsul waktu" },
   { id: "penutup", label: "Penutup" },
 ];
 const CHAPTER_IDS = CHAPTERS.map((c) => c.id);
@@ -826,6 +836,9 @@ function ChapterNav() {
 
 export default function YearBookContohPage() {
   const progress = useScrollProgress();
+  const [studentQuery, setStudentQuery] = useState("");
+  const [selectedClass, setSelectedClass] = useState("semua");
+  const matchingStudents = filterGraduates(graduates, studentQuery, selectedClass);
   return (
     <Layout minimalChrome hideBottomNav>
       <SEO
@@ -867,12 +880,26 @@ export default function YearBookContohPage() {
         <Sambutan />
         <Angkatan />
         <Perjalanan />
-        {kelasInfo.map((k, i) => (
-          <KelasSection key={k.kelas} kelas={k.kelas} index={i} />
-        ))}
+        <section id="cari-teman" className="yb-memories px-5 pb-10 pt-16 sm:px-10">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="font-serif text-4xl font-bold">Temukan teman ceritamu</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div><label htmlFor="student-search" className="mb-2 block text-sm font-bold">Cari nama atau IG</label><Input id="student-search" type="search" placeholder="Nama, julukan, atau Instagram" value={studentQuery} onChange={(event) => setStudentQuery(event.target.value)} /></div>
+              <div><label htmlFor="student-class" className="mb-2 block text-sm font-bold">Kelas</label><select id="student-class" className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm text-foreground" value={selectedClass} onChange={(event) => setSelectedClass(event.target.value)}><option value="semua">Semua kelas</option>{kelasList.map((kelas) => <option key={kelas} value={kelas}>{kelas}</option>)}</select></div>
+            </div>
+            <p role="status" className="mt-4 text-sm text-muted-foreground">{matchingStudents.length} teman ditemukan</p>
+            {matchingStudents.length === 0 && <div className="mt-5"><p>Belum ada teman yang cocok.</p><Button variant="outline" className="mt-3" onClick={() => { setStudentQuery(""); setSelectedClass("semua"); }}>Tampilkan semua teman</Button></div>}
+          </div>
+        </section>
+        {kelasInfo.map((k, i) => selectedClass === "semua" || selectedClass === k.kelas ? (
+          <KelasSection key={k.kelas} kelas={k.kelas} index={i} query={studentQuery} />
+        ) : null)}
         <Penghargaan />
         <Galeri />
         <Dinding />
+        <YearbookSoundtrack />
+        <YearbookFarewellVideo />
+        <YearbookTimeCapsule />
         <Penutup />
       </div>
     </Layout>
