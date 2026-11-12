@@ -3,6 +3,7 @@ import { mainNavItems } from "./main-nav-items";
 import {
   chapters,
   graduates,
+  graduateInstagramUrl,
   kelasInfo,
   kelasList,
   superlatives,
@@ -24,6 +25,18 @@ describe("menu Year Book", () => {
 });
 
 describe("isi year book", () => {
+  it("semua 12 siswa punya akun IG unik yang menuju profil Instagram", () => {
+    expect(graduates).toHaveLength(12);
+    expect(new Set(graduates.map((g) => g.instagram)).size).toBe(12);
+    for (const g of graduates) {
+      expect(g.instagram).toMatch(/^[a-zA-Z0-9._]{1,30}$/);
+      const url = new URL(graduateInstagramUrl(g.instagram));
+      expect(url.origin).toBe("https://www.instagram.com");
+      expect(url.pathname).toBe(`/${g.instagram}/`);
+    }
+    expect(graduateInstagramUrl("nadia.putri.contoh")).toBe("https://www.instagram.com/nadia.putri.contoh/");
+  });
+
   it("setiap lulusan punya kelas yang terdaftar", () => {
     expect(graduates.length).toBe(12);
     for (const g of graduates) {

@@ -46,6 +46,7 @@ export type Graduate = {
   id: string;
   nama: string;
   julukan: string;
+  instagram: string;
   kelas: Kelas;
   hobi: string;
   quote: string;
@@ -55,19 +56,23 @@ export type Graduate = {
 };
 
 export const graduates: Graduate[] = [
-  { id: "nadia", nama: "Nadia Putri", julukan: "Ketua Angkatan", kelas: "XII IPA 1", hobi: "Paduan suara", quote: "Kita mungkin ambil arah berbeda, tapi pernah tumbuh di halaman yang sama.", citaCita: "Diplomat", foto: fotoNadia, warna: "#e0447c" },
-  { id: "rayhan", nama: "Rayhan Aditya", julukan: "Si Paling Strategis", kelas: "XII IPA 1", hobi: "Catur & futsal", quote: "Seru-serunya sekolah: nggak pernah tahu cerita apa yang nunggu besok.", citaCita: "Insinyur sipil", foto: fotoRayhan, warna: "#2b6fd8" },
-  { id: "fajar", nama: "Fajar Nugraha", julukan: "Kapten Lapangan", kelas: "XII IPA 1", hobi: "Basket & lari pagi", quote: "Habis lapangan ini, masih banyak lapangan lain yang menunggu.", citaCita: "Pelatih timnas", foto: fotoFajar, warna: "#2b3fd8" },
-  { id: "kirana", nama: "Kirana Ayudia", julukan: "Pencatat Sejarah", kelas: "XII IPA 1", hobi: "Menulis & jurnalistik", quote: "Aku catat semuanya, biar nanti kita bisa baca lagi sambil ketawa.", citaCita: "Jurnalis", foto: fotoKirana, warna: "#d97706" },
-  { id: "salsa", nama: "Salsa Nuraini", julukan: "Creative Soul", kelas: "XII IPA 2", hobi: "Menggambar & film analog", quote: "Makasih untuk semua tawa yang bikin hari biasa jadi istimewa.", citaCita: "Ilustrator", foto: fotoSalsa, warna: "#7c4ddb" },
-  { id: "aulia", nama: "Aulia Rahma", julukan: "Quiet Achiever", kelas: "XII IPA 2", hobi: "Olimpiade fisika", quote: "Kita selesai di sini, tapi cerita kita belum benar-benar selesai.", citaCita: "Peneliti antariksa", foto: fotoAulia, warna: "#e07b00" },
-  { id: "salma", nama: "Salma Azzahra", julukan: "Ibu Kandung Kelas", kelas: "XII IPA 2", hobi: "Memasak & baca novel", quote: "Menu terenak di sekolah: makan bareng pas jam istirahat.", citaCita: "Dokter anak", foto: fotoSalma, warna: "#c026d3" },
-  { id: "nayla", nama: "Nayla Zahira", julukan: "Gudang Cerita", kelas: "XII IPA 2", hobi: "Teater & nulis lirik", quote: "Kalau nanti kita ketemu lagi, ceritanya kita lanjutin, ya.", citaCita: "Penulis skenario", foto: fotoNayla, warna: "#db2777" },
-  { id: "dimas", nama: "Dimas Pratama", julukan: "Si Penghubung", kelas: "XII IPS 1", hobi: "Podcast & nongkrong", quote: "Teman baik selalu punya cara untuk tetap dekat.", citaCita: "Penyiar radio", foto: fotoDimas, warna: "#0d9488" },
-  { id: "maya", nama: "Maya Kirana", julukan: "Si Paling Optimis", kelas: "XII IPS 1", hobi: "Menari & fotografi", quote: "Simpan yang baik-baik. Nanti kita akan rindu semuanya.", citaCita: "Fotografer", foto: fotoMaya, warna: "#e05244" },
-  { id: "gilang", nama: "Gilang Saputra", julukan: "DJ Kelas", kelas: "XII IPS 1", hobi: "Musik & editing video", quote: "Acara apa pun jadi hidup kalau lagunya pas.", citaCita: "Produser musik", foto: fotoGilang, warna: "#16a34a" },
-  { id: "rizky", nama: "Rizky Ramadhan", julukan: "Si Rajin Telat", kelas: "XII IPS 1", hobi: "Skateboard & gaming", quote: "Maaf untuk semua telatku. Makasih udah nyimpenin tempat duduk.", citaCita: "Pengusaha", foto: fotoRizky, warna: "#4f46e5" },
+  { id: "nadia", instagram: "nadia.putri.contoh", nama: "Nadia Putri", julukan: "Ketua Angkatan", kelas: "XII IPA 1", hobi: "Paduan suara", quote: "Kita mungkin ambil arah berbeda, tapi pernah tumbuh di halaman yang sama.", citaCita: "Diplomat", foto: fotoNadia, warna: "#e0447c" },
+  { id: "rayhan", instagram: "rayhan.aditya.contoh", nama: "Rayhan Aditya", julukan: "Si Paling Strategis", kelas: "XII IPA 1", hobi: "Catur & futsal", quote: "Seru-serunya sekolah: nggak pernah tahu cerita apa yang nunggu besok.", citaCita: "Insinyur sipil", foto: fotoRayhan, warna: "#2b6fd8" },
+  { id: "fajar", instagram: "fajar.nugraha.contoh", nama: "Fajar Nugraha", julukan: "Kapten Lapangan", kelas: "XII IPA 1", hobi: "Basket & lari pagi", quote: "Habis lapangan ini, masih banyak lapangan lain yang menunggu.", citaCita: "Pelatih timnas", foto: fotoFajar, warna: "#2b3fd8" },
+  { id: "kirana", instagram: "kirana.ayudia.contoh", nama: "Kirana Ayudia", julukan: "Pencatat Sejarah", kelas: "XII IPA 1", hobi: "Menulis & jurnalistik", quote: "Aku catat semuanya, biar nanti kita bisa baca lagi sambil ketawa.", citaCita: "Jurnalis", foto: fotoKirana, warna: "#d97706" },
+  { id: "salsa", instagram: "salsa.nuraini.contoh", nama: "Salsa Nuraini", julukan: "Creative Soul", kelas: "XII IPA 2", hobi: "Menggambar & film analog", quote: "Makasih untuk semua tawa yang bikin hari biasa jadi istimewa.", citaCita: "Ilustrator", foto: fotoSalsa, warna: "#7c4ddb" },
+  { id: "aulia", instagram: "aulia.rahma.contoh", nama: "Aulia Rahma", julukan: "Quiet Achiever", kelas: "XII IPA 2", hobi: "Olimpiade fisika", quote: "Kita selesai di sini, tapi cerita kita belum benar-benar selesai.", citaCita: "Peneliti antariksa", foto: fotoAulia, warna: "#e07b00" },
+  { id: "salma", instagram: "salma.azzahra.contoh", nama: "Salma Azzahra", julukan: "Ibu Kandung Kelas", kelas: "XII IPA 2", hobi: "Memasak & baca novel", quote: "Menu terenak di sekolah: makan bareng pas jam istirahat.", citaCita: "Dokter anak", foto: fotoSalma, warna: "#c026d3" },
+  { id: "nayla", instagram: "nayla.zahira.contoh", nama: "Nayla Zahira", julukan: "Gudang Cerita", kelas: "XII IPA 2", hobi: "Teater & nulis lirik", quote: "Kalau nanti kita ketemu lagi, ceritanya kita lanjutin, ya.", citaCita: "Penulis skenario", foto: fotoNayla, warna: "#db2777" },
+  { id: "dimas", instagram: "dimas.pratama.contoh", nama: "Dimas Pratama", julukan: "Si Penghubung", kelas: "XII IPS 1", hobi: "Podcast & nongkrong", quote: "Teman baik selalu punya cara untuk tetap dekat.", citaCita: "Penyiar radio", foto: fotoDimas, warna: "#0d9488" },
+  { id: "maya", instagram: "maya.kirana.contoh", nama: "Maya Kirana", julukan: "Si Paling Optimis", kelas: "XII IPS 1", hobi: "Menari & fotografi", quote: "Simpan yang baik-baik. Nanti kita akan rindu semuanya.", citaCita: "Fotografer", foto: fotoMaya, warna: "#e05244" },
+  { id: "gilang", instagram: "gilang.saputra.contoh", nama: "Gilang Saputra", julukan: "DJ Kelas", kelas: "XII IPS 1", hobi: "Musik & editing video", quote: "Acara apa pun jadi hidup kalau lagunya pas.", citaCita: "Produser musik", foto: fotoGilang, warna: "#16a34a" },
+  { id: "rizky", instagram: "rizky.ramadhan.contoh", nama: "Rizky Ramadhan", julukan: "Si Rajin Telat", kelas: "XII IPS 1", hobi: "Skateboard & gaming", quote: "Maaf untuk semua telatku. Makasih udah nyimpenin tempat duduk.", citaCita: "Pengusaha", foto: fotoRizky, warna: "#4f46e5" },
 ];
+
+export function graduateInstagramUrl(username: string): string {
+  return `https://www.instagram.com/${encodeURIComponent(username)}/`;
+}
 
 export type Moment = {
   src: string;

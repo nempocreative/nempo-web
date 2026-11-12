@@ -5,10 +5,11 @@ import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { YearbookPhotoUpload } from "@/components/yearbook-photo-upload";
 import { Link } from "@/lib/wouter";
-import { ArrowLeft, ArrowUp, Award, ChevronDown, GraduationCap, Send, Shuffle } from "lucide-react";
+import { ArrowLeft, ArrowUp, Award, ChevronDown, GraduationCap, Instagram, Send, Shuffle } from "lucide-react";
 import {
   chapters,
   graduates,
+  graduateInstagramUrl,
   kelasInfo,
   kepalaSekolah,
   moments,
@@ -454,6 +455,16 @@ function KelasSection({ kelas, index }: { kelas: Kelas; index: number }) {
               <h3 className="mt-5 text-xl font-black leading-tight sm:text-2xl" style={{ ...serif, color: INK }}>
                 {g.nama}
               </h3>
+              <a
+                href={graduateInstagramUrl(g.instagram)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Instagram ${g.nama} (akun contoh)`}
+                className="mt-1 inline-flex min-h-11 items-center gap-1.5 self-start text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:text-sm"
+              >
+                <Instagram aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+                <span className="min-w-0 break-all">@{g.instagram}</span>
+              </a>
               <p className="mt-1.5 text-xl leading-[1.12] sm:text-2xl" style={{ ...hand, color: INK_SOFT }}>
                 “{g.quote}”
               </p>
