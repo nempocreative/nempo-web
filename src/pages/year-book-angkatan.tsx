@@ -4,6 +4,7 @@ import { useState, type CSSProperties, type FormEvent, type ReactNode } from "re
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { YearbookPhotoUpload } from "@/components/yearbook-photo-upload";
+import { YearbookMusicPlayer } from "@/components/yearbook-music-player";
 import { YearbookSoundtrack, YearbookFarewellVideo, YearbookTimeCapsule } from "@/components/yearbook-memories";
 import { YearbookVoting, YearbookDreamMap, YearbookMemoryCards, YearbookFriendQuiz } from "@/components/yearbook-personal";
 import { Button } from "@/components/ui/button";
@@ -878,6 +879,7 @@ export default function YearBookAngkatanPage() {
 
         <Intro />
         <ChapterNav />
+        <YearbookMusicPlayer />
         <Cover />
         <Sambutan />
         <Angkatan />

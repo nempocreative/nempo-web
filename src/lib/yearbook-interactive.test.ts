@@ -28,3 +28,17 @@ describe("yearbook interactive memories", () => {
     expect(spotifySearchUrl("Sampai Jumpa", "Endank Soekamti")).toBe("https://open.spotify.com/search/Sampai%20Jumpa%20Endank%20Soekamti");
   });
 });
+describe("pemutar lagu tema yearbook", () => {
+  it("lagu tema adalah Kita dari Sheila On 7 dan ada di playlist", async () => {
+    const { yearbookThemeSong, yearbookPlaylist } = await import("./yearbook-interactive");
+    expect(yearbookThemeSong.title).toBe("Kita");
+    expect(yearbookThemeSong.src).toBe("/yearbook/kita-sheila-on-7.mp3");
+    expect(yearbookPlaylist.some((s) => s.title === "Kita" && s.artist === "Sheila On 7")).toBe(true);
+  });
+  it("format waktu m:ss", async () => {
+    const { formatTrackTime } = await import("./yearbook-interactive");
+    expect(formatTrackTime(272.24)).toBe("4:32");
+    expect(formatTrackTime(65)).toBe("1:05");
+    expect(formatTrackTime(Number.NaN)).toBe("0:00");
+  });
+});

@@ -1,10 +1,11 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Download, LockKeyhole, Mail, Music2, RotateCcw } from "lucide-react";
+import { Download, LockKeyhole, Mail, Music2, Play, RotateCcw } from "lucide-react";
+import { playYearbookSong } from "@/components/yearbook-music-player";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { moments } from "@/data/year-book";
-import { CAPSULE_MESSAGE_MAX, CAPSULE_STORAGE_KEY, createTimeCapsule, parseTimeCapsule, spotifySearchUrl, yearbookPlaylist, type TimeCapsule } from "@/lib/yearbook-interactive";
+import { CAPSULE_MESSAGE_MAX, CAPSULE_STORAGE_KEY, createTimeCapsule, parseTimeCapsule, spotifySearchUrl, yearbookPlaylist, yearbookThemeSong, type TimeCapsule } from "@/lib/yearbook-interactive";
 
 function SectionTitle({ label, title }: { label: string; title: string }) {
   return <div><p className="text-sm font-bold uppercase">{label}</p><h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">{title}</h2></div>;
@@ -19,6 +20,7 @@ export function YearbookSoundtrack() {
         {yearbookPlaylist.map((song, index) => <li key={song.title} className="flex items-center gap-4 py-5 sm:gap-6">
           <span className="w-8 shrink-0 font-serif text-2xl text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
           <div className="min-w-0 flex-1"><h3 className="text-lg font-bold">{song.title}</h3><p className="text-sm text-muted-foreground">{song.artist}</p><p className="mt-1 text-xs text-primary">{song.moment}</p></div>
+          {song.title === yearbookThemeSong.title && song.artist === yearbookThemeSong.artist && <Button size="icon" onClick={playYearbookSong} aria-label={`Putar ${song.title} di halaman ini`} title="Putar di sini"><Play className="fill-current" /></Button>}
           <Button asChild variant="outline" size="icon"><a href={spotifySearchUrl(song.title, song.artist)} target="_blank" rel="noopener noreferrer" aria-label={`Cari ${song.title} di Spotify`} title="Buka di Spotify"><Music2 /></a></Button>
         </li>)}
       </ol>

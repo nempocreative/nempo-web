@@ -2060,3 +2060,24 @@ html, body, #root {
   .on > .yb-cap { animation: none; }
   .yb-tilt { transition: none; }
 }
+
+/* Pemutar musik yearbook */
+.yb-vinyl { background: repeating-radial-gradient(circle at 50% 50%, #0b0f22 0 2px, #1b2246 2px 3px), #0b0f22; box-shadow: inset 0 0 0 2px rgba(242, 190, 80, 0.45), 0 10px 30px -10px rgba(0, 0, 0, 0.7); }
+.yb-vinyl::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: conic-gradient(from 30deg, transparent 0 20%, rgba(255, 255, 255, 0.14) 25%, transparent 32% 70%, rgba(255, 255, 255, 0.1) 75%, transparent 80%); }
+.yb-vinyl-spin { animation: yb-spin 3.2s linear infinite; }
+.yb-vinyl-paused { animation-play-state: paused; }
+.yb-eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.yb-eq > i { display: block; width: 3px; height: 100%; border-radius: 2px; background: linear-gradient(180deg, #ffe08a, #f2a007); transform-origin: bottom; animation: yb-eq 0.9s ease-in-out infinite; }
+.yb-eq > i:nth-child(2) { animation-delay: -0.3s; }
+.yb-eq > i:nth-child(3) { animation-delay: -0.6s; }
+.yb-eq > i:nth-child(4) { animation-delay: -0.15s; }
+.yb-eq.off > i { animation-play-state: paused; transform: scaleY(0.25); }
+@keyframes yb-eq { 0%, 100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
+.yb-player-in { animation: yb-player-in 0.6s cubic-bezier(0.2, 0.9, 0.25, 1.15) both; }
+@keyframes yb-player-in { from { opacity: 0; transform: translate3d(0, 40px, 0) scale(0.9); filter: blur(6px); } }
+.yb-range { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 9999px; background: linear-gradient(90deg, #f2a007 0 var(--p, 0%), rgba(255, 246, 220, 0.2) var(--p, 0%) 100%); cursor: pointer; }
+.yb-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 9999px; background: #ffe08a; box-shadow: 0 0 10px rgba(242, 160, 7, 0.9); }
+.yb-range::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 9999px; background: #ffe08a; }
+@media (prefers-reduced-motion: reduce) {
+  .yb-vinyl-spin, .yb-eq > i, .yb-player-in { animation: none !important; }
+}

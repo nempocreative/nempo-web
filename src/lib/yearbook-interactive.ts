@@ -48,3 +48,19 @@ export const yearbookPlaylist = [
 export function spotifySearchUrl(title: string, artist: string) {
   return `https://open.spotify.com/search/${encodeURIComponent(`${title} ${artist}`)}`;
 }
+/** Lagu tema angkatan yang diputar langsung di halaman (pemutar musik melayang). */
+export const yearbookThemeSong = {
+  title: "Kita",
+  artist: "Sheila On 7",
+  src: "/yearbook/kita-sheila-on-7.mp3",
+} as const;
+
+/** Event browser untuk meminta pemutar musik yearbook memutar lagu tema. */
+export const YEARBOOK_PLAY_EVENT = "yb-music-play";
+
+/** Ubah detik menjadi "m:ss" untuk pemutar musik; nilai tidak valid menjadi "0:00". */
+export function formatTrackTime(seconds: number) {
+  if (!Number.isFinite(seconds) || seconds <= 0) return "0:00";
+  const total = Math.floor(seconds);
+  return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
+}
