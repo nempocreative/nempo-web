@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter, useLocation } from "@/lib/wouter";
+import { Switch, Route, Redirect, Router as WouterRouter, useLocation } from "@/lib/wouter";
 import { lazyWithRetry } from "@/lib/lazy-with-retry";
 import { useEffect, useState, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -96,7 +96,7 @@ const DonasiBibitPage = lazyWithRetry(() => import("@/pages/donasi-bibit"));
 const TalentPage = lazyWithRetry(() => import("@/pages/talent-management"));
 const MerchandisePage = lazyWithRetry(() => import("@/pages/merchandise"));
 const YearBookPage = lazyWithRetry(() => import("@/pages/year-book"));
-const YearBookContohPage = lazyWithRetry(() => import("@/pages/year-book-contoh"));
+const YearBookAngkatanPage = lazyWithRetry(() => import("@/pages/year-book-angkatan"));
 const SettingsPage = lazyWithRetry(() => import("@/pages/settings"));
 const ItineraryPage = lazyWithRetry(() => import("@/pages/itinerary"));
 const ItineraryComingSoonPage = lazyWithRetry(() => import("@/pages/itinerary-coming-soon"));
@@ -201,7 +201,10 @@ function Router() {
       <Route path="/komunitas" component={KomunitasPage} />
       <Route path="/recruitment" component={RecruitmentPage} />
       <Route path="/portofolio" component={PortofolioPage} />
-      <Route path="/year-book/contoh" component={YearBookContohPage} />
+      <Route path="/year-book/contoh">
+        <Redirect to="/year-book/2026" />
+      </Route>
+      <Route path="/year-book/2026" component={YearBookAngkatanPage} />
       <Route path="/year-book" component={YearBookPage} />
       <Route path="/contact" component={ContactPage} />
       

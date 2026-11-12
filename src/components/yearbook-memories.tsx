@@ -14,7 +14,7 @@ export function YearbookSoundtrack() {
   return <section id="playlist" className="yb-memories px-5 py-20 sm:px-10">
     <div className="mx-auto max-w-6xl">
       <SectionTitle label="Soundtrack angkatan" title="Lagu yang membawa kita pulang" />
-      <p className="mt-4 text-muted-foreground">Pilihan lagu contoh · Angkatan 2026</p>
+      <p className="mt-4 text-muted-foreground">Lagu pilihan angkatan · Angkatan 2026</p>
       <ol className="mt-10 divide-y divide-border">
         {yearbookPlaylist.map((song, index) => <li key={song.title} className="flex items-center gap-4 py-5 sm:gap-6">
           <span className="w-8 shrink-0 font-serif text-2xl text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
@@ -30,12 +30,12 @@ export function YearbookFarewellVideo() {
   return <section id="video-perpisahan" className="yb-memories yb-memories-dark px-5 py-20 sm:px-10">
     <div className="mx-auto max-w-6xl">
       <SectionTitle label="Putar kembali" title="Kita pernah sebahagia ini" />
-      <p className="mb-8 mt-4 text-muted-foreground">Film kenangan contoh · rangkaian foto sekolah AI · tanpa musik</p>
-      <video className="aspect-video w-full rounded-lg bg-background" controls playsInline preload="metadata" poster={moments[0]?.src} aria-label="Video perpisahan angkatan contoh">
-        <source src="/yearbook/perpisahan-contoh.mp4" type="video/mp4" />
+      <p className="mb-8 mt-4 text-muted-foreground">Film kenangan · rangkaian foto sekolah · tanpa musik</p>
+      <video className="aspect-video w-full rounded-lg bg-background" controls playsInline preload="metadata" poster={moments[0]?.src} aria-label="Video perpisahan angkatan">
+        <source src="/yearbook/perpisahan-angkatan.mp4" type="video/mp4" />
         Browser kamu belum mendukung video.
       </video>
-      <Button asChild variant="link" className="mt-4 px-0"><a href="/yearbook/perpisahan-contoh.mp4" download><Download /> Unduh video contoh</a></Button>
+      <Button asChild variant="link" className="mt-4 px-0"><a href="/yearbook/perpisahan-angkatan.mp4" download><Download /> Unduh video</a></Button>
     </div>
   </section>;
 }

@@ -1,6 +1,6 @@
 // Year Book — isi buku tahunan angkatan.
-// Semua nama, julukan, kutipan, foto, dan pesan di bawah ini CONTOH (bukan data asli),
-// ditulis di kode supaya mudah diganti satu per satu. Semua foto dibuat dengan AI.
+// Semua nama, julukan, kutipan, foto, dan pesan di bawah ini masih isian sementara,
+// ditulis di kode supaya mudah diganti satu per satu.
 import momentAngkatan from "@/assets/yearbook/momen-angkatan.webp";
 import momentKumpul from "@/assets/yearbook/momen-kumpul-kelas.webp";
 import momentHunting from "@/assets/yearbook/momen-hunting-foto.webp";
@@ -34,9 +34,7 @@ export const yearBookMeta = {
   tahunMasuk: 2023,
   tahunLulus: 2026,
   tagline: "Tiga tahun, satu angkatan, sejuta cerita yang kita simpan di sini.",
-  halamanContoh: "/year-book/contoh",
-  catatanContoh:
-    "Semua nama, foto, dan pesan di halaman ini masih CONTOH (semua foto dibuat dengan AI). Ganti isinya di file src/data/year-book.ts.",
+  halamanBuku: "/year-book/2026",
 };
 
 export const kelasList = ["XII IPA 1", "XII IPA 2", "XII IPS 1"] as const;
@@ -56,18 +54,18 @@ export type Graduate = {
 };
 
 export const graduates: Graduate[] = [
-  { id: "nadia", instagram: "nadia.putri.contoh", nama: "Nadia Putri", julukan: "Ketua Angkatan", kelas: "XII IPA 1", hobi: "Paduan suara", quote: "Kita mungkin ambil arah berbeda, tapi pernah tumbuh di halaman yang sama.", citaCita: "Diplomat", foto: fotoNadia, warna: "#e0447c" },
-  { id: "rayhan", instagram: "rayhan.aditya.contoh", nama: "Rayhan Aditya", julukan: "Si Paling Strategis", kelas: "XII IPA 1", hobi: "Catur & futsal", quote: "Seru-serunya sekolah: nggak pernah tahu cerita apa yang nunggu besok.", citaCita: "Insinyur sipil", foto: fotoRayhan, warna: "#2b6fd8" },
-  { id: "fajar", instagram: "fajar.nugraha.contoh", nama: "Fajar Nugraha", julukan: "Kapten Lapangan", kelas: "XII IPA 1", hobi: "Basket & lari pagi", quote: "Habis lapangan ini, masih banyak lapangan lain yang menunggu.", citaCita: "Pelatih timnas", foto: fotoFajar, warna: "#2b3fd8" },
-  { id: "kirana", instagram: "kirana.ayudia.contoh", nama: "Kirana Ayudia", julukan: "Pencatat Sejarah", kelas: "XII IPA 1", hobi: "Menulis & jurnalistik", quote: "Aku catat semuanya, biar nanti kita bisa baca lagi sambil ketawa.", citaCita: "Jurnalis", foto: fotoKirana, warna: "#d97706" },
-  { id: "salsa", instagram: "salsa.nuraini.contoh", nama: "Salsa Nuraini", julukan: "Creative Soul", kelas: "XII IPA 2", hobi: "Menggambar & film analog", quote: "Makasih untuk semua tawa yang bikin hari biasa jadi istimewa.", citaCita: "Ilustrator", foto: fotoSalsa, warna: "#7c4ddb" },
-  { id: "aulia", instagram: "aulia.rahma.contoh", nama: "Aulia Rahma", julukan: "Quiet Achiever", kelas: "XII IPA 2", hobi: "Olimpiade fisika", quote: "Kita selesai di sini, tapi cerita kita belum benar-benar selesai.", citaCita: "Peneliti antariksa", foto: fotoAulia, warna: "#e07b00" },
-  { id: "salma", instagram: "salma.azzahra.contoh", nama: "Salma Azzahra", julukan: "Ibu Kandung Kelas", kelas: "XII IPA 2", hobi: "Memasak & baca novel", quote: "Menu terenak di sekolah: makan bareng pas jam istirahat.", citaCita: "Dokter anak", foto: fotoSalma, warna: "#c026d3" },
-  { id: "nayla", instagram: "nayla.zahira.contoh", nama: "Nayla Zahira", julukan: "Gudang Cerita", kelas: "XII IPA 2", hobi: "Teater & nulis lirik", quote: "Kalau nanti kita ketemu lagi, ceritanya kita lanjutin, ya.", citaCita: "Penulis skenario", foto: fotoNayla, warna: "#db2777" },
-  { id: "dimas", instagram: "dimas.pratama.contoh", nama: "Dimas Pratama", julukan: "Si Penghubung", kelas: "XII IPS 1", hobi: "Podcast & nongkrong", quote: "Teman baik selalu punya cara untuk tetap dekat.", citaCita: "Penyiar radio", foto: fotoDimas, warna: "#0d9488" },
-  { id: "maya", instagram: "maya.kirana.contoh", nama: "Maya Kirana", julukan: "Si Paling Optimis", kelas: "XII IPS 1", hobi: "Menari & fotografi", quote: "Simpan yang baik-baik. Nanti kita akan rindu semuanya.", citaCita: "Fotografer", foto: fotoMaya, warna: "#e05244" },
-  { id: "gilang", instagram: "gilang.saputra.contoh", nama: "Gilang Saputra", julukan: "DJ Kelas", kelas: "XII IPS 1", hobi: "Musik & editing video", quote: "Acara apa pun jadi hidup kalau lagunya pas.", citaCita: "Produser musik", foto: fotoGilang, warna: "#16a34a" },
-  { id: "rizky", instagram: "rizky.ramadhan.contoh", nama: "Rizky Ramadhan", julukan: "Si Rajin Telat", kelas: "XII IPS 1", hobi: "Skateboard & gaming", quote: "Maaf untuk semua telatku. Makasih udah nyimpenin tempat duduk.", citaCita: "Pengusaha", foto: fotoRizky, warna: "#4f46e5" },
+  { id: "nadia", instagram: "nadia.putri", nama: "Nadia Putri", julukan: "Ketua Angkatan", kelas: "XII IPA 1", hobi: "Paduan suara", quote: "Kita mungkin ambil arah berbeda, tapi pernah tumbuh di halaman yang sama.", citaCita: "Diplomat", foto: fotoNadia, warna: "#e0447c" },
+  { id: "rayhan", instagram: "rayhan.aditya", nama: "Rayhan Aditya", julukan: "Si Paling Strategis", kelas: "XII IPA 1", hobi: "Catur & futsal", quote: "Seru-serunya sekolah: nggak pernah tahu cerita apa yang nunggu besok.", citaCita: "Insinyur sipil", foto: fotoRayhan, warna: "#2b6fd8" },
+  { id: "fajar", instagram: "fajar.nugraha", nama: "Fajar Nugraha", julukan: "Kapten Lapangan", kelas: "XII IPA 1", hobi: "Basket & lari pagi", quote: "Habis lapangan ini, masih banyak lapangan lain yang menunggu.", citaCita: "Pelatih timnas", foto: fotoFajar, warna: "#2b3fd8" },
+  { id: "kirana", instagram: "kirana.ayudia", nama: "Kirana Ayudia", julukan: "Pencatat Sejarah", kelas: "XII IPA 1", hobi: "Menulis & jurnalistik", quote: "Aku catat semuanya, biar nanti kita bisa baca lagi sambil ketawa.", citaCita: "Jurnalis", foto: fotoKirana, warna: "#d97706" },
+  { id: "salsa", instagram: "salsa.nuraini", nama: "Salsa Nuraini", julukan: "Creative Soul", kelas: "XII IPA 2", hobi: "Menggambar & film analog", quote: "Makasih untuk semua tawa yang bikin hari biasa jadi istimewa.", citaCita: "Ilustrator", foto: fotoSalsa, warna: "#7c4ddb" },
+  { id: "aulia", instagram: "aulia.rahma", nama: "Aulia Rahma", julukan: "Quiet Achiever", kelas: "XII IPA 2", hobi: "Olimpiade fisika", quote: "Kita selesai di sini, tapi cerita kita belum benar-benar selesai.", citaCita: "Peneliti antariksa", foto: fotoAulia, warna: "#e07b00" },
+  { id: "salma", instagram: "salma.azzahra", nama: "Salma Azzahra", julukan: "Ibu Kandung Kelas", kelas: "XII IPA 2", hobi: "Memasak & baca novel", quote: "Menu terenak di sekolah: makan bareng pas jam istirahat.", citaCita: "Dokter anak", foto: fotoSalma, warna: "#c026d3" },
+  { id: "nayla", instagram: "nayla.zahira", nama: "Nayla Zahira", julukan: "Gudang Cerita", kelas: "XII IPA 2", hobi: "Teater & nulis lirik", quote: "Kalau nanti kita ketemu lagi, ceritanya kita lanjutin, ya.", citaCita: "Penulis skenario", foto: fotoNayla, warna: "#db2777" },
+  { id: "dimas", instagram: "dimas.pratama", nama: "Dimas Pratama", julukan: "Si Penghubung", kelas: "XII IPS 1", hobi: "Podcast & nongkrong", quote: "Teman baik selalu punya cara untuk tetap dekat.", citaCita: "Penyiar radio", foto: fotoDimas, warna: "#0d9488" },
+  { id: "maya", instagram: "maya.kirana", nama: "Maya Kirana", julukan: "Si Paling Optimis", kelas: "XII IPS 1", hobi: "Menari & fotografi", quote: "Simpan yang baik-baik. Nanti kita akan rindu semuanya.", citaCita: "Fotografer", foto: fotoMaya, warna: "#e05244" },
+  { id: "gilang", instagram: "gilang.saputra", nama: "Gilang Saputra", julukan: "DJ Kelas", kelas: "XII IPS 1", hobi: "Musik & editing video", quote: "Acara apa pun jadi hidup kalau lagunya pas.", citaCita: "Produser musik", foto: fotoGilang, warna: "#16a34a" },
+  { id: "rizky", instagram: "rizky.ramadhan", nama: "Rizky Ramadhan", julukan: "Si Rajin Telat", kelas: "XII IPS 1", hobi: "Skateboard & gaming", quote: "Maaf untuk semua telatku. Makasih udah nyimpenin tempat duduk.", citaCita: "Pengusaha", foto: fotoRizky, warna: "#4f46e5" },
 ];
 
 export function graduateInstagramUrl(username: string): string {
@@ -160,7 +158,7 @@ export const wallNotes: WallNote[] = [
   { dari: "Nayla", teks: "Naskah drama kita belum kelar. Lanjut lain waktu!" },
 ];
 
-// ── Kolom kirim pesan di dinding (contoh: hanya tersimpan di layar pengunjung) ──
+// ── Kolom kirim pesan di dinding (hanya tersimpan di layar pengunjung) ──
 
 export const WALL_TEXT_MAX = 140;
 export const WALL_NAME_MAX = 24;

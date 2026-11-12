@@ -50,7 +50,7 @@ export default function YearBookPage() {
     <Layout>
       <SEO
         title="Year Book untuk Sekolah"
-        description="Year book sekolah dari Nempo: profil lulusan, galeri momen satu tahun, pesan guru, dan dinding pesan — versi cetak maupun digital. Lihat contohnya dulu."
+        description="Year book sekolah dari Nempo: profil lulusan, galeri momen satu tahun, pesan guru, dan dinding pesan — versi cetak maupun digital."
         keywords="year book sekolah, buku tahunan sekolah, jasa yearbook, buku tahunan angkatan, yearbook digital"
         path="/year-book"
       />
@@ -100,12 +100,12 @@ export default function YearBookPage() {
             <Reveal delay={300} y={20}>
               <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href={yearBookMeta.halamanContoh}
+                href={yearBookMeta.halamanBuku}
                 className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black"
                 style={{ background: ACCENT, color: PAPER }}
               >
                 <BookOpen className="h-4 w-4" />
-                Lihat contoh yearbook
+                Lihat yearbook angkatan
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
               <a
@@ -123,11 +123,11 @@ export default function YearBookPage() {
           </div>
         </section>
 
-        {/* ── KARTU CONTOH (klik → halaman contoh) ── */}
+        {/* ── KARTU BUKU (klik → halaman yearbook) ── */}
         <section className="px-4 pb-4 sm:px-6 lg:px-8">
           <Reveal y={34} className="mx-auto max-w-7xl">
           <Link
-            href={yearBookMeta.halamanContoh}
+            href={yearBookMeta.halamanBuku}
             className="yb-card group mx-auto block max-w-7xl overflow-hidden rounded-3xl"
             style={{ background: INK, color: PAPER }}
           >
@@ -137,10 +137,10 @@ export default function YearBookPage() {
                   className="inline-block rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em]"
                   style={{ background: "rgba(242,160,7,.22)", color: "#ffd166", border: "1px solid rgba(242,160,7,.45)" }}
                 >
-                  Isi contoh
+                  Isi buku
                 </span>
                 <p className="mt-5 text-[11px] font-black uppercase tracking-[0.3em]" style={{ color: BRASS }}>
-                  Contoh Buku Tahunan
+                  Buku Tahunan
                 </p>
                 <h2 className="yb-serif mt-2 text-4xl font-black leading-[0.9] tracking-[-0.03em] sm:text-6xl">
                   Year Book
@@ -149,15 +149,14 @@ export default function YearBookPage() {
                   Angkatan {yearBookMeta.angkatan} · {yearBookMeta.sekolah}
                 </p>
                 <p className="mt-4 max-w-md text-sm leading-7" style={{ color: "rgba(244,246,255,.68)" }}>
-                  Isinya masih contoh — nama siswa, kutipan, dan fotonya saya
-                  karang. Buka halaman ini untuk melihat bentuk aslinya: profil
-                  lulusan, galeri momen, linimasa, pesan guru, dan dinding pesan.
+                  Profil lulusan, galeri momen, linimasa, pesan guru, dan dinding
+                  pesan — satu angkatan, satu halaman yang bisa dibaca siapa saja.
                 </p>
                 <p
                   className="mt-6 inline-flex items-center gap-2 text-sm font-black"
                   style={{ color: "#ffd166" }}
                 >
-                  Buka contoh yearbook
+                  Buka yearbook angkatan
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </p>
               </div>
@@ -312,12 +311,12 @@ export default function YearBookPage() {
                     Konsultasi bareng Nempo
                   </a>
                   <Link
-                    href={yearBookMeta.halamanContoh}
+                    href={yearBookMeta.halamanBuku}
                     className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black"
                     style={{ border: "1px solid rgba(244,246,255,.32)", color: PAPER }}
                   >
                     <BookOpen className="h-4 w-4" />
-                    Lihat contoh yearbook
+                    Lihat yearbook angkatan
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                 </div>
@@ -340,10 +339,6 @@ export default function YearBookPage() {
                 ))}
               </div>
             </div>
-
-            <p className="mt-10 text-[11px] font-bold leading-5" style={{ color: "rgba(244,246,255,.48)" }}>
-              {yearBookMeta.catatanContoh}
-            </p>
           </div>
         </section>
       </main>

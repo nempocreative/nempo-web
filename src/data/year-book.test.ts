@@ -34,7 +34,7 @@ describe("isi year book", () => {
       expect(url.origin).toBe("https://www.instagram.com");
       expect(url.pathname).toBe(`/${g.instagram}/`);
     }
-    expect(graduateInstagramUrl("nadia.putri.contoh")).toBe("https://www.instagram.com/nadia.putri.contoh/");
+    expect(graduateInstagramUrl("nadia.putri")).toBe("https://www.instagram.com/nadia.putri/");
   });
 
   it("setiap lulusan punya kelas yang terdaftar", () => {
@@ -68,13 +68,14 @@ describe("isi year book", () => {
     expect(yearBookMeta.tahunLulus).toBe(2026);
   });
 
-  it("isi halaman masih ditandai sebagai contoh", () => {
-    expect(yearBookMeta.catatanContoh).toContain("CONTOH");
-    expect(yearBookMeta.catatanContoh).toContain("src/data/year-book.ts");
+  it("isi halaman tidak lagi ditandai sebagai contoh atau foto AI", () => {
+    expect(yearBookMeta).not.toHaveProperty("catatanContoh");
+    expect(JSON.stringify(yearBookMeta)).not.toMatch(/contoh/i);
+    for (const g of graduates) expect(g.instagram).not.toMatch(/contoh/i);
   });
 
-  it("halaman contoh yearbook menunjuk ke /year-book/contoh", () => {
-    expect(yearBookMeta.halamanContoh).toBe("/year-book/contoh");
+  it("halaman yearbook angkatan menunjuk ke /year-book/2026", () => {
+    expect(yearBookMeta.halamanBuku).toBe("/year-book/2026");
   });
 
   it("penjelasan punya isi, langkah, dan bentuk yang terisi penuh", () => {

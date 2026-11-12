@@ -1,5 +1,5 @@
-// Contoh year book sebagai satu web buku tahunan layar penuh: tanpa menu situs,
-// hanya tombol kembali. Semua isi diambil dari src/data/year-book.ts (data contoh).
+// Year book angkatan sebagai satu web buku tahunan layar penuh: tanpa menu situs,
+// hanya tombol kembali. Semua isi diambil dari src/data/year-book.ts.
 import { useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
@@ -168,9 +168,6 @@ function Cover() {
         <b className="-bottom-[4px] -left-[4px]" />
       </div>
       <div aria-hidden className="yb-enter pointer-events-none absolute inset-6 rounded-xl border sm:inset-11" style={{ ...d(2.2), borderColor: "rgba(242,190,80,.24)" }} />
-      <span className="yb-enter absolute right-8 top-8 z-10 rotate-[8deg] rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] sm:right-14 sm:top-14 sm:text-xs" style={{ ...d(2.5), background: BRASS, color: INK }}>
-        Isi contoh
-      </span>
 
       <div ref={fadeRef} className="relative z-10 flex flex-col items-center will-change-transform">
         <span className="yb-enter grid h-20 w-20 place-items-center rounded-full border-2 sm:h-24 sm:w-24 [@media(max-height:720px)]:hidden" style={{ ...d(1.35), borderColor: "rgba(242,190,80,.85)", boxShadow: "0 0 40px -6px rgba(242,160,7,.55)" }}>
@@ -466,7 +463,7 @@ function KelasSection({ kelas, index, query = "" }: { kelas: Kelas; index: numbe
                 href={graduateInstagramUrl(g.instagram)}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Instagram ${g.nama} (akun contoh)`}
+                aria-label={`Instagram ${g.nama}`}
                 className="mt-1 inline-flex min-h-11 items-center gap-1.5 self-start text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:text-sm"
               >
                 <Instagram aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
@@ -629,7 +626,7 @@ function KirimPesan({ onKirim }: { onKirim: (note: WallNote, color: number) => v
               maxLength={WALL_TEXT_MAX}
               rows={3}
               aria-label="Pesan"
-              placeholder="Contoh: Utang gorengan belum lunas, kutagih pas reuni!"
+              placeholder="Utang gorengan belum lunas, kutagih pas reuni!"
               className="resize-none rounded-xl border bg-white px-4 py-3 text-2xl leading-tight outline-none transition-shadow focus:ring-2"
               style={{ ...hand, borderColor: LINE, color: INK, "--tw-ring-color": "rgba(43,63,216,.35)" } as CSSProperties}
             />
@@ -785,7 +782,7 @@ function Penutup() {
           Baca dari awal
         </a>
         <p className="mt-12 max-w-md text-xs leading-relaxed" style={{ color: "rgba(255,246,220,.5)" }}>
-          Contoh year book dari Nempo · Garut. Nama, kutipan, dan semua foto di halaman ini contoh (foto dibuat dengan AI).
+          Year book Angkatan {yearBookMeta.angkatan} · {yearBookMeta.sekolah} · Garut.
         </p>
       </Reveal>
     </section>
@@ -839,7 +836,7 @@ function ChapterNav() {
   );
 }
 
-export default function YearBookContohPage() {
+export default function YearBookAngkatanPage() {
   const progress = useScrollProgress();
   const [studentQuery, setStudentQuery] = useState("");
   const [selectedClass, setSelectedClass] = useState("semua");
@@ -847,9 +844,9 @@ export default function YearBookContohPage() {
   return (
     <Layout minimalChrome hideBottomNav>
       <SEO
-        title={`Contoh Year Book Angkatan ${yearBookMeta.angkatan} — ${yearBookMeta.sekolah}`}
-        description="Contoh web buku tahunan sekolah dari Nempo: sambutan kepala sekolah, profil tiap lulusan, halaman per kelas, paling-paling, galeri momen, dan dinding pesan."
-        path={yearBookMeta.halamanContoh}
+        title={`Year Book Angkatan ${yearBookMeta.angkatan} — ${yearBookMeta.sekolah}`}
+        description="Web buku tahunan sekolah dari Nempo: sambutan kepala sekolah, profil tiap lulusan, halaman per kelas, paling-paling, galeri momen, dan dinding pesan."
+        path={yearBookMeta.halamanBuku}
       />
       <style>{`
         html { scroll-behavior: smooth; }

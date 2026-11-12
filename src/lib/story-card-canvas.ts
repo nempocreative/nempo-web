@@ -129,7 +129,7 @@ export async function renderStoryCard(data: StoryCardData, tone: StoryTone): Pro
   // Footer
   ctx.strokeStyle = p.frame; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(96, 1820); ctx.lineTo(W - 96, 1820); ctx.stroke();
   ctx.font = `700 20px ${SANS}`; spaced(ctx, 5); ctx.fillStyle = p.accent; ctx.fillText("NEMPO YEAR BOOK", 96, 1852);
-  ctx.textAlign = "right"; ctx.fillStyle = p.muted; ctx.font = `500 18px ${SANS}`; spaced(ctx, 3); ctx.fillText("CONTOH · FOTO AI", W - 96, 1852); spaced(ctx, 0);
+  ctx.textAlign = "right"; ctx.fillStyle = p.muted; ctx.font = `500 18px ${SANS}`; spaced(ctx, 3); ctx.fillText("SEJUTA CERITA", W - 96, 1852); spaced(ctx, 0);
 
   return new Promise<Blob>((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("Empty image"))), "image/png"));
 }

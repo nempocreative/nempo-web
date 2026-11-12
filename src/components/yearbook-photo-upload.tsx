@@ -163,7 +163,7 @@ export function YearbookPhotoUpload() {
               maxLength={YEARBOOK_PHOTO_CAPTION_MAX}
               disabled={busy || sent}
               rows={3}
-              placeholder="Contoh: Juara lomba antarkelas!"
+              placeholder="Juara lomba antarkelas!"
               className="resize-none rounded-xl border bg-white px-4 py-3 text-base leading-relaxed outline-none transition-shadow focus:ring-2 disabled:opacity-70"
               style={{ borderColor: LINE, color: INK, "--tw-ring-color": "rgba(43,63,216,.35)" } as CSSProperties}
             />
