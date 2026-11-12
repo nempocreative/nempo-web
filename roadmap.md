@@ -23,3 +23,9 @@
 - [x] Video perpisahan contoh dari foto sekolah AI yang tersedia
 - [x] Pencarian siswa dan filter kelas di profil lulusan
 - [x] Kapsul waktu lima tahun: simpan di perangkat dan unduh salinan
+
+## Fitur personal yearbook
+- [x] Voting paling-paling lokal dengan pilihan tersimpan dan dapat diganti
+- [x] Peta mimpi interaktif dari cita-cita siswa contoh
+- [x] Kartu kenangan format Story dapat dipilih dan diunduh PNG
+- [x] Kuis tebak teman dengan jawaban, skor, dan main ulang

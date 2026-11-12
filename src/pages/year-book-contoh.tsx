@@ -5,6 +5,7 @@ import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { YearbookPhotoUpload } from "@/components/yearbook-photo-upload";
 import { YearbookSoundtrack, YearbookFarewellVideo, YearbookTimeCapsule } from "@/components/yearbook-memories";
+import { YearbookVoting, YearbookDreamMap, YearbookMemoryCards, YearbookFriendQuiz } from "@/components/yearbook-personal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { filterGraduates } from "@/lib/yearbook-interactive";
@@ -804,6 +805,10 @@ const CHAPTERS = [
   { id: "playlist", label: "Playlist" },
   { id: "video-perpisahan", label: "Video" },
   { id: "kapsul-waktu", label: "Kapsul waktu" },
+  { id: "voting", label: "Voting" },
+  { id: "peta-mimpi", label: "Peta mimpi" },
+  { id: "kartu-kenangan", label: "Kartu kenangan" },
+  { id: "tebak-teman", label: "Tebak teman" },
   { id: "penutup", label: "Penutup" },
 ];
 const CHAPTER_IDS = CHAPTERS.map((c) => c.id);
@@ -900,6 +905,10 @@ export default function YearBookContohPage() {
         <YearbookSoundtrack />
         <YearbookFarewellVideo />
         <YearbookTimeCapsule />
+        <YearbookVoting />
+        <YearbookDreamMap />
+        <YearbookMemoryCards />
+        <YearbookFriendQuiz />
         <Penutup />
       </div>
     </Layout>

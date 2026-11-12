@@ -28,6 +28,17 @@
   --muted-foreground: #dbe1f6;
   --border: #565f88;
 }
+.yb-dream-trails { border-top: 1px dashed var(--border); padding-top: 24px; }
+.yb-story-card { aspect-ratio: 9 / 16; background: var(--background); color: var(--foreground); container-type: inline-size; border: 1px solid var(--border); }
+.yb-story-inner { height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 7cqw 7cqw 5cqw; }
+.yb-story-label { font-size: 2.5cqw; font-weight: 700; text-transform: uppercase; }
+.yb-story-heading { font-family: Georgia, serif; font-size: 11cqw; font-weight: 700; line-height: .95; margin: 4cqw 0; color: var(--primary); }
+.yb-story-photo { width: 62cqw; height: 74cqw; object-fit: cover; object-position: top; border: 1cqw solid var(--border); }
+.yb-story-name { font-family: Georgia, serif; font-size: 6cqw; font-weight: 700; margin-top: 4cqw; }
+.yb-story-class { font-size: 2.8cqw; margin-top: 1cqw; }
+.yb-story-quote { font-family: Georgia, serif; font-size: 4cqw; line-height: 1.45; margin-top: 4cqw; }
+.yb-story-ig { display: flex; align-items: center; gap: 2cqw; font-size: 3cqw; margin-top: auto; padding-top: 3cqw; }
+.yb-story-footer { font-size: 2cqw; margin-top: 3cqw; color: var(--muted-foreground); }
 
 /* GGS open slide: shared brand palette, separate from other feeds. */
 .ggl-root {
