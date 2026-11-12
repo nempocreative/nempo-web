@@ -38,6 +38,6 @@ use the editor.
 - Media pointers under `src/assets/` must belong to this project's own storage (re-upload with `lovable-assets create` when bringing files from another project); why: a foreign project's pointer breaks once published.
 - Page-level routing inside the NEMPO app goes through `src/lib/wouter.tsx`, a wouter-compatible API backed by TanStack Router; why: keeps one router without rewriting every page. New pages are added to the `Switch` in `src/nempo-app.tsx`.
 - tsconfig strict extras (noUncheckedIndexedAccess, exactOptionalPropertyTypes, etc.) are off; why: the imported code was written without them.
-- Lazily loaded pages and apps use `lazyWithRetry` from `src/lib/lazy-with-retry.ts` instead of React `lazy`; why: a page file that fails to load after an update otherwise blanks the whole screen — it retries once, then reloads once.
+- Lazily loaded pages and apps use `lazyWithRetry` from `src/lib/lazy-with-retry.ts` instead of React `lazy`; why: a page file that fails to load after an update otherwise blanks the whole screen — it retries once, then reloads once. Do not call preventDefault on Vite's `vite:preloadError`; it makes the import resolve empty and React crashes with a blank screen.
 - Lock CMS and backup pages off published domains (preview only); why: owner wants only the organizer site live. Implemented in src/lib/hosting-lock.ts via Start request middleware.
 - Some subdirectories have their own `AGENTS.md` (`src/apps/`); read the nearest one before changing files there; why: those rules are scoped to that folder.

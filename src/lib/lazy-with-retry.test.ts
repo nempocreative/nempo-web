@@ -27,4 +27,10 @@ describe("importWithRetry", () => {
     await expect(importWithRetry(failing)).rejects.toThrow("Importing a module script failed.");
     expect(reload).toHaveBeenCalledTimes(1);
   });
+
+  it("treats an empty result (a load error the browser swallowed) as a failure and retries", async () => {
+    const factory = vi.fn().mockResolvedValueOnce(undefined).mockResolvedValueOnce({ default: "page" });
+    await expect(importWithRetry(factory)).resolves.toEqual({ default: "page" });
+    expect(factory).toHaveBeenCalledTimes(2);
+  });
 });

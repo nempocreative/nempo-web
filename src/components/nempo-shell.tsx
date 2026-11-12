@@ -1,5 +1,5 @@
-import { Suspense, useEffect } from "react";
-import { lazyWithRetry, reloadOnceForStaleChunks } from "@/lib/lazy-with-retry";
+import { Suspense } from "react";
+import { lazyWithRetry } from "@/lib/lazy-with-retry";
 import { ClientOnly } from "@tanstack/react-router";
 
 const NempoApp = lazyWithRetry(() => import("@/nempo-app"));
@@ -13,15 +13,8 @@ function Loader() {
 }
 
 export function NempoShell() {
-  // Vite reports files that fail to preload after an update; reload once to get the new ones.
-  useEffect(() => {
-    const onPreloadError = (event: Event) => {
-      if (reloadOnceForStaleChunks()) event.preventDefault();
-    };
-    window.addEventListener("vite:preloadError", onPreloadError);
-    return () => window.removeEventListener("vite:preloadError", onPreloadError);
-  }, []);
-
+  // Files that fail to load after an update are retried, then reloaded once, by lazyWithRetry.
+  // Never preventDefault Vite's "vite:preloadError" here: that makes the import resolve empty and blanks the page.
   return (
     <div id="root">
       <ClientOnly fallback={<Loader />}>

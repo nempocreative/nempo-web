@@ -23,11 +23,20 @@ export function reloadOnceForStaleChunks(): boolean {
   return true;
 }
 
+/** A load error the browser swallowed (e.g. Vite's preload error) resolves with nothing; treat it as a failure. */
+function ensureModule<T>(mod: T): T {
+  if (mod === null || (typeof mod !== "object" && typeof mod !== "function")) {
+    throw new TypeError("Importing a module script failed.");
+  }
+  return mod;
+}
+
 export function importWithRetry<T>(factory: () => Promise<T>): Promise<T> {
-  return factory().catch(async () => {
+  const attempt = () => factory().then(ensureModule);
+  return attempt().catch(async () => {
     await wait(600);
     try {
-      return await factory();
+      return await attempt();
     } catch (err) {
       if (reloadOnceForStaleChunks()) return new Promise<T>(() => {}); // page is reloading
       throw err;
