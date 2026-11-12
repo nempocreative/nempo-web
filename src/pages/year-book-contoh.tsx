@@ -87,7 +87,7 @@ function Polaroid({ src, caption, rotate, imgClass = "aspect-[4/3]", className =
       <div className={`overflow-hidden ${imgClass}`}>
         <img src={src} alt={caption} loading="lazy" className="h-full w-full object-cover" />
       </div>
-      <figcaption className="mt-2 truncate text-center text-xl leading-none sm:text-2xl" style={{ ...hand, color: INK }}>
+      <figcaption className="mt-2 break-words px-1 pb-1 text-center text-xl leading-[1.15] sm:text-2xl" style={{ ...hand, color: INK }}>
         {caption}
       </figcaption>
     </figure>
