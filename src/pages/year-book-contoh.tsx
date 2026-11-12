@@ -206,11 +206,13 @@ function Sambutan() {
     <section id="sambutan" className="px-5 py-20 sm:px-10 sm:py-28" style={{ background: PAPER }}>
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16">
         <Reveal className="relative mx-auto w-full max-w-sm" x={-30} y={20}>
-          <div aria-hidden className="absolute -inset-3 rounded-sm border sm:-inset-4" style={{ borderColor: "rgba(242,160,7,.45)", transform: "rotate(2deg)" }} />
+          <div aria-hidden className="absolute -inset-4 hidden rounded-sm border sm:block" style={{ borderColor: "rgba(242,160,7,.45)", transform: "rotate(2deg)" }} />
           <div className="relative bg-white p-3 pb-4 sm:p-4" style={{ transform: "rotate(-2.5deg)", boxShadow: "0 30px 60px -30px rgba(20,28,63,.55)" }}>
             <Tape className="-top-3 left-10" rotate={-6} />
-            <div ref={photoRef} className={`yb-wipe overflow-hidden${photoOn ? " on" : ""}`}>
-              <img src={kepalaSekolah.foto} alt={kepalaSekolah.nama} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            <div ref={photoRef} className="overflow-hidden">
+              <div className={`yb-wipe${photoOn ? " on" : ""}`}>
+                <img src={kepalaSekolah.foto} alt={kepalaSekolah.nama} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+              </div>
             </div>
             <p className="mt-3 text-center text-2xl leading-none" style={{ ...hand, color: INK }}>
               {kepalaSekolah.nama}
@@ -280,9 +282,11 @@ function Angkatan() {
     { n: yearBookMeta.tahunLulus - yearBookMeta.tahunMasuk, l: "Tahun bareng" },
     { n: moments.length, l: "Momen" },
   ];
+  const { ref: photoRef, inView: photoOn } = useInView<HTMLDivElement>(0.1);
   return (
     <section id="angkatan" className="relative overflow-hidden px-4 pb-20 pt-16 sm:px-10 sm:pb-28 sm:pt-24" style={{ background: NAV_BG }}>
-      <div className="mx-auto max-w-6xl">
+      <GoldDust count={18} seed={3} />
+      <div className="relative mx-auto max-w-6xl">
         <Reveal className="text-center" y={24}>
           <p className="text-3xl leading-none sm:text-4xl" style={{ ...hand, color: "#ffd166" }}>
             foto bareng satu angkatan ♡
@@ -298,8 +302,10 @@ function Angkatan() {
         <Reveal className="mx-auto mt-10 max-w-5xl sm:mt-14" y={44} delay={120}>
           <figure className="relative">
           <div className="rounded-[6px] p-2 sm:p-3.5" style={{ background: CARD, boxShadow: "0 40px 80px -30px rgba(0,0,0,.65)" }}>
-            <div className="overflow-hidden rounded-[3px]">
-              <img src={group.src} alt={group.caption} loading="lazy" width={1600} height={907} className="yb-kb block h-auto w-full" />
+            <div ref={photoRef} className="overflow-hidden rounded-[3px]">
+              <div className={`yb-wipe overflow-hidden${photoOn ? " on" : ""}`}>
+                <img src={group.src} alt={group.caption} loading="lazy" width={1600} height={907} className="yb-kb block h-auto w-full" />
+              </div>
             </div>
             <figcaption className="flex items-center justify-between gap-3 px-1 pb-0.5 pt-2.5 sm:px-2 sm:pt-3.5">
               <span className="text-xl leading-none sm:text-3xl" style={{ ...hand, color: INK }}>
@@ -340,7 +346,7 @@ function Perjalanan() {
             <li key={c.number} className="relative" style={{ animationDelay: `${i * 150}ms` }}>
               <span
                 aria-hidden
-                className="absolute -left-12 top-0 grid h-10 w-10 place-items-center rounded-full text-sm font-black lg:-top-14 lg:left-0"
+                className={`absolute -left-12 top-0 grid h-10 w-10 place-items-center rounded-full text-sm font-black lg:-top-14 lg:left-0${inView ? " yb-pulse" : ""}`}
                 style={{ background: ACCENT, color: "#fff", boxShadow: `0 0 0 6px ${PAPER}` }}
               >
                 {c.number}
@@ -373,6 +379,7 @@ function KelasSection({ kelas, index }: { kelas: Kelas; index: number }) {
   const candid = moments[kelasCandid[kelas]];
   const { ref: headRef, inView: headOn } = useInView<HTMLDivElement>(0.08);
   const { ref: gridRef, className: gridClass } = useStagger<HTMLDivElement>(0.06);
+  const { ref: candidRef, inView: candidOn } = useInView<HTMLDivElement>(0.1);
   return (
     <section id={`kelas-${index + 1}`} className="relative overflow-hidden px-5 py-20 sm:px-10 sm:py-28" style={{ background: index % 2 === 0 ? CARD : PAPER }}>
       <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-[0.08]" style={{ background: info.warna }} />
@@ -389,23 +396,25 @@ function KelasSection({ kelas, index }: { kelas: Kelas; index: number }) {
         >
           <div>
             <div className="flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-full" style={{ background: info.warna, color: "#fff" }}>
-                <Star className="h-5 w-5" fill="currentColor" />
+              <span className="grid h-11 w-11 place-items-center rounded-full text-base font-black" style={{ ...serif, background: info.warna, color: "#fff", boxShadow: `0 0 0 2px #fff, 0 0 0 3.5px ${BRASS}` }}>
+                {["I", "II", "III", "IV", "V"][index] ?? index + 1}
               </span>
               <Eyebrow color={info.warna}>{info.julukan}</Eyebrow>
             </div>
-            <p className="mt-4 text-[clamp(3.6rem,10vw,7rem)] font-black leading-[0.86] tracking-[-0.045em]" style={{ ...serif, color: info.warna }}>
-              {kelas}
+            <p className={`yb-mask mt-4 text-[clamp(3.6rem,10vw,7rem)] font-black leading-[0.86] tracking-[-0.045em]${headOn ? " on" : ""}`} style={{ ...serif, color: info.warna }}>
+              <span>{kelas}</span>
             </p>
             <p className="mt-4 text-3xl leading-tight sm:text-4xl" style={{ ...hand, color: INK }}>
               “{info.motto}”
             </p>
           </div>
-          <div className="relative overflow-hidden rounded-3xl" style={{ boxShadow: "0 30px 60px -36px rgba(20,28,63,.6)" }}>
+          <div ref={candidRef} className="relative overflow-hidden rounded-3xl" style={{ boxShadow: "0 30px 60px -36px rgba(20,28,63,.6)" }}>
+            <div className={`yb-wipe relative${candidOn ? " on" : ""}`}>
             <img src={candid.src} alt={candid.caption} loading="lazy" className="aspect-[16/9] w-full object-cover" />
             <span className="absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-black" style={{ background: "rgba(255,255,255,.92)", color: INK }}>
               {candid.caption}
             </span>
+            </div>
           </div>
         </div>
 
@@ -423,8 +432,13 @@ function KelasSection({ kelas, index }: { kelas: Kelas; index: number }) {
 
         <div ref={gridRef} className={`mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4 ${gridClass}`}>
           {members.map((g, i) => (
-            <article key={g.id} className="yb-card flex flex-col" style={{ animationDelay: `${i * 70}ms` }}>
-              <div className="relative overflow-hidden rounded-2xl" style={{ boxShadow: `0 0 0 5px #fff, 0 0 0 7px ${LINE}, 0 24px 40px -28px rgba(20,28,63,.6)`, transform: `rotate(${i % 2 === 0 ? -1.2 : 1.2}deg)` }}>
+            <article key={g.id} className="yb-card yb-rise flex flex-col" style={{ animationDelay: `${i * 70}ms`, "--i": i } as CSSProperties}>
+              <div
+                {...tiltHandlers(9)}
+                className="yb-tilt yb-sheen relative overflow-hidden rounded-2xl"
+                style={{ boxShadow: `0 0 0 5px #fff, 0 0 0 7px ${LINE}, 0 24px 40px -28px rgba(20,28,63,.6)`, "--r": `${i % 2 === 0 ? -1.2 : 1.2}deg` } as CSSProperties}
+              >
+                <span aria-hidden className="yb-glare z-10" />
                 <img src={g.foto} alt={g.nama} loading="lazy" className="aspect-[4/5] w-full object-cover object-[50%_22%]" />
                 <span className="absolute left-2.5 top-2.5 max-w-[calc(100%-20px)] truncate rounded-full px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.08em] sm:text-[11px]" style={{ background: g.warna, color: "#fff" }}>
                   {g.julukan}
@@ -457,11 +471,12 @@ function KelasSection({ kelas, index }: { kelas: Kelas; index: number }) {
 function Penghargaan() {
   const { ref, className } = useStagger<HTMLDivElement>(0.08);
   return (
-    <section id="paling-paling" className="px-5 py-20 sm:px-10 sm:py-28" style={{ background: NAV_BG, color: CREAM }}>
-      <div className="mx-auto max-w-6xl">
+    <section id="paling-paling" className="relative overflow-hidden px-5 py-20 sm:px-10 sm:py-28" style={{ background: NAV_BG, color: CREAM }}>
+      <GoldDust count={22} seed={5} />
+      <div className="relative mx-auto max-w-6xl">
         <Reveal className="text-center" y={24}>
           <Eyebrow color={BRASS}>Hasil voting angkatan</Eyebrow>
-          <Heading className="yb-foil mt-3" color="inherit">
+          <Heading className="mt-3" color="inherit" foil>
             Paling-paling
           </Heading>
           <p className="mx-auto mt-4 max-w-md text-sm sm:text-base" style={{ color: "rgba(255,246,220,.7)" }}>
@@ -472,9 +487,11 @@ function Penghargaan() {
           {superlatives.map((s, i) => {
             const g = byId(s.graduateId)!;
             return (
-              <div key={s.gelar} className="yb-card flex flex-col items-center rounded-3xl border px-4 py-7 text-center sm:px-6 sm:py-9" style={{ borderColor: "rgba(242,190,80,.3)", background: "rgba(255,255,255,.05)", animationDelay: `${i * 90}ms` }}>
+              <div key={s.gelar} className="yb-card yb-rise yb-glow flex flex-col items-center rounded-3xl border px-4 py-7 text-center sm:px-6 sm:py-9" style={{ borderColor: "rgba(242,190,80,.3)", background: "rgba(255,255,255,.05)", animationDelay: `${i * 90}ms` }}>
                 <div className="relative">
-                  <img src={g.foto} alt={g.nama} loading="lazy" className="h-24 w-24 rounded-full object-cover object-top sm:h-32 sm:w-32" style={{ boxShadow: `0 0 0 4px ${BRASS}` }} />
+                  <div className="yb-ring-gold" style={{ boxShadow: "0 0 34px -6px rgba(242,160,7,.6)" }}>
+                    <img src={g.foto} alt={g.nama} loading="lazy" className="h-24 w-24 rounded-full object-cover object-top sm:h-32 sm:w-32" style={{ boxShadow: `0 0 0 3px ${NAVY}` }} />
+                  </div>
                   <span className="absolute -bottom-1 -right-1 grid h-9 w-9 place-items-center rounded-full sm:h-10 sm:w-10" style={{ background: ACCENT, color: "#fff", boxShadow: `0 0 0 3px ${NAVY}` }}>
                     <Award className="h-5 w-5" />
                   </span>
@@ -517,7 +534,7 @@ function Galeri() {
         </Reveal>
         <div ref={ref} className={`mt-14 columns-2 gap-5 sm:gap-8 lg:columns-4 ${className}`}>
           {picks.map((m, i) => (
-            <div key={m.caption} className="mb-8 break-inside-avoid sm:mb-10" style={{ animationDelay: `${i * 80}ms` }}>
+            <div key={m.caption} className="yb-drop mb-8 break-inside-avoid sm:mb-10" style={{ animationDelay: `${i * 80}ms` }}>
               <Polaroid src={m.src} caption={m.caption} rotate={rot[i % rot.length]} imgClass={shape[i % shape.length]} />
             </div>
           ))}
@@ -543,7 +560,7 @@ function Dinding() {
           {wallNotes.map((n, i) => (
             <div
               key={n.dari}
-              className="yb-lift relative px-6 pb-5 pt-7"
+              className="yb-lift yb-swing relative px-6 pb-5 pt-7"
               style={{ "--r": `${i % 2 === 0 ? -2 : 1.8}deg`, background: NOTE_COLORS[i % NOTE_COLORS.length], boxShadow: "0 18px 34px -22px rgba(20,28,63,.5)", animationDelay: `${i * 80}ms` } as CSSProperties}
             >
               <span aria-hidden className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full" style={{ background: INK_COLORS[i % INK_COLORS.length] }} />
@@ -562,7 +579,7 @@ function Dinding() {
           </p>
           <div ref={signRef} className={`mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 ${signClass}`}>
             {graduates.map((g, i) => (
-              <span key={g.id} className="text-4xl leading-none sm:text-5xl" style={{ ...hand, color: INK_COLORS[i % INK_COLORS.length], transform: `rotate(${(i % 3) * 3 - 3}deg)`, animationDelay: `${i * 45}ms` }}>
+              <span key={g.id} className="yb-write text-4xl leading-none sm:text-5xl" style={{ ...hand, color: INK_COLORS[i % INK_COLORS.length], transform: `rotate(${(i % 3) * 3 - 3}deg)`, animationDelay: `${i * 45}ms` }}>
                 {g.nama.split(" ")[0]}
               </span>
             ))}
@@ -575,11 +592,34 @@ function Dinding() {
 
 /* ───────────── Penutup ───────────── */
 
+const CAPS = [
+  { l: "6%", t: "12%", s: 34, rot: -18, d: 0, o: 0.6 },
+  { l: "17%", t: "32%", s: 22, rot: 14, d: 0.12, o: 0.45 },
+  { l: "82%", t: "10%", s: 40, rot: 16, d: 0.06, o: 0.65 },
+  { l: "89%", t: "36%", s: 24, rot: -12, d: 0.2, o: 0.45 },
+  { l: "30%", t: "7%", s: 26, rot: 8, d: 0.28, o: 0.5 },
+  { l: "64%", t: "18%", s: 28, rot: -8, d: 0.16, o: 0.5 },
+  { l: "10%", t: "76%", s: 26, rot: 10, d: 0.34, o: 0.45 },
+  { l: "84%", t: "78%", s: 32, rot: -16, d: 0.24, o: 0.55 },
+];
+
 function Penutup() {
+  const { ref, inView } = useInView<HTMLDivElement>(0.2);
   return (
-    <section className="relative flex min-h-[90svh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center" style={{ background: "radial-gradient(120% 90% at 70% 82%, #2a3878 0%, #141c3f 52%, #0a1030 100%)", color: CREAM }}>
+    <section id="penutup" className="relative flex min-h-[90svh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center" style={{ background: "radial-gradient(120% 90% at 70% 82%, #2a3878 0%, #141c3f 52%, #0a1030 100%)", color: CREAM }}>
       <div aria-hidden className="pointer-events-none absolute inset-4 rounded-2xl border-2 sm:inset-8" style={{ borderColor: "rgba(242,190,80,.5)" }} />
-      <Reveal className="flex flex-col items-center" y={28}>
+      <GoldDust count={28} seed={19} />
+      <div ref={ref} aria-hidden className={`pointer-events-none absolute inset-0${inView ? " on" : ""}`}>
+        {CAPS.map((c) => (
+          <GraduationCap
+            key={c.l + c.t}
+            className="yb-cap"
+            strokeWidth={1.5}
+            style={{ left: c.l, top: c.t, width: c.s, height: c.s, color: "#f5c55a", "--rot": `${c.rot}deg`, "--d": `${c.d}s`, "--o": c.o } as CSSProperties}
+          />
+        ))}
+      </div>
+      <Reveal className="relative z-10 flex flex-col items-center" y={28}>
         <span aria-hidden className="flex items-center gap-3">
           <span className="h-px w-16 sm:w-24" style={{ background: "rgba(242,190,80,.55)" }} />
           <span className="h-2.5 w-2.5 rotate-45" style={{ background: "#f5c55a" }} />
@@ -600,6 +640,45 @@ function Penutup() {
         </p>
       </Reveal>
     </section>
+  );
+}
+
+const CHAPTERS = [
+  { id: "sampul", label: "Sampul" },
+  { id: "sambutan", label: "Sambutan" },
+  { id: "angkatan", label: "Angkatan" },
+  { id: "perjalanan", label: "Perjalanan" },
+  ...kelasInfo.map((k, i) => ({ id: `kelas-${i + 1}`, label: k.kelas })),
+  { id: "paling-paling", label: "Paling-paling" },
+  { id: "galeri", label: "Galeri" },
+  { id: "dinding", label: "Pesan" },
+  { id: "penutup", label: "Penutup" },
+];
+const CHAPTER_IDS = CHAPTERS.map((c) => c.id);
+
+function ChapterNav() {
+  const active = useActiveSection(CHAPTER_IDS);
+  return (
+    <nav aria-label="Bab year book" className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
+      <ul className="flex flex-col items-center gap-3 rounded-full px-2.5 py-4" style={{ background: "rgba(20,28,63,.6)", backdropFilter: "blur(10px)", border: "1px solid rgba(242,190,80,.28)" }}>
+        {CHAPTERS.map((c) => {
+          const on = c.id === active;
+          return (
+            <li key={c.id}>
+              <a href={`#${c.id}`} className="group relative flex items-center justify-center" aria-label={c.label} aria-current={on ? "true" : undefined}>
+                <span className="pointer-events-none absolute right-full top-1/2 mr-4 -translate-y-1/2 translate-x-2 whitespace-nowrap rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" style={{ background: NAVY, color: "#f5c55a", border: "1px solid rgba(242,190,80,.35)" }}>
+                  {c.label}
+                </span>
+                <span
+                  className="block w-2 rounded-full transition-all duration-500"
+                  style={{ height: on ? 26 : 8, background: on ? "linear-gradient(180deg,#ffe08a,#f2a007)" : "rgba(255,246,220,.45)", boxShadow: on ? "0 0 12px rgba(242,160,7,.75)" : "none" }}
+                />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }
 
@@ -629,7 +708,7 @@ export default function YearBookContohPage() {
         <div
           aria-hidden
           className="fixed left-0 top-0 z-50 h-[3px] w-full origin-left"
-          style={{ transform: `scaleX(${progress})`, background: "linear-gradient(90deg, #2b3fd8, #f2a007)" }}
+          style={{ transform: `scaleX(${progress})`, background: "linear-gradient(90deg, #2b3fd8, #f2a007, #ffe08a)", boxShadow: "0 0 10px rgba(242,160,7,.6)" }}
         />
         <Link
           href="/year-book"
@@ -640,6 +719,8 @@ export default function YearBookContohPage() {
           Kembali
         </Link>
 
+        <Intro />
+        <ChapterNav />
         <Cover />
         <Sambutan />
         <Angkatan />
