@@ -14,3 +14,4 @@
 - [x] Year book lebih hidup: animasi reveal saat scroll, angka menghitung, foto angkatan zoom pelan, bilah progres baca; footer yearbook tanpa ikon bintang
 - [x] Year book mewah: gerbang emas pembuka, bingkai emas, debu emas, judul & foto bertirai, foto siswa miring 3D, cincin emas, topi toga dilempar, navigasi bab; lencana kelas angka Romawi
 - [x] Dinding pesan yearbook: kolom kirim pesan lucu (nama, pesan maks 140 huruf, warna kertas, tombol ide lucu); pesan contoh hanya di layar pengunjung
+- [x] Kirim foto momen yearbook: unggah JPG/PNG/WebP maks 8 MB dengan nama dan cerita; tersimpan pribadi untuk dipilah admin nanti, tanpa halaman admin

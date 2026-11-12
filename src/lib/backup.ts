@@ -26,6 +26,7 @@ export const BACKUP_TABLES = [
   "transportasi",
   "vouchers",
   "wisata",
+  "yearbook_photo_submissions",
 ] as const satisfies readonly TableName[];
 
 // user_roles and admin_allowlist hold admin access grants and are deliberately never exported.

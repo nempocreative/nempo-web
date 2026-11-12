@@ -3,6 +3,7 @@
 import { useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
+import { YearbookPhotoUpload } from "@/components/yearbook-photo-upload";
 import { Link } from "@/lib/wouter";
 import { ArrowLeft, ArrowUp, Award, ChevronDown, GraduationCap, Send, Shuffle } from "lucide-react";
 import {
@@ -538,6 +539,7 @@ function Galeri() {
             kangen nggak?
           </p>
         </Reveal>
+        <YearbookPhotoUpload />
         <div ref={ref} className={`mt-14 columns-2 gap-5 sm:gap-8 lg:columns-4 ${className}`}>
           {picks.map((m, i) => (
             <div key={m.caption} className="yb-drop mb-8 break-inside-avoid sm:mb-10" style={{ animationDelay: `${i * 80}ms` }}>
