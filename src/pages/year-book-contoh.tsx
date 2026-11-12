@@ -1,10 +1,10 @@
 // Contoh year book sebagai satu web buku tahunan layar penuh: tanpa menu situs,
 // hanya tombol kembali. Semua isi diambil dari src/data/year-book.ts (data contoh).
-import type { CSSProperties, ReactNode } from "react";
+import { useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
 import { Link } from "@/lib/wouter";
-import { ArrowLeft, ArrowUp, Award, ChevronDown, GraduationCap } from "lucide-react";
+import { ArrowLeft, ArrowUp, Award, ChevronDown, GraduationCap, Send, Shuffle } from "lucide-react";
 import {
   chapters,
   graduates,
@@ -13,9 +13,15 @@ import {
   moments,
   superlatives,
   teacherMessages,
+  WALL_DEFAULT_NAME,
+  WALL_NAME_MAX,
+  WALL_TEXT_MAX,
+  buatPesanDinding,
+  pesanLucuIde,
   wallNotes,
   yearBookMeta,
   type Kelas,
+  type WallNote,
 } from "@/data/year-book";
 import {
   GoldDust,
@@ -546,9 +552,126 @@ function Galeri() {
 
 /* ───────────── Dinding pesan ───────────── */
 
+type PostedNote = WallNote & { id: number; color: number };
+
+function KirimPesan({ onKirim }: { onKirim: (note: WallNote, color: number) => void }) {
+  const [nama, setNama] = useState("");
+  const [teks, setTeks] = useState("");
+  const [color, setColor] = useState(0);
+  const [error, setError] = useState("");
+  const [ide, setIde] = useState(0);
+
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    const res = buatPesanDinding(nama, teks);
+    if (!res.ok) return setError(res.error);
+    onKirim(res.note, color);
+    setTeks("");
+    setError("");
+  };
+
+  const kasihIde = () => {
+    setTeks(pesanLucuIde[ide % pesanLucuIde.length]);
+    setIde((i) => i + 1);
+    setError("");
+  };
+
+  return (
+    <Reveal className="mx-auto mt-12 max-w-2xl" y={24}>
+      <form
+        onSubmit={submit}
+        className="relative rounded-[28px] border-2 p-5 sm:p-7"
+        style={{ borderColor: "rgba(242,160,7,.45)", background: `linear-gradient(160deg, ${CREAM} 0%, #ffffff 70%)`, boxShadow: "0 30px 60px -36px rgba(20,28,63,.55)" }}
+      >
+        <p className="text-center text-3xl leading-none sm:text-4xl" style={{ ...hand, color: ACCENT }}>
+          Tinggalkan pesan lucu buat angkatan!
+        </p>
+        <div className="mt-5 grid gap-3">
+          <label className="grid gap-1.5">
+            <span className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: INK_SOFT }}>Nama kamu</span>
+            <input
+              value={nama}
+              onChange={(e) => setNama(e.target.value)}
+              maxLength={WALL_NAME_MAX}
+              placeholder={`Kosongkan jadi "${WALL_DEFAULT_NAME}"`}
+              className="h-11 rounded-xl border bg-white px-4 text-base outline-none transition-shadow focus:ring-2"
+              style={{ borderColor: LINE, color: INK, "--tw-ring-color": "rgba(43,63,216,.35)" } as CSSProperties}
+            />
+          </label>
+          <label className="grid gap-1.5">
+            <span className="flex items-center justify-between text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: INK_SOFT }}>
+              Pesan
+              <span style={{ color: teks.length > WALL_TEXT_MAX - 20 ? "#c0265b" : INK_SOFT }}>{teks.length}/{WALL_TEXT_MAX}</span>
+            </span>
+            <textarea
+              value={teks}
+              onChange={(e) => { setTeks(e.target.value); if (error) setError(""); }}
+              maxLength={WALL_TEXT_MAX}
+              rows={3}
+              aria-label="Pesan"
+              placeholder="Contoh: Utang gorengan belum lunas, kutagih pas reuni!"
+              className="resize-none rounded-xl border bg-white px-4 py-3 text-2xl leading-tight outline-none transition-shadow focus:ring-2"
+              style={{ ...hand, borderColor: LINE, color: INK, "--tw-ring-color": "rgba(43,63,216,.35)" } as CSSProperties}
+            />
+          </label>
+        </div>
+        <div className="mt-4 flex flex-wrap items-center gap-2" role="radiogroup" aria-label="Warna kertas">
+          <span className="mr-1 text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: INK_SOFT }}>Warna kertas</span>
+          {NOTE_COLORS.map((c, i) => (
+            <button
+              key={c}
+              type="button"
+              role="radio"
+              aria-checked={color === i}
+              aria-label={`Warna kertas ${i + 1}`}
+              onClick={() => setColor(i)}
+              className="h-7 w-7 rounded-full border-2 transition-transform hover:scale-110"
+              style={{ background: c, borderColor: color === i ? ACCENT : "rgba(20,28,63,.12)", transform: color === i ? "scale(1.15)" : undefined }}
+            />
+          ))}
+        </div>
+        {error && (
+          <p role="alert" className="mt-3 text-sm font-bold" style={{ color: "#c0265b" }}>{error}</p>
+        )}
+        <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+          <button
+            type="button"
+            onClick={kasihIde}
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-full border-2 px-5 text-sm font-black transition-colors hover:bg-white"
+            style={{ borderColor: ACCENT, color: ACCENT }}
+          >
+            <Shuffle className="h-4 w-4" />
+            Kasih ide lucu
+          </button>
+          <button
+            type="submit"
+            className="yb-sheen relative inline-flex h-12 flex-1 items-center justify-center gap-2 overflow-hidden rounded-full px-6 text-sm font-black transition-transform hover:-translate-y-0.5"
+            style={{ background: `linear-gradient(135deg, ${ACCENT}, #1d2a9e)`, color: "#ffffff", boxShadow: "0 16px 30px -16px rgba(43,63,216,.8)" }}
+          >
+            <Send className="h-4 w-4" />
+            Tempel di dinding
+          </button>
+        </div>
+        <p className="mt-4 text-center text-xs leading-relaxed" style={{ color: INK_SOFT }}>
+          Ini pratinjau: pesanmu hanya tampil di layar ini dan hilang saat halaman dimuat ulang.
+        </p>
+      </form>
+    </Reveal>
+  );
+}
+
 function Dinding() {
   const { ref: notesRef, className: notesClass } = useStagger<HTMLDivElement>(0.06);
   const { ref: signRef, className: signClass } = useStagger<HTMLDivElement>(0.15);
+  const [posted, setPosted] = useState<PostedNote[]>([]);
+  const notes = [
+    ...posted.map((n) => ({ ...n, key: `m-${n.id}`, mine: true })),
+    ...wallNotes.map((n, i) => ({ ...n, key: n.dari, color: i % NOTE_COLORS.length, mine: false })),
+  ];
+  const kirim = (note: WallNote, color: number) => {
+    setPosted((p) => [{ ...note, color, id: Date.now() }, ...p]);
+    requestAnimationFrame(() => notesRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
   return (
     <section id="dinding" className="px-5 py-20 sm:px-10 sm:py-28" style={{ background: CARD }}>
       <div className="mx-auto max-w-6xl">
@@ -556,15 +679,21 @@ function Dinding() {
           <Eyebrow>Dinding pesan</Eyebrow>
           <Heading className="mt-3">Tanda tangan & pesan</Heading>
         </Reveal>
-        <div ref={notesRef} className={`mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 ${notesClass}`}>
-          {wallNotes.map((n, i) => (
+        <KirimPesan onKirim={kirim} />
+        <div ref={notesRef} className={`mt-14 grid scroll-mt-24 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 ${notesClass}`}>
+          {notes.map((n, i) => (
             <div
-              key={n.dari}
+              key={n.key}
               className="yb-lift yb-swing relative px-6 pb-5 pt-7"
-              style={{ "--r": `${i % 2 === 0 ? -2 : 1.8}deg`, background: NOTE_COLORS[i % NOTE_COLORS.length], boxShadow: "0 18px 34px -22px rgba(20,28,63,.5)", animationDelay: `${i * 80}ms` } as CSSProperties}
+              style={{ "--r": `${i % 2 === 0 ? -2 : 1.8}deg`, background: NOTE_COLORS[n.color], boxShadow: "0 18px 34px -22px rgba(20,28,63,.5)", animationDelay: n.mine ? "0ms" : `${i * 80}ms` } as CSSProperties}
             >
               <span aria-hidden className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full" style={{ background: INK_COLORS[i % INK_COLORS.length] }} />
-              <p className="text-3xl leading-[1.08]" style={{ ...hand, color: INK }}>
+              {n.mine && (
+                <span className="absolute right-3 top-2 rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.14em]" style={{ background: "rgba(255,255,255,.7)", color: ACCENT }}>
+                  Baru
+                </span>
+              )}
+              <p className="break-words text-3xl leading-[1.08]" style={{ ...hand, color: INK }}>
                 {n.teks}
               </p>
               <p className="mt-3 text-right text-xs font-black uppercase tracking-[0.14em]" style={{ color: INK_COLORS[i % INK_COLORS.length] }}>

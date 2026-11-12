@@ -146,7 +146,7 @@ export const superlatives: Superlative[] = [
   { gelar: "Teman curhat terbaik", graduateId: "salma" },
 ];
 
-export const wallNotes = [
+export const wallNotes: WallNote[] = [
   { dari: "Dimas", teks: "Nanti kalau udah kerja, jangan cuma muncul di grup ya." },
   { dari: "Maya", teks: "Sisa foto hunting masih di flashdiskku. Ambil sebelum kehapus!" },
   { dari: "Kirana", teks: "Aku simpan semua koran dinding kalian. Suatu hari jadi buku." },
@@ -154,6 +154,35 @@ export const wallNotes = [
   { dari: "Salma", teks: "Kalau rindu, mampir. Aku masak." },
   { dari: "Nayla", teks: "Naskah drama kita belum kelar. Lanjut lain waktu!" },
 ];
+
+// ── Kolom kirim pesan di dinding (contoh: hanya tersimpan di layar pengunjung) ──
+
+export const WALL_TEXT_MAX = 140;
+export const WALL_NAME_MAX = 24;
+export const WALL_DEFAULT_NAME = "Teman sekelas";
+
+export const pesanLucuIde = [
+  "Utang gorengan di kantin belum lunas. Kutagih pas reuni!",
+  "Makasih udah jadi alarm hidupku tiap jam pertama.",
+  "Jangan lupa, kamu pernah tidur pas upacara. Ada fotonya.",
+  "Semoga sukses! Kalau kaya, traktir seblak satu angkatan.",
+  "PR fisika kita akhirnya selesai juga… tiga tahun kemudian.",
+  "Kangen dimarahin bareng gara-gara ribut di kelas.",
+  "Nanti kalau ketemu di jalan, pura-pura kenal ya.",
+  "Tetap jadi orang paling heboh di grup kelas!",
+];
+
+export type WallNote = { dari: string; teks: string };
+
+const rapikan = (s: string) => s.replace(/\s+/g, " ").trim();
+
+export function buatPesanDinding(nama: string, teks: string): { ok: true; note: WallNote } | { ok: false; error: string } {
+  const isi = rapikan(teks);
+  if (isi.length < 2) return { ok: false, error: "Tulis pesannya dulu, ya." };
+  if (isi.length > WALL_TEXT_MAX) return { ok: false, error: `Pesan maksimal ${WALL_TEXT_MAX} huruf.` };
+  const dari = rapikan(nama).slice(0, WALL_NAME_MAX) || WALL_DEFAULT_NAME;
+  return { ok: true, note: { dari, teks: isi } };
+}
 
 // ── Penjelasan layanan Year Book (dipakai halaman /year-book) ──
 
