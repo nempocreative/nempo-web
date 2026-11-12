@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Check, Download, Flag, Instagram, Loader2, RotateCcw, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { deliverFile } from "@/lib/download";
 import { graduates, yearBookMeta } from "@/data/year-book";
 import { chooseVote, dreamGroups, makeQuiz, parseVotes, quizScore, VOTE_STORAGE_KEY, voteCategories, type QuizQuestion, type VoteCategory, type Votes } from "@/lib/yearbook-personal";
 
@@ -54,26 +55,38 @@ export function YearbookMemoryCards() {
   const [tone, setTone] = useState("dark");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [prepared, setPrepared] = useState<{ blob: Blob; filename: string } | null>(null);
+  const [retry, setRetry] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
   const student = graduates.find((g) => g.id === studentId);
-  async function download() {
-    const card = cardRef.current;
-    if (!card || !student) return;
-    setBusy(true); setError("");
-    try {
-      await document.fonts.ready;
-      await Promise.all(Array.from(card.querySelectorAll("img")).map((img) => img.decode()));
-      const { toPng } = await import("html-to-image");
-      const data = await toPng(card, { pixelRatio: 1080 / card.offsetWidth, cacheBust: false });
-      const a = document.createElement("a"); a.download = `kenangan-${student.id}-2026.png`; a.href = data; a.click();
-    } catch { setError("Kartu belum bisa diunduh. Coba lagi, ya."); }
-    finally { setBusy(false); }
+  useEffect(() => {
+    let cancelled = false;
+    setPrepared(null); setBusy(true); setError("");
+    async function prepare() {
+      const card = cardRef.current;
+      if (!card || !student) return;
+      try {
+        await document.fonts.ready;
+        await Promise.all(Array.from(card.querySelectorAll("img")).map((img) => img.decode()));
+        const { toCanvas } = await import("html-to-image");
+        const canvas = await toCanvas(card, { pixelRatio: 1, canvasWidth: 1080, canvasHeight: 1920, cacheBust: false });
+        const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob((result) => result ? resolve(result) : reject(new Error("Empty image")), "image/png"));
+        if (!cancelled) setPrepared({ blob, filename: `kenangan-${student.id}-2026.png` });
+      } catch { if (!cancelled) setError("Kartu belum siap diunduh. Coba siapkan ulang, ya."); }
+      finally { if (!cancelled) setBusy(false); }
+    }
+    void prepare();
+    return () => { cancelled = true; };
+  }, [student, tone, retry]);
+  function download() {
+    if (!prepared) return;
+    void deliverFile(prepared.blob, prepared.filename).catch(() => setError("Unduhan belum berhasil. Coba lagi, ya."));
   }
   if (!student) return null;
   return <section id="kartu-kenangan" className="yb-memories px-5 py-20 sm:px-10"><div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-2">
-    <div><Title label="Simpan, lalu bagikan" title="Satu kartu, sejuta cerita" /><div className="mt-8"><label htmlFor="card-student" className="mb-2 block text-sm font-bold">Siswa di kartu</label><StudentSelect id="card-student" value={studentId} onChange={setStudentId} /></div><div className="mt-5 flex gap-3" role="group" aria-label="Warna kartu"><Button variant={tone === "dark" ? "default" : "outline"} aria-pressed={tone === "dark"} onClick={() => setTone("dark")}>Biru malam</Button><Button variant={tone === "light" ? "default" : "outline"} aria-pressed={tone === "light"} onClick={() => setTone("light")}>Kertas putih</Button></div><Button className="mt-6" onClick={download} disabled={busy}>{busy ? <Loader2 className="animate-spin" /> : <Download />} {busy ? "Menyiapkan kartu…" : "Unduh kartu Story"}</Button><p className="mt-3 text-sm text-muted-foreground">PNG · 1080 × 1920 · nama dan IG masih contoh</p>{error && <p role="alert" className="mt-3 text-destructive">{error}</p>}</div>
+    <div><Title label="Simpan, lalu bagikan" title="Satu kartu, sejuta cerita" /><div className="mt-8"><label htmlFor="card-student" className="mb-2 block text-sm font-bold">Siswa di kartu</label><StudentSelect id="card-student" value={studentId} onChange={(id) => { if (id !== studentId) { setPrepared(null); setStudentId(id); } }} /></div><div className="mt-5 flex gap-3" role="group" aria-label="Warna kartu"><Button variant={tone === "dark" ? "default" : "outline"} aria-pressed={tone === "dark"} onClick={() => { if (tone !== "dark") { setPrepared(null); setTone("dark"); } }}>Biru malam</Button><Button variant={tone === "light" ? "default" : "outline"} aria-pressed={tone === "light"} onClick={() => { if (tone !== "light") { setPrepared(null); setTone("light"); } }}>Kertas putih</Button></div><Button className="mt-6" onClick={download} disabled={busy || !prepared}>{busy ? <Loader2 className="animate-spin" /> : <Download />} {busy ? "Menyiapkan kartu…" : "Unduh kartu Story"}</Button><p role="status" className="mt-3 text-sm text-muted-foreground">{prepared ? "Kartu siap diunduh · " : ""}PNG · 1080 × 1920 · nama dan IG masih contoh</p>{error && <div><p role="alert" className="mt-3 text-destructive">{error}</p><Button variant="outline" className="mt-3" onClick={() => setRetry(retry + 1)}><RotateCcw /> Siapkan ulang</Button></div>}</div>
     <div ref={cardRef} className={`yb-story-card ${tone === "dark" ? "yb-memories-dark" : ""} mx-auto w-full max-w-[360px] overflow-hidden`}>
-      <div className="yb-story-inner"><p className="yb-story-label">{yearBookMeta.sekolah} · {yearBookMeta.angkatan}</p><h3 className="yb-story-heading">Sejuta<br />Cerita.</h3><img src={student.foto} alt={student.nama} className="yb-story-photo" /><h4 className="yb-story-name">{student.nama}</h4><p className="yb-story-class">{student.kelas} · {student.julukan}</p><p className="yb-story-quote">“{student.quote}”</p><p className="yb-story-ig"><Instagram size={14} /> @{student.instagram}</p><p className="yb-story-footer">NEMPO YEAR BOOK · CONTOH</p></div>
+      <div className="yb-story-inner"><div className="yb-story-top"><p className="yb-story-label">{yearBookMeta.sekolah}</p><span className="yb-story-edition">CLASS OF<br />{yearBookMeta.angkatan}</span></div><h3 className="yb-story-heading">Sejuta Cerita<span>dan kamu di dalamnya.</span></h3><div className="yb-story-photo-wrap"><img src={student.foto} alt={student.nama} className="yb-story-photo" /><span className="yb-story-stamp">2026<br /><small>THE MEMORIES</small></span><span className="yb-story-photo-caption">{student.julukan}</span></div><h4 className="yb-story-name">{student.nama}</h4><p className="yb-story-class">{student.kelas} · {student.citaCita}</p><p className="yb-story-quote">“{student.quote}”</p><p className="yb-story-ig"><Instagram size={14} /> @{student.instagram}</p><p className="yb-story-footer">NEMPO YEAR BOOK <span>CONTOH · FOTO AI</span></p></div>
     </div>
   </div></section>;
 }
